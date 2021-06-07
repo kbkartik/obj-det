@@ -1,0 +1,1103 @@
+[05/02 09:13:11] detectron2 INFO: Rank of current process: 1. World size: 4
+[05/02 09:13:12] detectron2 INFO: Environment info:
+------------------------  ---------------------------------------------------------------------------------------------
+sys.platform              linux
+Python                    3.7.6 (default, Jan  8 2020, 19:59:22) [GCC 7.3.0]
+numpy                     1.18.1
+detectron2                0.1.1 @/home/myfolder/detectron2_set2/detectron2
+detectron2 compiler       GCC 5.5
+detectron2 CUDA compiler  10.2
+detectron2 arch flags     sm_75
+DETECTRON2_ENV_MODULE     <not set>
+PyTorch                   1.4.0+cu100 @/home/myfolder/miniconda3/envs/det_trial/lib/python3.7/site-packages/torch
+PyTorch debug build       False
+CUDA available            True
+GPU 0,1,2,3               GeForce RTX 2080 Ti
+CUDA_HOME                 /usr/local/cuda
+NVCC                      Cuda compilation tools, release 10.2, V10.2.89
+Pillow                    6.2.2
+torchvision               0.5.0+cu100 @/home/myfolder/miniconda3/envs/det_trial/lib/python3.7/site-packages/torchvision
+torchvision arch flags    sm_35, sm_50, sm_60, sm_70, sm_75
+fvcore                    0.1.dev200114
+cv2                       4.1.2
+------------------------  ---------------------------------------------------------------------------------------------
+PyTorch built with:
+  - GCC 7.3
+  - Intel(R) Math Kernel Library Version 2019.0.4 Product Build 20190411 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v0.21.1 (Git Hash 7d2fd500bc78936d1d648ca713b901012f470dbc)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - NNPACK is enabled
+  - CUDA Runtime 10.0
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_37,code=compute_37
+  - CuDNN 7.6.3
+  - Magma 2.5.1
+  - Build settings: BLAS=MKL, BUILD_NAMEDTENSOR=OFF, BUILD_TYPE=Release, CXX_FLAGS= -Wno-deprecated -fvisibility-inlines-hidden -fopenmp -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -O2 -fPIC -Wno-narrowing -Wall -Wextra -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wno-unused-result -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Wno-stringop-overflow, DISABLE_NUMA=1, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, USE_CUDA=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, USE_STATIC_DISPATCH=OFF, 
+
+[05/02 09:13:12] detectron2 INFO: Command line arguments: Namespace(config_file='', dist_url='auto', eval_only=False, machine_rank=0, num_gpus=4, num_machines=1, opts=[], resume=False)
+[05/02 09:13:12] detectron2 INFO: Running with full config:
+CUDNN_BENCHMARK: False
+DATALOADER:
+  ASPECT_RATIO_GROUPING: True
+  FILTER_EMPTY_ANNOTATIONS: True
+  NUM_WORKERS: 2
+  REPEAT_THRESHOLD: 0.0
+  SAMPLER_TRAIN: TrainingSampler
+DATASETS:
+  PRECOMPUTED_PROPOSAL_TOPK_TEST: 1000
+  PRECOMPUTED_PROPOSAL_TOPK_TRAIN: 2000
+  PROPOSAL_FILES_TEST: ()
+  PROPOSAL_FILES_TRAIN: ()
+  TEST: ('cityscapes_fine_inst_seg_val',)
+  TRAIN: ('cityscapes_fine_inst_seg_train',)
+GLOBAL:
+  HACK: 1.0
+INPUT:
+  CROP:
+    ENABLED: False
+    SIZE: [0.9, 0.9]
+    TYPE: relative_range
+  FORMAT: BGR
+  MASK_FORMAT: polygon
+  MAX_SIZE_TEST: 2048
+  MAX_SIZE_TRAIN: 2048
+  MIN_SIZE_TEST: 1024
+  MIN_SIZE_TRAIN: (800, 832, 864, 896, 928, 960, 992, 1024)
+  MIN_SIZE_TRAIN_SAMPLING: choice
+MODEL:
+  ANCHOR_GENERATOR:
+    ANGLES: [[-90, 0, 90]]
+    ASPECT_RATIOS: [[0.5, 1.0, 2.0]]
+    NAME: DefaultAnchorGenerator
+    OFFSET: 0.0
+    SIZES: [[32], [64], [128], [256], [512]]
+  BACKBONE:
+    FREEZE_AT: 2
+    NAME: build_resnet_fpn_backbone
+  DEVICE: cuda
+  FPN:
+    FUSE_TYPE: sum
+    IN_FEATURES: ['res2', 'res3', 'res4', 'res5']
+    NORM: 
+    OUT_CHANNELS: 256
+  KEYPOINT_ON: False
+  LOAD_PROPOSALS: False
+  MASK_ON: True
+  META_ARCHITECTURE: GeneralizedRCNN
+  PANOPTIC_FPN:
+    COMBINE:
+      ENABLED: True
+      INSTANCES_CONFIDENCE_THRESH: 0.5
+      OVERLAP_THRESH: 0.5
+      STUFF_AREA_LIMIT: 4096
+    INSTANCE_LOSS_WEIGHT: 1.0
+  PIXEL_MEAN: [103.53, 116.28, 123.675]
+  PIXEL_STD: [1.0, 1.0, 1.0]
+  PROPOSAL_GENERATOR:
+    MIN_SIZE: 0
+    NAME: RPN
+  RESNETS:
+    DEFORM_MODULATED: False
+    DEFORM_NUM_GROUPS: 1
+    DEFORM_ON_PER_STAGE: [False, False, False, False]
+    DEPTH: 50
+    NORM: FrozenBN
+    NUM_GROUPS: 1
+    OUT_FEATURES: ['res2', 'res3', 'res4', 'res5']
+    RES2_OUT_CHANNELS: 256
+    RES5_DILATION: 1
+    STEM_OUT_CHANNELS: 64
+    STRIDE_IN_1X1: True
+    WIDTH_PER_GROUP: 64
+  RETINANET:
+    BBOX_REG_WEIGHTS: (1.0, 1.0, 1.0, 1.0)
+    FOCAL_LOSS_ALPHA: 0.25
+    FOCAL_LOSS_GAMMA: 2.0
+    IN_FEATURES: ['p3', 'p4', 'p5', 'p6', 'p7']
+    IOU_LABELS: [0, -1, 1]
+    IOU_THRESHOLDS: [0.4, 0.5]
+    NMS_THRESH_TEST: 0.5
+    NUM_CLASSES: 80
+    NUM_CONVS: 4
+    PRIOR_PROB: 0.01
+    SCORE_THRESH_TEST: 0.05
+    SMOOTH_L1_LOSS_BETA: 0.1
+    TOPK_CANDIDATES_TEST: 1000
+  ROI_BOX_CASCADE_HEAD:
+    BBOX_REG_WEIGHTS: ((10.0, 10.0, 5.0, 5.0), (20.0, 20.0, 10.0, 10.0), (30.0, 30.0, 15.0, 15.0))
+    IOUS: (0.5, 0.6, 0.7)
+  ROI_BOX_HEAD:
+    BBOX_REG_WEIGHTS: (10.0, 10.0, 5.0, 5.0)
+    CLS_AGNOSTIC_BBOX_REG: True
+    CONV_DIM: 256
+    FC_DIM: 1024
+    NAME: FastRCNNConvFCHead
+    NORM: 
+    NUM_CONV: 0
+    NUM_FC: 2
+    POOLER_RESOLUTION: 7
+    POOLER_SAMPLING_RATIO: 2
+    POOLER_TYPE: ROIAlignV2
+    SMOOTH_L1_BETA: 0.0
+    TRAIN_ON_PRED_BOXES: False
+  ROI_HEADS:
+    BATCH_SIZE_PER_IMAGE: 128
+    IN_FEATURES: ['p2', 'p3', 'p4', 'p5']
+    IOU_LABELS: [0, 1]
+    IOU_THRESHOLDS: [0.5]
+    NAME: CascadeROIHeads
+    NMS_THRESH_TEST: 0.5
+    NUM_CLASSES: 8
+    POSITIVE_FRACTION: 0.25
+    PROPOSAL_APPEND_GT: True
+    SCORE_THRESH_TEST: 0.05
+  ROI_KEYPOINT_HEAD:
+    CONV_DIMS: (512, 512, 512, 512, 512, 512, 512, 512)
+    LOSS_WEIGHT: 1.0
+    MIN_KEYPOINTS_PER_IMAGE: 1
+    NAME: KRCNNConvDeconvUpsampleHead
+    NORMALIZE_LOSS_BY_VISIBLE_KEYPOINTS: True
+    NUM_KEYPOINTS: 17
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_TYPE: ROIAlignV2
+  ROI_MASK_HEAD:
+    CLS_AGNOSTIC_MASK: False
+    CONV_DIM: 256
+    NAME: MaskRCNNConvUpsampleHead
+    NORM: 
+    NUM_CONV: 4
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 2
+    POOLER_TYPE: ROIAlignV2
+  RPN:
+    BATCH_SIZE_PER_IMAGE: 256
+    BBOX_REG_WEIGHTS: (1.0, 1.0, 1.0, 1.0)
+    BOUNDARY_THRESH: 1000
+    HEAD_NAME: StandardRPNHead
+    IN_FEATURES: ['p2', 'p3', 'p4', 'p5', 'p6']
+    IOU_LABELS: [0, -1, 1]
+    IOU_THRESHOLDS: [0.3, 0.7]
+    LOSS_WEIGHT: 1.0
+    NMS_THRESH: 0.7
+    POSITIVE_FRACTION: 0.5
+    POST_NMS_TOPK_TEST: 2000
+    POST_NMS_TOPK_TRAIN: 2000
+    PRE_NMS_TOPK_TEST: 2000
+    PRE_NMS_TOPK_TRAIN: 2000
+    SMOOTH_L1_BETA: 0.0
+  SEM_SEG_HEAD:
+    COMMON_STRIDE: 4
+    CONVS_DIM: 128
+    IGNORE_VALUE: 255
+    IN_FEATURES: ['p2', 'p3', 'p4', 'p5']
+    LOSS_WEIGHT: 1.0
+    NAME: SemSegFPNHead
+    NORM: GN
+    NUM_CLASSES: 54
+  WEIGHTS: /ssd_scratch/cvit/myfolder/cityscapes/model_final_480dd8.pkl
+OUTPUT_DIR: /ssd_scratch/cvit/myfolder/cityscapes/models/
+SEED: -1
+SOLVER:
+  BASE_LR: 0.0035
+  BASE_MOMENTUM: 0.8
+  BIAS_LR_FACTOR: 1.0
+  CHECKPOINT_PERIOD: 2470
+  CLIP_GRADIENTS:
+    CLIP_TYPE: value
+    CLIP_VALUE: 1.0
+    ENABLED: False
+    NORM_TYPE: 2.0
+  CYCLE_MOMENTUM_SWITCH: True
+  GAMMA: 0.2
+  IMS_PER_BATCH: 12
+  LR_SCHEDULER_NAME: WarmupMultiStepLR
+  MAX_ITER: 49400
+  MAX_LR: 0.01
+  MAX_MOMENTUM: 0.9
+  MIN_LR: 0.001
+  MOMENTUM: 0.9
+  NESTEROV: False
+  SCALE_MODE: cycle
+  STEPS: (29640,)
+  STEP_SIZE_UP: 2000
+  WARMUP_FACTOR: 0.001
+  WARMUP_ITERS: 1000
+  WARMUP_METHOD: linear
+  WEIGHT_DECAY: 0.0001
+  WEIGHT_DECAY_BIAS: 0.0001
+  WEIGHT_DECAY_NORM: 0.0
+TEST:
+  AUG:
+    ENABLED: False
+    FLIP: True
+    MAX_SIZE: 4000
+    MIN_SIZES: (400, 500, 600, 700, 800, 900, 1000, 1100, 1200)
+  DETECTIONS_PER_IMAGE: 100
+  EVAL_PERIOD: 2470
+  EXPECTED_RESULTS: []
+  KEYPOINT_OKS_SIGMAS: []
+  PRECISE_BN:
+    ENABLED: False
+    NUM_ITER: 200
+VERSION: 2
+VIS_PERIOD: 0
+[05/02 09:13:12] detectron2.utils.env INFO: Using a generated random seed 12997972
+[05/02 09:13:13] detectron2 INFO: Model:
+GeneralizedRCNN(
+  (backbone): FPN(
+    (fpn_lateral2): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral3): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral4): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output4): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral5): Conv2d(2048, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output5): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (top_block): LastLevelMaxPool()
+    (bottom_up): ResNet(
+      (stem): BasicStem(
+        (conv1): Conv2d(
+          3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False
+          (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+        )
+      )
+      (res2): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+        )
+      )
+      (res3): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            256, 128, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+        (3): BottleneckBlock(
+          (conv1): Conv2d(
+            512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+      )
+      (res4): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            512, 256, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (3): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (4): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (5): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+      )
+      (res5): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            1024, 2048, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            1024, 512, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+        )
+      )
+    )
+  )
+  (proposal_generator): RPN(
+    (anchor_generator): DefaultAnchorGenerator(
+      (cell_anchors): BufferList()
+    )
+    (rpn_head): StandardRPNHead(
+      (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (objectness_logits): Conv2d(256, 3, kernel_size=(1, 1), stride=(1, 1))
+      (anchor_deltas): Conv2d(256, 12, kernel_size=(1, 1), stride=(1, 1))
+    )
+  )
+  (roi_heads): CascadeROIHeads(
+    (box_pooler): ROIPooler(
+      (level_poolers): ModuleList(
+        (0): ROIAlign(output_size=(7, 7), spatial_scale=0.25, sampling_ratio=2, aligned=True)
+        (1): ROIAlign(output_size=(7, 7), spatial_scale=0.125, sampling_ratio=2, aligned=True)
+        (2): ROIAlign(output_size=(7, 7), spatial_scale=0.0625, sampling_ratio=2, aligned=True)
+        (3): ROIAlign(output_size=(7, 7), spatial_scale=0.03125, sampling_ratio=2, aligned=True)
+      )
+    )
+    (box_head): ModuleList(
+      (0): FastRCNNConvFCHead(
+        (fc1): Linear(in_features=12544, out_features=1024, bias=True)
+        (fc2): Linear(in_features=1024, out_features=1024, bias=True)
+      )
+      (1): FastRCNNConvFCHead(
+        (fc1): Linear(in_features=12544, out_features=1024, bias=True)
+        (fc2): Linear(in_features=1024, out_features=1024, bias=True)
+      )
+      (2): FastRCNNConvFCHead(
+        (fc1): Linear(in_features=12544, out_features=1024, bias=True)
+        (fc2): Linear(in_features=1024, out_features=1024, bias=True)
+      )
+    )
+    (box_predictor): ModuleList(
+      (0): FastRCNNOutputLayers(
+        (cls_score): Linear(in_features=1024, out_features=9, bias=True)
+        (bbox_pred): Linear(in_features=1024, out_features=4, bias=True)
+      )
+      (1): FastRCNNOutputLayers(
+        (cls_score): Linear(in_features=1024, out_features=9, bias=True)
+        (bbox_pred): Linear(in_features=1024, out_features=4, bias=True)
+      )
+      (2): FastRCNNOutputLayers(
+        (cls_score): Linear(in_features=1024, out_features=9, bias=True)
+        (bbox_pred): Linear(in_features=1024, out_features=4, bias=True)
+      )
+    )
+    (mask_pooler): ROIPooler(
+      (level_poolers): ModuleList(
+        (0): ROIAlign(output_size=(14, 14), spatial_scale=0.25, sampling_ratio=2, aligned=True)
+        (1): ROIAlign(output_size=(14, 14), spatial_scale=0.125, sampling_ratio=2, aligned=True)
+        (2): ROIAlign(output_size=(14, 14), spatial_scale=0.0625, sampling_ratio=2, aligned=True)
+        (3): ROIAlign(output_size=(14, 14), spatial_scale=0.03125, sampling_ratio=2, aligned=True)
+      )
+    )
+    (mask_head): MaskRCNNConvUpsampleHead(
+      (mask_fcn1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (mask_fcn2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (mask_fcn3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (mask_fcn4): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (deconv): ConvTranspose2d(256, 256, kernel_size=(2, 2), stride=(2, 2))
+      (predictor): Conv2d(256, 8, kernel_size=(1, 1), stride=(1, 1))
+    )
+  )
+)
+[05/02 09:13:14] fvcore.common.checkpoint INFO: Loading checkpoint from /ssd_scratch/cvit/myfolder/cityscapes/model_final_480dd8.pkl
+[05/02 09:13:15] fvcore.common.checkpoint INFO: Reading a file from 'Detectron2 Model Zoo'
+[05/02 09:13:15] fvcore.common.checkpoint WARNING: 'roi_heads.box_predictor.0.cls_score.weight' has shape (81, 1024) in the checkpoint but (9, 1024) in the model! Skipped.
+[05/02 09:13:15] fvcore.common.checkpoint WARNING: 'roi_heads.box_predictor.0.cls_score.bias' has shape (81,) in the checkpoint but (9,) in the model! Skipped.
+[05/02 09:13:15] fvcore.common.checkpoint WARNING: 'roi_heads.box_predictor.1.cls_score.weight' has shape (81, 1024) in the checkpoint but (9, 1024) in the model! Skipped.
+[05/02 09:13:15] fvcore.common.checkpoint WARNING: 'roi_heads.box_predictor.1.cls_score.bias' has shape (81,) in the checkpoint but (9,) in the model! Skipped.
+[05/02 09:13:15] fvcore.common.checkpoint WARNING: 'roi_heads.box_predictor.2.cls_score.weight' has shape (81, 1024) in the checkpoint but (9, 1024) in the model! Skipped.
+[05/02 09:13:15] fvcore.common.checkpoint WARNING: 'roi_heads.box_predictor.2.cls_score.bias' has shape (81,) in the checkpoint but (9,) in the model! Skipped.
+[05/02 09:13:15] fvcore.common.checkpoint WARNING: 'roi_heads.mask_head.predictor.weight' has shape (80, 256, 1, 1) in the checkpoint but (8, 256, 1, 1) in the model! Skipped.
+[05/02 09:13:15] fvcore.common.checkpoint WARNING: 'roi_heads.mask_head.predictor.bias' has shape (80,) in the checkpoint but (8,) in the model! Skipped.
+[05/02 09:13:15] fvcore.common.checkpoint INFO: Some model parameters are not in the checkpoint:
+  [34mpixel_mean[0m
+  [34mpixel_std[0m
+  [34mroi_heads.box_predictor.0.cls_score.{weight, bias}[0m
+  [34mroi_heads.box_predictor.1.cls_score.{weight, bias}[0m
+  [34mroi_heads.box_predictor.2.cls_score.{weight, bias}[0m
+  [34mroi_heads.mask_head.predictor.{weight, bias}[0m
+[05/02 09:13:15] detectron2.data.datasets.cityscapes INFO: 18 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/train'.
+[05/02 09:13:15] detectron2.data.datasets.cityscapes INFO: Preprocessing cityscapes annotations ...
+[05/02 09:20:48] detectron2.data.datasets.cityscapes INFO: Loaded 2975 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/train
+[05/02 09:20:48] detectron2.data.build INFO: Removed 10 images with no usable annotations. 2965 images left.
+[05/02 09:20:48] detectron2.data.build INFO: Distribution of instances among all 8 categories:
+[36m|  category  | #instances   |  category  | #instances   |  category  | #instances   |
+|:----------:|:-------------|:----------:|:-------------|:----------:|:-------------|
+|   person   | 17910        |   rider    | 1778         |    car     | 26957        |
+|   truck    | 484          |    bus     | 380          |   train    | 168          |
+| motorcycle | 737          |  bicycle   | 3674         |            |              |
+|   total    | 52088        |            |              |            |              |[0m
+[05/02 09:20:48] detectron2.data.common INFO: Serializing 2965 elements to byte tensors and concatenating them all ...
+[05/02 09:20:49] detectron2.data.common INFO: Serialized dataset takes 67.18 MiB
+[05/02 09:20:49] detectron2.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(800, 832, 864, 896, 928, 960, 992, 1024), max_size=2048, sample_style='choice'), RandomFlip()]
+[05/02 09:20:49] detectron2.data.build INFO: Using training sampler TrainingSampler
+[05/02 09:21:10] detectron2 INFO: Starting training from iteration 0
+[05/02 09:53:43] detectron2.data.datasets.cityscapes INFO: 3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[05/02 09:53:43] detectron2.data.datasets.cityscapes INFO: Preprocessing cityscapes annotations ...
+[05/02 09:55:29] detectron2.data.datasets.cityscapes INFO: Loaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[05/02 09:55:29] detectron2.data.build INFO: Distribution of instances among all 8 categories:
+[36m|  category  | #instances   |  category  | #instances   |  category  | #instances   |
+|:----------:|:-------------|:----------:|:-------------|:----------:|:-------------|
+|   person   | 3399         |   rider    | 544          |    car     | 4656         |
+|   truck    | 93           |    bus     | 98           |   train    | 23           |
+| motorcycle | 149          |  bicycle   | 1169         |            |              |
+|   total    | 10131        |            |              |            |              |[0m
+[05/02 09:55:29] detectron2.data.common INFO: Serializing 500 elements to byte tensors and concatenating them all ...
+[05/02 09:55:29] detectron2.data.common INFO: Serialized dataset takes 12.85 MiB
+[05/02 09:55:29] detectron2.evaluation.evaluator INFO: Start inference on 125 images
+[05/02 09:55:33] detectron2.evaluation.cityscapes_evaluation INFO: Writing cityscapes results to temporary directory /tmp/cityscapes_eval_az16td_8 ...
+[05/02 09:55:49] detectron2.evaluation.evaluator INFO: Inference done 11/125. 0.1279 s / img. ETA=0:01:59
+[05/02 09:55:54] detectron2.evaluation.evaluator INFO: Inference done 15/125. 0.1305 s / img. ETA=0:02:07
+[05/02 09:56:00] detectron2.evaluation.evaluator INFO: Inference done 20/125. 0.1291 s / img. ETA=0:02:00
+[05/02 09:56:06] detectron2.evaluation.evaluator INFO: Inference done 24/125. 0.1329 s / img. ETA=0:02:03
+[05/02 09:56:11] detectron2.evaluation.evaluator INFO: Inference done 27/125. 0.1345 s / img. ETA=0:02:07
+[05/02 09:56:16] detectron2.evaluation.evaluator INFO: Inference done 31/125. 0.1357 s / img. ETA=0:02:02
+[05/02 09:56:22] detectron2.evaluation.evaluator INFO: Inference done 36/125. 0.1351 s / img. ETA=0:01:53
+[05/02 09:56:28] detectron2.evaluation.evaluator INFO: Inference done 40/125. 0.1347 s / img. ETA=0:01:50
+[05/02 09:56:33] detectron2.evaluation.evaluator INFO: Inference done 44/125. 0.1342 s / img. ETA=0:01:45
+[05/02 09:56:38] detectron2.evaluation.evaluator INFO: Inference done 48/125. 0.1337 s / img. ETA=0:01:39
+[05/02 09:56:43] detectron2.evaluation.evaluator INFO: Inference done 60/125. 0.1298 s / img. ETA=0:01:12
+[05/02 09:56:49] detectron2.evaluation.evaluator INFO: Inference done 74/125. 0.1263 s / img. ETA=0:00:48
+[05/02 09:56:54] detectron2.evaluation.evaluator INFO: Inference done 82/125. 0.1255 s / img. ETA=0:00:39
+[05/02 09:56:59] detectron2.evaluation.evaluator INFO: Inference done 91/125. 0.1246 s / img. ETA=0:00:30
+[05/02 09:57:05] detectron2.evaluation.evaluator INFO: Inference done 99/125. 0.1240 s / img. ETA=0:00:22
+[05/02 09:57:10] detectron2.evaluation.evaluator INFO: Inference done 108/125. 0.1233 s / img. ETA=0:00:14
+[05/02 09:57:16] detectron2.evaluation.evaluator INFO: Inference done 113/125. 0.1236 s / img. ETA=0:00:10
+[05/02 09:57:22] detectron2.evaluation.evaluator INFO: Inference done 116/125. 0.1243 s / img. ETA=0:00:08
+[05/02 09:57:27] detectron2.evaluation.evaluator INFO: Inference done 120/125. 0.1249 s / img. ETA=0:00:04
+[05/02 09:57:34] detectron2.evaluation.evaluator INFO: Inference done 125/125. 0.1253 s / img. ETA=0:00:00
+[05/02 09:57:34] detectron2.evaluation.evaluator INFO: Total inference time: 0:01:51.663155 (0.930526 s / img per device, on 4 devices)
+[05/02 09:57:34] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:00:15 (0.125341 s / img per device, on 4 devices)
+[05/02 10:40:04] detectron2.data.datasets.cityscapes INFO: 3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[05/02 10:40:04] detectron2.data.datasets.cityscapes INFO: Preprocessing cityscapes annotations ...
+[05/02 10:41:44] detectron2.data.datasets.cityscapes INFO: Loaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[05/02 10:41:44] detectron2.data.common INFO: Serializing 500 elements to byte tensors and concatenating them all ...
+[05/02 10:41:44] detectron2.data.common INFO: Serialized dataset takes 12.85 MiB
+[05/02 10:41:44] detectron2.evaluation.evaluator INFO: Start inference on 125 images
+[05/02 10:41:53] detectron2.evaluation.cityscapes_evaluation INFO: Writing cityscapes results to temporary directory /tmp/cityscapes_eval_49c9gevw ...
+[05/02 10:42:06] detectron2.evaluation.evaluator INFO: Inference done 11/125. 0.1243 s / img. ETA=0:01:40
+[05/02 10:42:11] detectron2.evaluation.evaluator INFO: Inference done 16/125. 0.1252 s / img. ETA=0:01:44
+[05/02 10:42:17] detectron2.evaluation.evaluator INFO: Inference done 21/125. 0.1251 s / img. ETA=0:01:44
+[05/02 10:42:23] detectron2.evaluation.evaluator INFO: Inference done 25/125. 0.1278 s / img. ETA=0:01:49
+[05/02 10:42:28] detectron2.evaluation.evaluator INFO: Inference done 29/125. 0.1291 s / img. ETA=0:01:48
+[05/02 10:42:34] detectron2.evaluation.evaluator INFO: Inference done 34/125. 0.1293 s / img. ETA=0:01:44
+[05/02 10:42:39] detectron2.evaluation.evaluator INFO: Inference done 39/125. 0.1296 s / img. ETA=0:01:37
+[05/02 10:42:45] detectron2.evaluation.evaluator INFO: Inference done 44/125. 0.1294 s / img. ETA=0:01:31
+[05/02 10:42:51] detectron2.evaluation.evaluator INFO: Inference done 49/125. 0.1303 s / img. ETA=0:01:27
+[05/02 10:42:57] detectron2.evaluation.evaluator INFO: Inference done 70/125. 0.1238 s / img. ETA=0:00:47
+[05/02 10:43:03] detectron2.evaluation.evaluator INFO: Inference done 79/125. 0.1232 s / img. ETA=0:00:38
+[05/02 10:43:08] detectron2.evaluation.evaluator INFO: Inference done 91/125. 0.1219 s / img. ETA=0:00:26
+[05/02 10:43:13] detectron2.evaluation.evaluator INFO: Inference done 100/125. 0.1213 s / img. ETA=0:00:19
+[05/02 10:43:19] detectron2.evaluation.evaluator INFO: Inference done 109/125. 0.1209 s / img. ETA=0:00:11
+[05/02 10:43:25] detectron2.evaluation.evaluator INFO: Inference done 114/125. 0.1212 s / img. ETA=0:00:08
+[05/02 10:43:30] detectron2.evaluation.evaluator INFO: Inference done 117/125. 0.1221 s / img. ETA=0:00:06
+[05/02 10:43:36] detectron2.evaluation.evaluator INFO: Inference done 123/125. 0.1223 s / img. ETA=0:00:01
+[05/02 10:43:39] detectron2.evaluation.evaluator INFO: Total inference time: 0:01:38.332508 (0.819438 s / img per device, on 4 devices)
+[05/02 10:43:39] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:00:14 (0.122426 s / img per device, on 4 devices)
+[05/02 11:24:53] detectron2.data.datasets.cityscapes INFO: 3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[05/02 11:24:53] detectron2.data.datasets.cityscapes INFO: Preprocessing cityscapes annotations ...
+[05/02 11:26:26] detectron2.data.datasets.cityscapes INFO: Loaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[05/02 11:26:26] detectron2.data.common INFO: Serializing 500 elements to byte tensors and concatenating them all ...
+[05/02 11:26:27] detectron2.data.common INFO: Serialized dataset takes 12.85 MiB
+[05/02 11:26:27] detectron2.evaluation.evaluator INFO: Start inference on 125 images
+[05/02 11:26:39] detectron2.evaluation.cityscapes_evaluation INFO: Writing cityscapes results to temporary directory /tmp/cityscapes_eval_vvt3dkm0 ...
+[05/02 11:26:53] detectron2.evaluation.evaluator INFO: Inference done 11/125. 0.1265 s / img. ETA=0:01:51
+[05/02 11:26:58] detectron2.evaluation.evaluator INFO: Inference done 16/125. 0.1259 s / img. ETA=0:01:51
+[05/02 11:27:05] detectron2.evaluation.evaluator INFO: Inference done 21/125. 0.1279 s / img. ETA=0:01:55
+[05/02 11:27:11] detectron2.evaluation.evaluator INFO: Inference done 25/125. 0.1301 s / img. ETA=0:01:59
+[05/02 11:27:16] detectron2.evaluation.evaluator INFO: Inference done 29/125. 0.1312 s / img. ETA=0:01:58
+[05/02 11:27:23] detectron2.evaluation.evaluator INFO: Inference done 34/125. 0.1312 s / img. ETA=0:01:52
+[05/02 11:27:29] detectron2.evaluation.evaluator INFO: Inference done 39/125. 0.1311 s / img. ETA=0:01:45
+[05/02 11:27:35] detectron2.evaluation.evaluator INFO: Inference done 44/125. 0.1312 s / img. ETA=0:01:39
+[05/02 11:27:41] detectron2.evaluation.evaluator INFO: Inference done 49/125. 0.1309 s / img. ETA=0:01:33
+[05/02 11:27:46] detectron2.evaluation.evaluator INFO: Inference done 69/125. 0.1245 s / img. ETA=0:00:51
+[05/02 11:27:51] detectron2.evaluation.evaluator INFO: Inference done 77/125. 0.1239 s / img. ETA=0:00:42
+[05/02 11:27:57] detectron2.evaluation.evaluator INFO: Inference done 85/125. 0.1236 s / img. ETA=0:00:34
+[05/02 11:28:03] detectron2.evaluation.evaluator INFO: Inference done 95/125. 0.1228 s / img. ETA=0:00:25
+[05/02 11:28:09] detectron2.evaluation.evaluator INFO: Inference done 107/125. 0.1222 s / img. ETA=0:00:14
+[05/02 11:28:15] detectron2.evaluation.evaluator INFO: Inference done 113/125. 0.1226 s / img. ETA=0:00:09
+[05/02 11:28:21] detectron2.evaluation.evaluator INFO: Inference done 116/125. 0.1233 s / img. ETA=0:00:07
+[05/02 11:28:26] detectron2.evaluation.evaluator INFO: Inference done 120/125. 0.1236 s / img. ETA=0:00:04
+[05/02 11:28:32] detectron2.evaluation.evaluator INFO: Inference done 125/125. 0.1242 s / img. ETA=0:00:00
+[05/02 11:28:32] detectron2.evaluation.evaluator INFO: Total inference time: 0:01:45.405222 (0.878377 s / img per device, on 4 devices)
+[05/02 11:28:32] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:00:14 (0.124162 s / img per device, on 4 devices)
+[05/02 12:10:49] detectron2.data.datasets.cityscapes INFO: 3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[05/02 12:10:49] detectron2.data.datasets.cityscapes INFO: Preprocessing cityscapes annotations ...
+[05/02 12:12:21] detectron2.data.datasets.cityscapes INFO: Loaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[05/02 12:12:21] detectron2.data.common INFO: Serializing 500 elements to byte tensors and concatenating them all ...
+[05/02 12:12:22] detectron2.data.common INFO: Serialized dataset takes 12.85 MiB
+[05/02 12:12:22] detectron2.evaluation.evaluator INFO: Start inference on 125 images
+[05/02 12:12:35] detectron2.evaluation.cityscapes_evaluation INFO: Writing cityscapes results to temporary directory /tmp/cityscapes_eval_p2epw_1d ...
+[05/02 12:12:48] detectron2.evaluation.evaluator INFO: Inference done 11/125. 0.1214 s / img. ETA=0:01:40
+[05/02 12:12:54] detectron2.evaluation.evaluator INFO: Inference done 16/125. 0.1264 s / img. ETA=0:01:47
+[05/02 12:13:00] detectron2.evaluation.evaluator INFO: Inference done 21/125. 0.1271 s / img. ETA=0:01:51
+[05/02 12:13:06] detectron2.evaluation.evaluator INFO: Inference done 25/125. 0.1279 s / img. ETA=0:01:54
+[05/02 12:13:11] detectron2.evaluation.evaluator INFO: Inference done 29/125. 0.1282 s / img. ETA=0:01:52
+[05/02 12:13:17] detectron2.evaluation.evaluator INFO: Inference done 34/125. 0.1290 s / img. ETA=0:01:48
+[05/02 12:13:23] detectron2.evaluation.evaluator INFO: Inference done 39/125. 0.1292 s / img. ETA=0:01:41
+[05/02 12:13:29] detectron2.evaluation.evaluator INFO: Inference done 44/125. 0.1289 s / img. ETA=0:01:35
+[05/02 12:13:36] detectron2.evaluation.evaluator INFO: Inference done 49/125. 0.1295 s / img. ETA=0:01:31
+[05/02 12:13:41] detectron2.evaluation.evaluator INFO: Inference done 68/125. 0.1243 s / img. ETA=0:00:52
+[05/02 12:13:47] detectron2.evaluation.evaluator INFO: Inference done 78/125. 0.1233 s / img. ETA=0:00:41
+[05/02 12:13:52] detectron2.evaluation.evaluator INFO: Inference done 89/125. 0.1223 s / img. ETA=0:00:29
+[05/02 12:13:58] detectron2.evaluation.evaluator INFO: Inference done 98/125. 0.1218 s / img. ETA=0:00:21
+[05/02 12:14:04] detectron2.evaluation.evaluator INFO: Inference done 109/125. 0.1212 s / img. ETA=0:00:12
+[05/02 12:14:11] detectron2.evaluation.evaluator INFO: Inference done 114/125. 0.1219 s / img. ETA=0:00:08
+[05/02 12:14:17] detectron2.evaluation.evaluator INFO: Inference done 117/125. 0.1226 s / img. ETA=0:00:06
+[05/02 12:14:22] detectron2.evaluation.evaluator INFO: Inference done 122/125. 0.1228 s / img. ETA=0:00:02
+[05/02 12:14:26] detectron2.evaluation.evaluator INFO: Total inference time: 0:01:43.150692 (0.859589 s / img per device, on 4 devices)
+[05/02 12:14:26] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:00:14 (0.123009 s / img per device, on 4 devices)
+[05/02 12:56:49] detectron2.data.datasets.cityscapes INFO: 3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[05/02 12:56:49] detectron2.data.datasets.cityscapes INFO: Preprocessing cityscapes annotations ...
+[05/02 12:58:28] detectron2.data.datasets.cityscapes INFO: Loaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[05/02 12:58:28] detectron2.data.common INFO: Serializing 500 elements to byte tensors and concatenating them all ...
+[05/02 12:58:28] detectron2.data.common INFO: Serialized dataset takes 12.85 MiB
+[05/02 12:58:28] detectron2.evaluation.evaluator INFO: Start inference on 125 images
+[05/02 12:58:36] detectron2.evaluation.cityscapes_evaluation INFO: Writing cityscapes results to temporary directory /tmp/cityscapes_eval_drnh7h9q ...
+[05/02 12:58:47] detectron2.evaluation.evaluator INFO: Inference done 11/125. 0.1232 s / img. ETA=0:01:25
+[05/02 12:58:53] detectron2.evaluation.evaluator INFO: Inference done 18/125. 0.1217 s / img. ETA=0:01:25
+[05/02 12:58:59] detectron2.evaluation.evaluator INFO: Inference done 23/125. 0.1241 s / img. ETA=0:01:34
+[05/02 12:59:05] detectron2.evaluation.evaluator INFO: Inference done 27/125. 0.1263 s / img. ETA=0:01:38
+[05/02 12:59:10] detectron2.evaluation.evaluator INFO: Inference done 33/125. 0.1254 s / img. ETA=0:01:30
+[05/02 12:59:16] detectron2.evaluation.evaluator INFO: Inference done 38/125. 0.1259 s / img. ETA=0:01:27
+[05/02 12:59:21] detectron2.evaluation.evaluator INFO: Inference done 43/125. 0.1267 s / img. ETA=0:01:22
+[05/02 12:59:26] detectron2.evaluation.evaluator INFO: Inference done 48/125. 0.1268 s / img. ETA=0:01:17
+[05/02 12:59:31] detectron2.evaluation.evaluator INFO: Inference done 61/125. 0.1243 s / img. ETA=0:00:55
+[05/02 12:59:37] detectron2.evaluation.evaluator INFO: Inference done 77/125. 0.1217 s / img. ETA=0:00:36
+[05/02 12:59:42] detectron2.evaluation.evaluator INFO: Inference done 87/125. 0.1209 s / img. ETA=0:00:27
+[05/02 12:59:47] detectron2.evaluation.evaluator INFO: Inference done 99/125. 0.1201 s / img. ETA=0:00:17
+[05/02 12:59:52] detectron2.evaluation.evaluator INFO: Inference done 109/125. 0.1197 s / img. ETA=0:00:10
+[05/02 12:59:58] detectron2.evaluation.evaluator INFO: Inference done 114/125. 0.1199 s / img. ETA=0:00:07
+[05/02 13:00:03] detectron2.evaluation.evaluator INFO: Inference done 117/125. 0.1206 s / img. ETA=0:00:05
+[05/02 13:00:09] detectron2.evaluation.evaluator INFO: Inference done 123/125. 0.1208 s / img. ETA=0:00:01
+[05/02 13:00:12] detectron2.evaluation.evaluator INFO: Total inference time: 0:01:29.193496 (0.743279 s / img per device, on 4 devices)
+[05/02 13:00:12] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:00:14 (0.120923 s / img per device, on 4 devices)
+[05/02 13:41:21] detectron2.data.datasets.cityscapes INFO: 3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[05/02 13:41:21] detectron2.data.datasets.cityscapes INFO: Preprocessing cityscapes annotations ...
+[05/02 13:43:09] detectron2.data.datasets.cityscapes INFO: Loaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[05/02 13:43:09] detectron2.data.common INFO: Serializing 500 elements to byte tensors and concatenating them all ...
+[05/02 13:43:09] detectron2.data.common INFO: Serialized dataset takes 12.85 MiB
+[05/02 13:43:09] detectron2.evaluation.evaluator INFO: Start inference on 125 images
+[05/02 13:43:09] detectron2.evaluation.cityscapes_evaluation INFO: Writing cityscapes results to temporary directory /tmp/cityscapes_eval_ctffxl73 ...
+[05/02 13:43:22] detectron2.evaluation.evaluator INFO: Inference done 11/125. 0.1201 s / img. ETA=0:01:29
+[05/02 13:43:27] detectron2.evaluation.evaluator INFO: Inference done 17/125. 0.1217 s / img. ETA=0:01:28
+[05/02 13:43:32] detectron2.evaluation.evaluator INFO: Inference done 21/125. 0.1237 s / img. ETA=0:01:38
+[05/02 13:43:37] detectron2.evaluation.evaluator INFO: Inference done 25/125. 0.1245 s / img. ETA=0:01:40
+[05/02 13:43:44] detectron2.evaluation.evaluator INFO: Inference done 30/125. 0.1255 s / img. ETA=0:01:41
+[05/02 13:43:49] detectron2.evaluation.evaluator INFO: Inference done 36/125. 0.1247 s / img. ETA=0:01:32
+[05/02 13:43:55] detectron2.evaluation.evaluator INFO: Inference done 40/125. 0.1256 s / img. ETA=0:01:30
+[05/02 13:44:00] detectron2.evaluation.evaluator INFO: Inference done 45/125. 0.1254 s / img. ETA=0:01:25
+[05/02 13:44:05] detectron2.evaluation.evaluator INFO: Inference done 49/125. 0.1263 s / img. ETA=0:01:22
+[05/02 13:44:10] detectron2.evaluation.evaluator INFO: Inference done 69/125. 0.1220 s / img. ETA=0:00:46
+[05/02 13:44:16] detectron2.evaluation.evaluator INFO: Inference done 79/125. 0.1214 s / img. ETA=0:00:36
+[05/02 13:44:22] detectron2.evaluation.evaluator INFO: Inference done 92/125. 0.1202 s / img. ETA=0:00:24
+[05/02 13:44:27] detectron2.evaluation.evaluator INFO: Inference done 102/125. 0.1197 s / img. ETA=0:00:16
+[05/02 13:44:32] detectron2.evaluation.evaluator INFO: Inference done 109/125. 0.1197 s / img. ETA=0:00:11
+[05/02 13:44:38] detectron2.evaluation.evaluator INFO: Inference done 114/125. 0.1201 s / img. ETA=0:00:08
+[05/02 13:44:44] detectron2.evaluation.evaluator INFO: Inference done 117/125. 0.1207 s / img. ETA=0:00:06
+[05/02 13:44:49] detectron2.evaluation.evaluator INFO: Inference done 122/125. 0.1210 s / img. ETA=0:00:02
+[05/02 13:44:53] detectron2.evaluation.evaluator INFO: Total inference time: 0:01:35.504581 (0.795872 s / img per device, on 4 devices)
+[05/02 13:44:53] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:00:14 (0.121193 s / img per device, on 4 devices)
+[05/02 14:26:26] detectron2.data.datasets.cityscapes INFO: 3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[05/02 14:26:26] detectron2.data.datasets.cityscapes INFO: Preprocessing cityscapes annotations ...
+[05/02 14:28:06] detectron2.data.datasets.cityscapes INFO: Loaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[05/02 14:28:06] detectron2.data.common INFO: Serializing 500 elements to byte tensors and concatenating them all ...
+[05/02 14:28:06] detectron2.data.common INFO: Serialized dataset takes 12.85 MiB
+[05/02 14:28:06] detectron2.evaluation.evaluator INFO: Start inference on 125 images
+[05/02 14:28:19] detectron2.evaluation.cityscapes_evaluation INFO: Writing cityscapes results to temporary directory /tmp/cityscapes_eval_eo1k2c63 ...
+[05/02 14:28:31] detectron2.evaluation.evaluator INFO: Inference done 11/125. 0.1184 s / img. ETA=0:01:23
+[05/02 14:28:37] detectron2.evaluation.evaluator INFO: Inference done 18/125. 0.1206 s / img. ETA=0:01:24
+[05/02 14:28:43] detectron2.evaluation.evaluator INFO: Inference done 23/125. 0.1234 s / img. ETA=0:01:33
+[05/02 14:28:48] detectron2.evaluation.evaluator INFO: Inference done 27/125. 0.1249 s / img. ETA=0:01:36
+[05/02 14:28:54] detectron2.evaluation.evaluator INFO: Inference done 33/125. 0.1250 s / img. ETA=0:01:29
+[05/02 14:29:00] detectron2.evaluation.evaluator INFO: Inference done 38/125. 0.1256 s / img. ETA=0:01:27
+[05/02 14:29:05] detectron2.evaluation.evaluator INFO: Inference done 43/125. 0.1263 s / img. ETA=0:01:23
+[05/02 14:29:10] detectron2.evaluation.evaluator INFO: Inference done 48/125. 0.1260 s / img. ETA=0:01:18
+[05/02 14:29:15] detectron2.evaluation.evaluator INFO: Inference done 63/125. 0.1224 s / img. ETA=0:00:52
+[05/02 14:29:21] detectron2.evaluation.evaluator INFO: Inference done 77/125. 0.1208 s / img. ETA=0:00:36
+[05/02 14:29:26] detectron2.evaluation.evaluator INFO: Inference done 87/125. 0.1201 s / img. ETA=0:00:27
+[05/02 14:29:31] detectron2.evaluation.evaluator INFO: Inference done 97/125. 0.1196 s / img. ETA=0:00:19
+[05/02 14:29:36] detectron2.evaluation.evaluator INFO: Inference done 108/125. 0.1191 s / img. ETA=0:00:11
+[05/02 14:29:42] detectron2.evaluation.evaluator INFO: Inference done 113/125. 0.1194 s / img. ETA=0:00:08
+[05/02 14:29:47] detectron2.evaluation.evaluator INFO: Inference done 116/125. 0.1198 s / img. ETA=0:00:06
+[05/02 14:29:52] detectron2.evaluation.evaluator INFO: Inference done 121/125. 0.1203 s / img. ETA=0:00:02
+[05/02 14:29:57] detectron2.evaluation.evaluator INFO: Total inference time: 0:01:30.253786 (0.752115 s / img per device, on 4 devices)
+[05/02 14:29:57] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:00:14 (0.120412 s / img per device, on 4 devices)
+[05/02 15:11:01] detectron2.data.datasets.cityscapes INFO: 3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[05/02 15:11:01] detectron2.data.datasets.cityscapes INFO: Preprocessing cityscapes annotations ...
+[05/02 15:12:43] detectron2.data.datasets.cityscapes INFO: Loaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[05/02 15:12:43] detectron2.data.common INFO: Serializing 500 elements to byte tensors and concatenating them all ...
+[05/02 15:12:43] detectron2.data.common INFO: Serialized dataset takes 12.85 MiB
+[05/02 15:12:43] detectron2.evaluation.evaluator INFO: Start inference on 125 images
+[05/02 15:12:44] detectron2.evaluation.cityscapes_evaluation INFO: Writing cityscapes results to temporary directory /tmp/cityscapes_eval_wjlqca0r ...
+[05/02 15:12:55] detectron2.evaluation.evaluator INFO: Inference done 11/125. 0.1170 s / img. ETA=0:01:12
+[05/02 15:13:01] detectron2.evaluation.evaluator INFO: Inference done 18/125. 0.1201 s / img. ETA=0:01:18
+[05/02 15:13:06] detectron2.evaluation.evaluator INFO: Inference done 23/125. 0.1226 s / img. ETA=0:01:26
+[05/02 15:13:12] detectron2.evaluation.evaluator INFO: Inference done 28/125. 0.1261 s / img. ETA=0:01:28
+[05/02 15:13:17] detectron2.evaluation.evaluator INFO: Inference done 34/125. 0.1262 s / img. ETA=0:01:22
+[05/02 15:13:22] detectron2.evaluation.evaluator INFO: Inference done 39/125. 0.1268 s / img. ETA=0:01:19
+[05/02 15:13:28] detectron2.evaluation.evaluator INFO: Inference done 45/125. 0.1262 s / img. ETA=0:01:14
+[05/02 15:13:33] detectron2.evaluation.evaluator INFO: Inference done 52/125. 0.1256 s / img. ETA=0:01:05
+[05/02 15:13:39] detectron2.evaluation.evaluator INFO: Inference done 73/125. 0.1211 s / img. ETA=0:00:36
+[05/02 15:13:44] detectron2.evaluation.evaluator INFO: Inference done 83/125. 0.1204 s / img. ETA=0:00:28
+[05/02 15:13:49] detectron2.evaluation.evaluator INFO: Inference done 95/125. 0.1196 s / img. ETA=0:00:19
+[05/02 15:13:55] detectron2.evaluation.evaluator INFO: Inference done 109/125. 0.1189 s / img. ETA=0:00:09
+[05/02 15:14:01] detectron2.evaluation.evaluator INFO: Inference done 114/125. 0.1192 s / img. ETA=0:00:07
+[05/02 15:14:06] detectron2.evaluation.evaluator INFO: Inference done 117/125. 0.1197 s / img. ETA=0:00:05
+[05/02 15:14:11] detectron2.evaluation.evaluator INFO: Inference done 123/125. 0.1201 s / img. ETA=0:00:01
+[05/02 15:14:14] detectron2.evaluation.evaluator INFO: Total inference time: 0:01:22.738028 (0.689484 s / img per device, on 4 devices)
+[05/02 15:14:14] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:00:14 (0.120492 s / img per device, on 4 devices)
+[05/02 15:54:56] detectron2.data.datasets.cityscapes INFO: 3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[05/02 15:54:56] detectron2.data.datasets.cityscapes INFO: Preprocessing cityscapes annotations ...
+[05/02 15:56:46] detectron2.data.datasets.cityscapes INFO: Loaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[05/02 15:56:46] detectron2.data.common INFO: Serializing 500 elements to byte tensors and concatenating them all ...
+[05/02 15:56:46] detectron2.data.common INFO: Serialized dataset takes 12.85 MiB
+[05/02 15:56:46] detectron2.evaluation.evaluator INFO: Start inference on 125 images
+[05/02 15:56:53] detectron2.evaluation.cityscapes_evaluation INFO: Writing cityscapes results to temporary directory /tmp/cityscapes_eval_82b4l01v ...
+[05/02 15:57:05] detectron2.evaluation.evaluator INFO: Inference done 11/125. 0.1221 s / img. ETA=0:01:23
+[05/02 15:57:11] detectron2.evaluation.evaluator INFO: Inference done 18/125. 0.1213 s / img. ETA=0:01:24
+[05/02 15:57:17] detectron2.evaluation.evaluator INFO: Inference done 23/125. 0.1257 s / img. ETA=0:01:33
+[05/02 15:57:23] detectron2.evaluation.evaluator INFO: Inference done 27/125. 0.1280 s / img. ETA=0:01:38
+[05/02 15:57:28] detectron2.evaluation.evaluator INFO: Inference done 33/125. 0.1275 s / img. ETA=0:01:30
+[05/02 15:57:34] detectron2.evaluation.evaluator INFO: Inference done 38/125. 0.1279 s / img. ETA=0:01:28
+[05/02 15:57:39] detectron2.evaluation.evaluator INFO: Inference done 43/125. 0.1280 s / img. ETA=0:01:23
+[05/02 15:57:45] detectron2.evaluation.evaluator INFO: Inference done 48/125. 0.1285 s / img. ETA=0:01:18
+[05/02 15:57:50] detectron2.evaluation.evaluator INFO: Inference done 62/125. 0.1260 s / img. ETA=0:00:54
+[05/02 15:57:55] detectron2.evaluation.evaluator INFO: Inference done 76/125. 0.1240 s / img. ETA=0:00:37
+[05/02 15:58:00] detectron2.evaluation.evaluator INFO: Inference done 86/125. 0.1232 s / img. ETA=0:00:28
+[05/02 15:58:05] detectron2.evaluation.evaluator INFO: Inference done 95/125. 0.1230 s / img. ETA=0:00:21
+[05/02 15:58:12] detectron2.evaluation.evaluator INFO: Inference done 109/125. 0.1222 s / img. ETA=0:00:10
+[05/02 15:58:18] detectron2.evaluation.evaluator INFO: Inference done 114/125. 0.1228 s / img. ETA=0:00:07
+[05/02 15:58:23] detectron2.evaluation.evaluator INFO: Inference done 117/125. 0.1236 s / img. ETA=0:00:05
+[05/02 15:58:28] detectron2.evaluation.evaluator INFO: Inference done 122/125. 0.1241 s / img. ETA=0:00:02
+[05/02 15:58:32] detectron2.evaluation.evaluator INFO: Total inference time: 0:01:31.700036 (0.764167 s / img per device, on 4 devices)
+[05/02 15:58:32] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:00:14 (0.124237 s / img per device, on 4 devices)
+[05/02 16:40:04] detectron2.data.datasets.cityscapes INFO: 3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[05/02 16:40:04] detectron2.data.datasets.cityscapes INFO: Preprocessing cityscapes annotations ...
+[05/02 16:41:39] detectron2.data.datasets.cityscapes INFO: Loaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[05/02 16:41:39] detectron2.data.common INFO: Serializing 500 elements to byte tensors and concatenating them all ...
+[05/02 16:41:40] detectron2.data.common INFO: Serialized dataset takes 12.85 MiB
+[05/02 16:41:40] detectron2.evaluation.evaluator INFO: Start inference on 125 images
+[05/02 16:41:50] detectron2.evaluation.cityscapes_evaluation INFO: Writing cityscapes results to temporary directory /tmp/cityscapes_eval_a30cvqsx ...
+[05/02 16:42:02] detectron2.evaluation.evaluator INFO: Inference done 11/125. 0.1232 s / img. ETA=0:01:18
+[05/02 16:42:08] detectron2.evaluation.evaluator INFO: Inference done 18/125. 0.1239 s / img. ETA=0:01:20
+[05/02 16:42:13] detectron2.evaluation.evaluator INFO: Inference done 23/125. 0.1258 s / img. ETA=0:01:25
+[05/02 16:42:18] detectron2.evaluation.evaluator INFO: Inference done 27/125. 0.1270 s / img. ETA=0:01:30
+[05/02 16:42:24] detectron2.evaluation.evaluator INFO: Inference done 33/125. 0.1269 s / img. ETA=0:01:23
+[05/02 16:42:29] detectron2.evaluation.evaluator INFO: Inference done 38/125. 0.1270 s / img. ETA=0:01:21
+[05/02 16:42:35] detectron2.evaluation.evaluator INFO: Inference done 44/125. 0.1279 s / img. ETA=0:01:16
+[05/02 16:42:41] detectron2.evaluation.evaluator INFO: Inference done 49/125. 0.1282 s / img. ETA=0:01:13
+[05/02 16:42:46] detectron2.evaluation.evaluator INFO: Inference done 71/125. 0.1229 s / img. ETA=0:00:39
+[05/02 16:42:51] detectron2.evaluation.evaluator INFO: Inference done 79/125. 0.1223 s / img. ETA=0:00:33
+[05/02 16:42:57] detectron2.evaluation.evaluator INFO: Inference done 94/125. 0.1207 s / img. ETA=0:00:20
+[05/02 16:43:02] detectron2.evaluation.evaluator INFO: Inference done 106/125. 0.1200 s / img. ETA=0:00:11
+[05/02 16:43:08] detectron2.evaluation.evaluator INFO: Inference done 113/125. 0.1203 s / img. ETA=0:00:07
+[05/02 16:43:13] detectron2.evaluation.evaluator INFO: Inference done 116/125. 0.1209 s / img. ETA=0:00:06
+[05/02 16:43:18] detectron2.evaluation.evaluator INFO: Inference done 121/125. 0.1213 s / img. ETA=0:00:02
+[05/02 16:43:23] detectron2.evaluation.evaluator INFO: Total inference time: 0:01:24.369745 (0.703081 s / img per device, on 4 devices)
+[05/02 16:43:23] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:00:14 (0.121518 s / img per device, on 4 devices)
+[05/02 17:24:25] detectron2.data.datasets.cityscapes INFO: 3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[05/02 17:24:25] detectron2.data.datasets.cityscapes INFO: Preprocessing cityscapes annotations ...
+[05/02 17:26:04] detectron2.data.datasets.cityscapes INFO: Loaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[05/02 17:26:04] detectron2.data.common INFO: Serializing 500 elements to byte tensors and concatenating them all ...
+[05/02 17:26:04] detectron2.data.common INFO: Serialized dataset takes 12.85 MiB
+[05/02 17:26:04] detectron2.evaluation.evaluator INFO: Start inference on 125 images
+[05/02 17:26:12] detectron2.evaluation.cityscapes_evaluation INFO: Writing cityscapes results to temporary directory /tmp/cityscapes_eval_tg6q_8km ...
+[05/02 17:26:23] detectron2.evaluation.evaluator INFO: Inference done 11/125. 0.1168 s / img. ETA=0:01:11
+[05/02 17:26:29] detectron2.evaluation.evaluator INFO: Inference done 18/125. 0.1199 s / img. ETA=0:01:17
+[05/02 17:26:34] detectron2.evaluation.evaluator INFO: Inference done 23/125. 0.1215 s / img. ETA=0:01:26
+[05/02 17:26:40] detectron2.evaluation.evaluator INFO: Inference done 28/125. 0.1242 s / img. ETA=0:01:28
+[05/02 17:26:45] detectron2.evaluation.evaluator INFO: Inference done 34/125. 0.1242 s / img. ETA=0:01:21
+[05/02 17:26:50] detectron2.evaluation.evaluator INFO: Inference done 39/125. 0.1251 s / img. ETA=0:01:18
+[05/02 17:26:56] detectron2.evaluation.evaluator INFO: Inference done 45/125. 0.1251 s / img. ETA=0:01:13
+[05/02 17:27:01] detectron2.evaluation.evaluator INFO: Inference done 51/125. 0.1255 s / img. ETA=0:01:07
+[05/02 17:27:07] detectron2.evaluation.evaluator INFO: Inference done 72/125. 0.1219 s / img. ETA=0:00:37
+[05/02 17:27:12] detectron2.evaluation.evaluator INFO: Inference done 81/125. 0.1216 s / img. ETA=0:00:30
+[05/02 17:27:18] detectron2.evaluation.evaluator INFO: Inference done 95/125. 0.1205 s / img. ETA=0:00:19
+[05/02 17:27:23] detectron2.evaluation.evaluator INFO: Inference done 107/125. 0.1198 s / img. ETA=0:00:11
+[05/02 17:27:29] detectron2.evaluation.evaluator INFO: Inference done 113/125. 0.1199 s / img. ETA=0:00:07
+[05/02 17:27:35] detectron2.evaluation.evaluator INFO: Inference done 117/125. 0.1207 s / img. ETA=0:00:05
+[05/02 17:27:41] detectron2.evaluation.evaluator INFO: Inference done 123/125. 0.1211 s / img. ETA=0:00:01
+[05/02 17:27:43] detectron2.evaluation.evaluator INFO: Total inference time: 0:01:24.059985 (0.700500 s / img per device, on 4 devices)
+[05/02 17:27:43] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:00:14 (0.121216 s / img per device, on 4 devices)
+[05/02 18:08:37] detectron2.data.datasets.cityscapes INFO: 3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[05/02 18:08:37] detectron2.data.datasets.cityscapes INFO: Preprocessing cityscapes annotations ...
+[05/02 18:10:25] detectron2.data.datasets.cityscapes INFO: Loaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[05/02 18:10:25] detectron2.data.common INFO: Serializing 500 elements to byte tensors and concatenating them all ...
+[05/02 18:10:26] detectron2.data.common INFO: Serialized dataset takes 12.85 MiB
+[05/02 18:10:26] detectron2.evaluation.evaluator INFO: Start inference on 125 images
+[05/02 18:10:26] detectron2.evaluation.cityscapes_evaluation INFO: Writing cityscapes results to temporary directory /tmp/cityscapes_eval_dwpvgrh1 ...
+[05/02 18:10:36] detectron2.evaluation.evaluator INFO: Inference done 11/125. 0.1203 s / img. ETA=0:01:11
+[05/02 18:10:41] detectron2.evaluation.evaluator INFO: Inference done 18/125. 0.1200 s / img. ETA=0:01:14
+[05/02 18:10:47] detectron2.evaluation.evaluator INFO: Inference done 23/125. 0.1241 s / img. ETA=0:01:21
+[05/02 18:10:52] detectron2.evaluation.evaluator INFO: Inference done 28/125. 0.1244 s / img. ETA=0:01:23
+[05/02 18:10:57] detectron2.evaluation.evaluator INFO: Inference done 34/125. 0.1246 s / img. ETA=0:01:18
+[05/02 18:11:03] detectron2.evaluation.evaluator INFO: Inference done 40/125. 0.1248 s / img. ETA=0:01:13
+[05/02 18:11:09] detectron2.evaluation.evaluator INFO: Inference done 47/125. 0.1244 s / img. ETA=0:01:07
+[05/02 18:11:14] detectron2.evaluation.evaluator INFO: Inference done 63/125. 0.1212 s / img. ETA=0:00:44
+[05/02 18:11:19] detectron2.evaluation.evaluator INFO: Inference done 78/125. 0.1196 s / img. ETA=0:00:30
+[05/02 18:11:25] detectron2.evaluation.evaluator INFO: Inference done 93/125. 0.1186 s / img. ETA=0:00:19
+[05/02 18:11:30] detectron2.evaluation.evaluator INFO: Inference done 107/125. 0.1180 s / img. ETA=0:00:10
+[05/02 18:11:35] detectron2.evaluation.evaluator INFO: Inference done 113/125. 0.1182 s / img. ETA=0:00:06
+[05/02 18:11:42] detectron2.evaluation.evaluator INFO: Inference done 117/125. 0.1192 s / img. ETA=0:00:04
+[05/02 18:11:48] detectron2.evaluation.evaluator INFO: Inference done 125/125. 0.1194 s / img. ETA=0:00:00
+[05/02 18:11:48] detectron2.evaluation.evaluator INFO: Total inference time: 0:01:15.615072 (0.630126 s / img per device, on 4 devices)
+[05/02 18:11:48] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:00:14 (0.119373 s / img per device, on 4 devices)
+[05/02 18:52:05] detectron2.data.datasets.cityscapes INFO: 3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[05/02 18:52:05] detectron2.data.datasets.cityscapes INFO: Preprocessing cityscapes annotations ...
+[05/02 18:53:48] detectron2.data.datasets.cityscapes INFO: Loaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[05/02 18:53:48] detectron2.data.common INFO: Serializing 500 elements to byte tensors and concatenating them all ...
+[05/02 18:53:48] detectron2.data.common INFO: Serialized dataset takes 12.85 MiB
+[05/02 18:53:48] detectron2.evaluation.evaluator INFO: Start inference on 125 images
+[05/02 18:53:51] detectron2.evaluation.cityscapes_evaluation INFO: Writing cityscapes results to temporary directory /tmp/cityscapes_eval_tle3uqkg ...
+[05/02 18:54:01] detectron2.evaluation.evaluator INFO: Inference done 11/125. 0.1162 s / img. ETA=0:01:04
+[05/02 18:54:06] detectron2.evaluation.evaluator INFO: Inference done 18/125. 0.1213 s / img. ETA=0:01:10
+[05/02 18:54:11] detectron2.evaluation.evaluator INFO: Inference done 23/125. 0.1223 s / img. ETA=0:01:18
+[05/02 18:54:17] detectron2.evaluation.evaluator INFO: Inference done 28/125. 0.1239 s / img. ETA=0:01:20
+[05/02 18:54:22] detectron2.evaluation.evaluator INFO: Inference done 35/125. 0.1235 s / img. ETA=0:01:14
+[05/02 18:54:28] detectron2.evaluation.evaluator INFO: Inference done 41/125. 0.1245 s / img. ETA=0:01:10
+[05/02 18:54:33] detectron2.evaluation.evaluator INFO: Inference done 47/125. 0.1244 s / img. ETA=0:01:06
+[05/02 18:54:39] detectron2.evaluation.evaluator INFO: Inference done 63/125. 0.1221 s / img. ETA=0:00:44
+[05/02 18:54:44] detectron2.evaluation.evaluator INFO: Inference done 78/125. 0.1202 s / img. ETA=0:00:29
+[05/02 18:54:49] detectron2.evaluation.evaluator INFO: Inference done 93/125. 0.1191 s / img. ETA=0:00:18
+[05/02 18:54:55] detectron2.evaluation.evaluator INFO: Inference done 107/125. 0.1184 s / img. ETA=0:00:10
+[05/02 18:55:01] detectron2.evaluation.evaluator INFO: Inference done 114/125. 0.1188 s / img. ETA=0:00:06
+[05/02 18:55:07] detectron2.evaluation.evaluator INFO: Inference done 118/125. 0.1195 s / img. ETA=0:00:04
+[05/02 18:55:12] detectron2.evaluation.evaluator INFO: Inference done 125/125. 0.1196 s / img. ETA=0:00:00
+[05/02 18:55:12] detectron2.evaluation.evaluator INFO: Total inference time: 0:01:14.905533 (0.624213 s / img per device, on 4 devices)
+[05/02 18:55:12] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:00:14 (0.119595 s / img per device, on 4 devices)
+[05/02 19:35:22] detectron2.data.datasets.cityscapes INFO: 3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[05/02 19:35:22] detectron2.data.datasets.cityscapes INFO: Preprocessing cityscapes annotations ...
+[05/02 19:37:10] detectron2.data.datasets.cityscapes INFO: Loaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[05/02 19:37:10] detectron2.data.common INFO: Serializing 500 elements to byte tensors and concatenating them all ...
+[05/02 19:37:10] detectron2.data.common INFO: Serialized dataset takes 12.85 MiB
+[05/02 19:37:10] detectron2.evaluation.evaluator INFO: Start inference on 125 images
+[05/02 19:37:11] detectron2.evaluation.cityscapes_evaluation INFO: Writing cityscapes results to temporary directory /tmp/cityscapes_eval_1_o7nnlr ...
+[05/02 19:37:22] detectron2.evaluation.evaluator INFO: Inference done 11/125. 0.1172 s / img. ETA=0:01:07
+[05/02 19:37:27] detectron2.evaluation.evaluator INFO: Inference done 18/125. 0.1207 s / img. ETA=0:01:12
+[05/02 19:37:32] detectron2.evaluation.evaluator INFO: Inference done 23/125. 0.1230 s / img. ETA=0:01:19
+[05/02 19:37:37] detectron2.evaluation.evaluator INFO: Inference done 28/125. 0.1244 s / img. ETA=0:01:21
+[05/02 19:37:43] detectron2.evaluation.evaluator INFO: Inference done 35/125. 0.1247 s / img. ETA=0:01:15
+[05/02 19:37:49] detectron2.evaluation.evaluator INFO: Inference done 41/125. 0.1248 s / img. ETA=0:01:11
+[05/02 19:37:54] detectron2.evaluation.evaluator INFO: Inference done 47/125. 0.1248 s / img. ETA=0:01:07
+[05/02 19:37:59] detectron2.evaluation.evaluator INFO: Inference done 63/125. 0.1218 s / img. ETA=0:00:44
+[05/02 19:38:05] detectron2.evaluation.evaluator INFO: Inference done 78/125. 0.1200 s / img. ETA=0:00:30
+[05/02 19:38:10] detectron2.evaluation.evaluator INFO: Inference done 93/125. 0.1188 s / img. ETA=0:00:18
+[05/02 19:38:15] detectron2.evaluation.evaluator INFO: Inference done 107/125. 0.1183 s / img. ETA=0:00:10
+[05/02 19:38:22] detectron2.evaluation.evaluator INFO: Inference done 114/125. 0.1186 s / img. ETA=0:00:06
+[05/02 19:38:27] detectron2.evaluation.evaluator INFO: Inference done 118/125. 0.1191 s / img. ETA=0:00:04
+[05/02 19:38:33] detectron2.evaluation.evaluator INFO: Inference done 125/125. 0.1193 s / img. ETA=0:00:00
+[05/02 19:38:33] detectron2.evaluation.evaluator INFO: Total inference time: 0:01:15.116160 (0.625968 s / img per device, on 4 devices)
+[05/02 19:38:33] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:00:14 (0.119263 s / img per device, on 4 devices)
+[05/02 20:18:45] detectron2.data.datasets.cityscapes INFO: 3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[05/02 20:18:45] detectron2.data.datasets.cityscapes INFO: Preprocessing cityscapes annotations ...
+[05/02 20:20:32] detectron2.data.datasets.cityscapes INFO: Loaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[05/02 20:20:32] detectron2.data.common INFO: Serializing 500 elements to byte tensors and concatenating them all ...
+[05/02 20:20:32] detectron2.data.common INFO: Serialized dataset takes 12.85 MiB
+[05/02 20:20:32] detectron2.evaluation.evaluator INFO: Start inference on 125 images
+[05/02 20:20:32] detectron2.evaluation.cityscapes_evaluation INFO: Writing cityscapes results to temporary directory /tmp/cityscapes_eval_fiel3khb ...
+[05/02 20:20:42] detectron2.evaluation.evaluator INFO: Inference done 11/125. 0.1159 s / img. ETA=0:01:04
+[05/02 20:20:47] detectron2.evaluation.evaluator INFO: Inference done 18/125. 0.1185 s / img. ETA=0:01:09
+[05/02 20:20:53] detectron2.evaluation.evaluator INFO: Inference done 24/125. 0.1197 s / img. ETA=0:01:14
+[05/02 20:20:58] detectron2.evaluation.evaluator INFO: Inference done 29/125. 0.1216 s / img. ETA=0:01:16
+[05/02 20:21:03] detectron2.evaluation.evaluator INFO: Inference done 36/125. 0.1216 s / img. ETA=0:01:10
+[05/02 20:21:09] detectron2.evaluation.evaluator INFO: Inference done 42/125. 0.1217 s / img. ETA=0:01:07
+[05/02 20:21:15] detectron2.evaluation.evaluator INFO: Inference done 49/125. 0.1219 s / img. ETA=0:01:03
+[05/02 20:21:20] detectron2.evaluation.evaluator INFO: Inference done 71/125. 0.1192 s / img. ETA=0:00:34
+[05/02 20:21:26] detectron2.evaluation.evaluator INFO: Inference done 83/125. 0.1187 s / img. ETA=0:00:25
+[05/02 20:21:31] detectron2.evaluation.evaluator INFO: Inference done 98/125. 0.1178 s / img. ETA=0:00:15
+[05/02 20:21:36] detectron2.evaluation.evaluator INFO: Inference done 110/125. 0.1174 s / img. ETA=0:00:08
+[05/02 20:21:42] detectron2.evaluation.evaluator INFO: Inference done 115/125. 0.1178 s / img. ETA=0:00:05
+[05/02 20:21:47] detectron2.evaluation.evaluator INFO: Inference done 120/125. 0.1182 s / img. ETA=0:00:02
+[05/02 20:21:51] detectron2.evaluation.evaluator INFO: Total inference time: 0:01:12.090655 (0.600755 s / img per device, on 4 devices)
+[05/02 20:21:51] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:00:14 (0.118276 s / img per device, on 4 devices)
+[05/02 21:01:51] detectron2.data.datasets.cityscapes INFO: 3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[05/02 21:01:51] detectron2.data.datasets.cityscapes INFO: Preprocessing cityscapes annotations ...
+[05/02 21:03:40] detectron2.data.datasets.cityscapes INFO: Loaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[05/02 21:03:40] detectron2.data.common INFO: Serializing 500 elements to byte tensors and concatenating them all ...
+[05/02 21:03:40] detectron2.data.common INFO: Serialized dataset takes 12.85 MiB
+[05/02 21:03:40] detectron2.evaluation.evaluator INFO: Start inference on 125 images
+[05/02 21:03:41] detectron2.evaluation.cityscapes_evaluation INFO: Writing cityscapes results to temporary directory /tmp/cityscapes_eval_yb2jc1yi ...
+[05/02 21:03:51] detectron2.evaluation.evaluator INFO: Inference done 11/125. 0.1157 s / img. ETA=0:01:06
+[05/02 21:03:57] detectron2.evaluation.evaluator INFO: Inference done 18/125. 0.1193 s / img. ETA=0:01:13
+[05/02 21:04:02] detectron2.evaluation.evaluator INFO: Inference done 23/125. 0.1206 s / img. ETA=0:01:19
+[05/02 21:04:07] detectron2.evaluation.evaluator INFO: Inference done 28/125. 0.1223 s / img. ETA=0:01:22
+[05/02 21:04:13] detectron2.evaluation.evaluator INFO: Inference done 35/125. 0.1219 s / img. ETA=0:01:15
+[05/02 21:04:19] detectron2.evaluation.evaluator INFO: Inference done 41/125. 0.1225 s / img. ETA=0:01:11
+[05/02 21:04:24] detectron2.evaluation.evaluator INFO: Inference done 47/125. 0.1225 s / img. ETA=0:01:07
+[05/02 21:04:29] detectron2.evaluation.evaluator INFO: Inference done 62/125. 0.1203 s / img. ETA=0:00:45
+[05/02 21:04:35] detectron2.evaluation.evaluator INFO: Inference done 77/125. 0.1190 s / img. ETA=0:00:31
+[05/02 21:04:40] detectron2.evaluation.evaluator INFO: Inference done 91/125. 0.1186 s / img. ETA=0:00:20
+[05/02 21:04:45] detectron2.evaluation.evaluator INFO: Inference done 105/125. 0.1183 s / img. ETA=0:00:11
+[05/02 21:04:51] detectron2.evaluation.evaluator INFO: Inference done 113/125. 0.1186 s / img. ETA=0:00:07
+[05/02 21:04:57] detectron2.evaluation.evaluator INFO: Inference done 117/125. 0.1191 s / img. ETA=0:00:04
+[05/02 21:05:04] detectron2.evaluation.evaluator INFO: Inference done 125/125. 0.1194 s / img. ETA=0:00:00
+[05/02 21:05:04] detectron2.evaluation.evaluator INFO: Total inference time: 0:01:16.226348 (0.635220 s / img per device, on 4 devices)
+[05/02 21:05:04] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:00:14 (0.119410 s / img per device, on 4 devices)
+[05/02 21:45:13] detectron2.data.datasets.cityscapes INFO: 3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[05/02 21:45:13] detectron2.data.datasets.cityscapes INFO: Preprocessing cityscapes annotations ...
+[05/02 21:46:59] detectron2.data.datasets.cityscapes INFO: Loaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[05/02 21:46:59] detectron2.data.common INFO: Serializing 500 elements to byte tensors and concatenating them all ...
+[05/02 21:46:59] detectron2.data.common INFO: Serialized dataset takes 12.85 MiB
+[05/02 21:46:59] detectron2.evaluation.evaluator INFO: Start inference on 125 images
+[05/02 21:47:00] detectron2.evaluation.cityscapes_evaluation INFO: Writing cityscapes results to temporary directory /tmp/cityscapes_eval_xy2ftmtf ...
+[05/02 21:47:10] detectron2.evaluation.evaluator INFO: Inference done 11/125. 0.1202 s / img. ETA=0:01:06
+[05/02 21:47:15] detectron2.evaluation.evaluator INFO: Inference done 18/125. 0.1201 s / img. ETA=0:01:10
+[05/02 21:47:20] detectron2.evaluation.evaluator INFO: Inference done 23/125. 0.1216 s / img. ETA=0:01:17
+[05/02 21:47:25] detectron2.evaluation.evaluator INFO: Inference done 28/125. 0.1232 s / img. ETA=0:01:20
+[05/02 21:47:31] detectron2.evaluation.evaluator INFO: Inference done 35/125. 0.1231 s / img. ETA=0:01:13
+[05/02 21:47:36] detectron2.evaluation.evaluator INFO: Inference done 41/125. 0.1233 s / img. ETA=0:01:10
+[05/02 21:47:42] detectron2.evaluation.evaluator INFO: Inference done 47/125. 0.1238 s / img. ETA=0:01:06
+[05/02 21:47:47] detectron2.evaluation.evaluator INFO: Inference done 63/125. 0.1210 s / img. ETA=0:00:43
+[05/02 21:47:52] detectron2.evaluation.evaluator INFO: Inference done 78/125. 0.1192 s / img. ETA=0:00:29
+[05/02 21:47:58] detectron2.evaluation.evaluator INFO: Inference done 93/125. 0.1182 s / img. ETA=0:00:18
+[05/02 21:48:03] detectron2.evaluation.evaluator INFO: Inference done 107/125. 0.1175 s / img. ETA=0:00:10
+[05/02 21:48:08] detectron2.evaluation.evaluator INFO: Inference done 113/125. 0.1180 s / img. ETA=0:00:06
+[05/02 21:48:14] detectron2.evaluation.evaluator INFO: Inference done 117/125. 0.1186 s / img. ETA=0:00:04
+[05/02 21:48:19] detectron2.evaluation.evaluator INFO: Inference done 124/125. 0.1192 s / img. ETA=0:00:00
+[05/02 21:48:21] detectron2.evaluation.evaluator INFO: Total inference time: 0:01:14.937142 (0.624476 s / img per device, on 4 devices)
+[05/02 21:48:21] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:00:14 (0.119351 s / img per device, on 4 devices)
+[05/02 22:29:20] detectron2.data.datasets.cityscapes INFO: 3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[05/02 22:29:20] detectron2.data.datasets.cityscapes INFO: Preprocessing cityscapes annotations ...
+[05/02 22:30:59] detectron2.data.datasets.cityscapes INFO: Loaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[05/02 22:30:59] detectron2.data.common INFO: Serializing 500 elements to byte tensors and concatenating them all ...
+[05/02 22:31:00] detectron2.data.common INFO: Serialized dataset takes 12.85 MiB
+[05/02 22:31:00] detectron2.evaluation.evaluator INFO: Start inference on 125 images
+[05/02 22:31:05] detectron2.evaluation.cityscapes_evaluation INFO: Writing cityscapes results to temporary directory /tmp/cityscapes_eval_5818gm1l ...
+[05/02 22:31:15] detectron2.evaluation.evaluator INFO: Inference done 11/125. 0.1154 s / img. ETA=0:01:02
+[05/02 22:31:20] detectron2.evaluation.evaluator INFO: Inference done 18/125. 0.1174 s / img. ETA=0:01:11
+[05/02 22:31:25] detectron2.evaluation.evaluator INFO: Inference done 23/125. 0.1199 s / img. ETA=0:01:17
+[05/02 22:31:30] detectron2.evaluation.evaluator INFO: Inference done 28/125. 0.1218 s / img. ETA=0:01:19
+[05/02 22:31:36] detectron2.evaluation.evaluator INFO: Inference done 35/125. 0.1213 s / img. ETA=0:01:13
+[05/02 22:31:41] detectron2.evaluation.evaluator INFO: Inference done 41/125. 0.1214 s / img. ETA=0:01:09
+[05/02 22:31:46] detectron2.evaluation.evaluator INFO: Inference done 47/125. 0.1217 s / img. ETA=0:01:04
+[05/02 22:31:51] detectron2.evaluation.evaluator INFO: Inference done 64/125. 0.1189 s / img. ETA=0:00:41
+[05/02 22:31:56] detectron2.evaluation.evaluator INFO: Inference done 78/125. 0.1178 s / img. ETA=0:00:29
+[05/02 22:32:02] detectron2.evaluation.evaluator INFO: Inference done 93/125. 0.1171 s / img. ETA=0:00:18
+[05/02 22:32:07] detectron2.evaluation.evaluator INFO: Inference done 107/125. 0.1167 s / img. ETA=0:00:09
+[05/02 22:32:14] detectron2.evaluation.evaluator INFO: Inference done 114/125. 0.1170 s / img. ETA=0:00:06
+[05/02 22:32:19] detectron2.evaluation.evaluator INFO: Inference done 118/125. 0.1176 s / img. ETA=0:00:04
+[05/02 22:32:24] detectron2.evaluation.evaluator INFO: Inference done 125/125. 0.1179 s / img. ETA=0:00:00
+[05/02 22:32:25] detectron2.evaluation.evaluator INFO: Total inference time: 0:01:13.267359 (0.610561 s / img per device, on 4 devices)
+[05/02 22:32:25] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:00:14 (0.117931 s / img per device, on 4 devices)
+[05/02 23:12:32] detectron2.data.datasets.cityscapes INFO: 3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[05/02 23:12:32] detectron2.data.datasets.cityscapes INFO: Preprocessing cityscapes annotations ...
+[05/02 23:14:13] detectron2.data.datasets.cityscapes INFO: Loaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[05/02 23:14:14] detectron2.data.common INFO: Serializing 500 elements to byte tensors and concatenating them all ...
+[05/02 23:14:14] detectron2.data.common INFO: Serialized dataset takes 12.85 MiB
+[05/02 23:14:14] detectron2.evaluation.evaluator INFO: Start inference on 125 images
+[05/02 23:14:25] detectron2.evaluation.cityscapes_evaluation INFO: Writing cityscapes results to temporary directory /tmp/cityscapes_eval_2nzlyuzr ...
+[05/02 23:14:35] detectron2.evaluation.evaluator INFO: Inference done 11/125. 0.1168 s / img. ETA=0:01:06
+[05/02 23:14:40] detectron2.evaluation.evaluator INFO: Inference done 18/125. 0.1180 s / img. ETA=0:01:10
+[05/02 23:14:46] detectron2.evaluation.evaluator INFO: Inference done 24/125. 0.1207 s / img. ETA=0:01:15
+[05/02 23:14:51] detectron2.evaluation.evaluator INFO: Inference done 29/125. 0.1239 s / img. ETA=0:01:17
+[05/02 23:14:57] detectron2.evaluation.evaluator INFO: Inference done 36/125. 0.1242 s / img. ETA=0:01:11
+[05/02 23:15:02] detectron2.evaluation.evaluator INFO: Inference done 42/125. 0.1243 s / img. ETA=0:01:08
+[05/02 23:15:09] detectron2.evaluation.evaluator INFO: Inference done 49/125. 0.1243 s / img. ETA=0:01:03
+[05/02 23:15:14] detectron2.evaluation.evaluator INFO: Inference done 71/125. 0.1200 s / img. ETA=0:00:34
+[05/02 23:15:19] detectron2.evaluation.evaluator INFO: Inference done 83/125. 0.1192 s / img. ETA=0:00:25
+[05/02 23:15:24] detectron2.evaluation.evaluator INFO: Inference done 98/125. 0.1183 s / img. ETA=0:00:15
+[05/02 23:15:30] detectron2.evaluation.evaluator INFO: Inference done 110/125. 0.1180 s / img. ETA=0:00:08
+[05/02 23:15:35] detectron2.evaluation.evaluator INFO: Inference done 115/125. 0.1183 s / img. ETA=0:00:05
+[05/02 23:15:40] detectron2.evaluation.evaluator INFO: Inference done 120/125. 0.1186 s / img. ETA=0:00:02
+[05/02 23:15:44] detectron2.evaluation.evaluator INFO: Total inference time: 0:01:12.296478 (0.602471 s / img per device, on 4 devices)
+[05/02 23:15:44] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:00:14 (0.118665 s / img per device, on 4 devices)
+[05/02 23:55:45] detectron2.data.datasets.cityscapes INFO: 3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[05/02 23:55:45] detectron2.data.datasets.cityscapes INFO: Preprocessing cityscapes annotations ...
+[05/02 23:57:31] detectron2.data.datasets.cityscapes INFO: Loaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[05/02 23:57:31] detectron2.data.common INFO: Serializing 500 elements to byte tensors and concatenating them all ...
+[05/02 23:57:31] detectron2.data.common INFO: Serialized dataset takes 12.85 MiB
+[05/02 23:57:31] detectron2.evaluation.evaluator INFO: Start inference on 125 images
+[05/02 23:57:31] detectron2.evaluation.cityscapes_evaluation INFO: Writing cityscapes results to temporary directory /tmp/cityscapes_eval_nwt_3exd ...
+[05/02 23:57:41] detectron2.evaluation.evaluator INFO: Inference done 11/125. 0.1160 s / img. ETA=0:01:04
+[05/02 23:57:46] detectron2.evaluation.evaluator INFO: Inference done 19/125. 0.1184 s / img. ETA=0:01:08
+[05/02 23:57:53] detectron2.evaluation.evaluator INFO: Inference done 25/125. 0.1206 s / img. ETA=0:01:15
+[05/02 23:57:58] detectron2.evaluation.evaluator INFO: Inference done 31/125. 0.1215 s / img. ETA=0:01:14
+[05/02 23:58:04] detectron2.evaluation.evaluator INFO: Inference done 38/125. 0.1228 s / img. ETA=0:01:09
+[05/02 23:58:09] detectron2.evaluation.evaluator INFO: Inference done 45/125. 0.1228 s / img. ETA=0:01:03
+[05/02 23:58:15] detectron2.evaluation.evaluator INFO: Inference done 55/125. 0.1214 s / img. ETA=0:00:51
+[05/02 23:58:20] detectron2.evaluation.evaluator INFO: Inference done 75/125. 0.1188 s / img. ETA=0:00:30
+[05/02 23:58:25] detectron2.evaluation.evaluator INFO: Inference done 89/125. 0.1180 s / img. ETA=0:00:20
+[05/02 23:58:30] detectron2.evaluation.evaluator INFO: Inference done 103/125. 0.1174 s / img. ETA=0:00:11
+[05/02 23:58:35] detectron2.evaluation.evaluator INFO: Inference done 112/125. 0.1174 s / img. ETA=0:00:07
+[05/02 23:58:42] detectron2.evaluation.evaluator INFO: Inference done 117/125. 0.1182 s / img. ETA=0:00:04
+[05/02 23:58:48] detectron2.evaluation.evaluator INFO: Inference done 125/125. 0.1184 s / img. ETA=0:00:00
+[05/02 23:58:48] detectron2.evaluation.evaluator INFO: Total inference time: 0:01:10.959094 (0.591326 s / img per device, on 4 devices)
+[05/02 23:58:48] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:00:14 (0.118409 s / img per device, on 4 devices)

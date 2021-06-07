@@ -1,0 +1,1448 @@
+[05/08 18:18:43] detectron2 INFO: Rank of current process: 1. World size: 4
+[05/08 18:18:43] detectron2 INFO: Environment info:
+------------------------  --------------------------------------------------------------------------------------------
+sys.platform              linux
+Python                    3.7.6 (default, Jan  8 2020, 19:59:22) [GCC 7.3.0]
+numpy                     1.18.1
+detectron2                0.1.1 @/home/myfolder/detectron2_set1/detectron2
+detectron2 compiler       GCC 5.5
+detectron2 CUDA compiler  10.2
+detectron2 arch flags     sm_61
+DETECTRON2_ENV_MODULE     <not set>
+PyTorch                   1.4.0+cu100 @/home/myfolder/miniconda3/envs/env_det2/lib/python3.7/site-packages/torch
+PyTorch debug build       False
+CUDA available            True
+GPU 0,1,2,3               GeForce GTX 1080 Ti
+CUDA_HOME                 /usr/local/cuda
+NVCC                      Cuda compilation tools, release 10.2, V10.2.89
+Pillow                    6.2.2
+torchvision               0.5.0+cu100 @/home/myfolder/miniconda3/envs/env_det2/lib/python3.7/site-packages/torchvision
+torchvision arch flags    sm_35, sm_50, sm_60, sm_70, sm_75
+fvcore                    0.1.dev200114
+cv2                       4.1.2
+------------------------  --------------------------------------------------------------------------------------------
+PyTorch built with:
+  - GCC 7.3
+  - Intel(R) Math Kernel Library Version 2019.0.4 Product Build 20190411 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v0.21.1 (Git Hash 7d2fd500bc78936d1d648ca713b901012f470dbc)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - NNPACK is enabled
+  - CUDA Runtime 10.0
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_37,code=compute_37
+  - CuDNN 7.6.3
+  - Magma 2.5.1
+  - Build settings: BLAS=MKL, BUILD_NAMEDTENSOR=OFF, BUILD_TYPE=Release, CXX_FLAGS= -Wno-deprecated -fvisibility-inlines-hidden -fopenmp -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -O2 -fPIC -Wno-narrowing -Wall -Wextra -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wno-unused-result -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Wno-stringop-overflow, DISABLE_NUMA=1, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, USE_CUDA=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, USE_STATIC_DISPATCH=OFF, 
+
+[05/08 18:18:43] detectron2 INFO: Command line arguments: Namespace(config_file='', dist_url='auto', eval_only=False, machine_rank=0, num_gpus=4, num_machines=1, opts=[], resume=False)
+[05/08 18:18:43] detectron2 INFO: Running with full config:
+CUDNN_BENCHMARK: False
+DATALOADER:
+  ASPECT_RATIO_GROUPING: True
+  FILTER_EMPTY_ANNOTATIONS: True
+  NUM_WORKERS: 2
+  REPEAT_THRESHOLD: 0.0
+  SAMPLER_TRAIN: TrainingSampler
+DATASETS:
+  PRECOMPUTED_PROPOSAL_TOPK_TEST: 1000
+  PRECOMPUTED_PROPOSAL_TOPK_TRAIN: 2000
+  PROPOSAL_FILES_TEST: ()
+  PROPOSAL_FILES_TRAIN: ()
+  TEST: ('idd_val',)
+  TRAIN: ('idd_train',)
+GLOBAL:
+  HACK: 1.0
+INPUT:
+  CROP:
+    ENABLED: False
+    SIZE: [0.9, 0.9]
+    TYPE: relative_range
+  FORMAT: BGR
+  MASK_FORMAT: polygon
+  MAX_SIZE_TEST: 2048
+  MAX_SIZE_TRAIN: 2048
+  MIN_SIZE_TEST: 1024
+  MIN_SIZE_TRAIN: (800, 832, 864, 896, 928, 960, 992, 1024)
+  MIN_SIZE_TRAIN_SAMPLING: choice
+MODEL:
+  ANCHOR_GENERATOR:
+    ANGLES: [[-90, 0, 90]]
+    ASPECT_RATIOS: [[0.5, 1.0, 2.0]]
+    NAME: DefaultAnchorGenerator
+    OFFSET: 0.0
+    SIZES: [[32], [64], [128], [256], [512]]
+  BACKBONE:
+    FREEZE_AT: 2
+    NAME: build_resnet_fpn_backbone
+  DEVICE: cuda
+  FPN:
+    FUSE_TYPE: sum
+    IN_FEATURES: ['res2', 'res3', 'res4', 'res5']
+    NORM: 
+    OUT_CHANNELS: 256
+  KEYPOINT_ON: False
+  LOAD_PROPOSALS: False
+  MASK_ON: False
+  META_ARCHITECTURE: GeneralizedRCNN
+  PANOPTIC_FPN:
+    COMBINE:
+      ENABLED: True
+      INSTANCES_CONFIDENCE_THRESH: 0.5
+      OVERLAP_THRESH: 0.5
+      STUFF_AREA_LIMIT: 4096
+    INSTANCE_LOSS_WEIGHT: 1.0
+  PIXEL_MEAN: [103.53, 116.28, 123.675]
+  PIXEL_STD: [1.0, 1.0, 1.0]
+  PROPOSAL_GENERATOR:
+    MIN_SIZE: 0
+    NAME: RPN
+  RESNETS:
+    DEFORM_MODULATED: False
+    DEFORM_NUM_GROUPS: 1
+    DEFORM_ON_PER_STAGE: [False, False, False, False]
+    DEPTH: 50
+    NORM: FrozenBN
+    NUM_GROUPS: 1
+    OUT_FEATURES: ['res2', 'res3', 'res4', 'res5']
+    RES2_OUT_CHANNELS: 256
+    RES5_DILATION: 1
+    STEM_OUT_CHANNELS: 64
+    STRIDE_IN_1X1: True
+    WIDTH_PER_GROUP: 64
+  RETINANET:
+    BBOX_REG_WEIGHTS: (1.0, 1.0, 1.0, 1.0)
+    FOCAL_LOSS_ALPHA: 0.25
+    FOCAL_LOSS_GAMMA: 2.0
+    IN_FEATURES: ['p3', 'p4', 'p5', 'p6', 'p7']
+    IOU_LABELS: [0, -1, 1]
+    IOU_THRESHOLDS: [0.4, 0.5]
+    NMS_THRESH_TEST: 0.5
+    NUM_CLASSES: 80
+    NUM_CONVS: 4
+    PRIOR_PROB: 0.01
+    SCORE_THRESH_TEST: 0.05
+    SMOOTH_L1_LOSS_BETA: 0.1
+    TOPK_CANDIDATES_TEST: 1000
+  ROI_BOX_CASCADE_HEAD:
+    BBOX_REG_WEIGHTS: ((10.0, 10.0, 5.0, 5.0), (20.0, 20.0, 10.0, 10.0), (30.0, 30.0, 15.0, 15.0))
+    IOUS: (0.5, 0.6, 0.7)
+  ROI_BOX_HEAD:
+    BBOX_REG_WEIGHTS: (10.0, 10.0, 5.0, 5.0)
+    CLS_AGNOSTIC_BBOX_REG: True
+    CONV_DIM: 256
+    FC_DIM: 1024
+    NAME: FastRCNNConvFCHead
+    NORM: 
+    NUM_CONV: 0
+    NUM_FC: 2
+    POOLER_RESOLUTION: 7
+    POOLER_SAMPLING_RATIO: 2
+    POOLER_TYPE: ROIAlignV2
+    SMOOTH_L1_BETA: 0.0
+    TRAIN_ON_PRED_BOXES: False
+  ROI_HEADS:
+    BATCH_SIZE_PER_IMAGE: 128
+    IN_FEATURES: ['p2', 'p3', 'p4', 'p5']
+    IOU_LABELS: [0, 1]
+    IOU_THRESHOLDS: [0.5]
+    NAME: CascadeROIHeads
+    NMS_THRESH_TEST: 0.5
+    NUM_CLASSES: 15
+    POSITIVE_FRACTION: 0.25
+    PROPOSAL_APPEND_GT: True
+    SCORE_THRESH_TEST: 0.05
+  ROI_KEYPOINT_HEAD:
+    CONV_DIMS: (512, 512, 512, 512, 512, 512, 512, 512)
+    LOSS_WEIGHT: 1.0
+    MIN_KEYPOINTS_PER_IMAGE: 1
+    NAME: KRCNNConvDeconvUpsampleHead
+    NORMALIZE_LOSS_BY_VISIBLE_KEYPOINTS: True
+    NUM_KEYPOINTS: 17
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_TYPE: ROIAlignV2
+  ROI_MASK_HEAD:
+    CLS_AGNOSTIC_MASK: False
+    CONV_DIM: 256
+    NAME: MaskRCNNConvUpsampleHead
+    NORM: 
+    NUM_CONV: 4
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 2
+    POOLER_TYPE: ROIAlignV2
+  RPN:
+    BATCH_SIZE_PER_IMAGE: 256
+    BBOX_REG_WEIGHTS: (1.0, 1.0, 1.0, 1.0)
+    BOUNDARY_THRESH: 1000
+    HEAD_NAME: StandardRPNHead
+    IN_FEATURES: ['p2', 'p3', 'p4', 'p5', 'p6']
+    IOU_LABELS: [0, -1, 1]
+    IOU_THRESHOLDS: [0.3, 0.7]
+    LOSS_WEIGHT: 1.0
+    NMS_THRESH: 0.7
+    POSITIVE_FRACTION: 0.5
+    POST_NMS_TOPK_TEST: 2000
+    POST_NMS_TOPK_TRAIN: 2000
+    PRE_NMS_TOPK_TEST: 2000
+    PRE_NMS_TOPK_TRAIN: 2000
+    SMOOTH_L1_BETA: 0.0
+  SEM_SEG_HEAD:
+    COMMON_STRIDE: 4
+    CONVS_DIM: 128
+    IGNORE_VALUE: 255
+    IN_FEATURES: ['p2', 'p3', 'p4', 'p5']
+    LOSS_WEIGHT: 1.0
+    NAME: SemSegFPNHead
+    NORM: GN
+    NUM_CLASSES: 54
+  WEIGHTS: /ssd_scratch/cvit/myfolder/idd_data_coco/model_final_480dd8.pkl
+OUTPUT_DIR: /ssd_scratch/cvit/myfolder/idd_data_coco/models/
+SEED: -1
+SOLVER:
+  BASE_LR: 0.005
+  BASE_MOMENTUM: 0.8
+  BIAS_LR_FACTOR: 1.0
+  CHECKPOINT_PERIOD: 1973
+  CLIP_GRADIENTS:
+    CLIP_TYPE: value
+    CLIP_VALUE: 1.0
+    ENABLED: False
+    NORM_TYPE: 2.0
+  CYCLE_MOMENTUM_SWITCH: True
+  GAMMA: 0.2
+  IMS_PER_BATCH: 16
+  LR_SCHEDULER_NAME: WarmupMultiStepLR
+  MAX_ITER: 98650
+  MAX_LR: 0.01
+  MAX_MOMENTUM: 0.9
+  MIN_LR: 0.001
+  MOMENTUM: 0.9
+  NESTEROV: False
+  SCALE_MODE: cycle
+  STEPS: (78920,)
+  STEP_SIZE_UP: 2000
+  WARMUP_FACTOR: 0.001
+  WARMUP_ITERS: 1000
+  WARMUP_METHOD: linear
+  WEIGHT_DECAY: 0.0001
+  WEIGHT_DECAY_BIAS: 0.0001
+  WEIGHT_DECAY_NORM: 0.0
+TEST:
+  AUG:
+    ENABLED: False
+    FLIP: True
+    MAX_SIZE: 4000
+    MIN_SIZES: (400, 500, 600, 700, 800, 900, 1000, 1100, 1200)
+  DETECTIONS_PER_IMAGE: 100
+  EVAL_PERIOD: 9865
+  EXPECTED_RESULTS: []
+  KEYPOINT_OKS_SIGMAS: []
+  PRECISE_BN:
+    ENABLED: False
+    NUM_ITER: 200
+VERSION: 2
+VIS_PERIOD: 0
+[05/08 18:18:43] detectron2.utils.env INFO: Using a generated random seed 43838118
+[05/08 18:18:44] detectron2 INFO: Model:
+GeneralizedRCNN(
+  (backbone): FPN(
+    (fpn_lateral2): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral3): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral4): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output4): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral5): Conv2d(2048, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output5): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (top_block): LastLevelMaxPool()
+    (bottom_up): ResNet(
+      (stem): BasicStem(
+        (conv1): Conv2d(
+          3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False
+          (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+        )
+      )
+      (res2): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+        )
+      )
+      (res3): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            256, 128, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+        (3): BottleneckBlock(
+          (conv1): Conv2d(
+            512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+      )
+      (res4): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            512, 256, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (3): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (4): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (5): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+      )
+      (res5): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            1024, 2048, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            1024, 512, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+        )
+      )
+    )
+  )
+  (proposal_generator): RPN(
+    (anchor_generator): DefaultAnchorGenerator(
+      (cell_anchors): BufferList()
+    )
+    (rpn_head): StandardRPNHead(
+      (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (objectness_logits): Conv2d(256, 3, kernel_size=(1, 1), stride=(1, 1))
+      (anchor_deltas): Conv2d(256, 12, kernel_size=(1, 1), stride=(1, 1))
+    )
+  )
+  (roi_heads): CascadeROIHeads(
+    (box_pooler): ROIPooler(
+      (level_poolers): ModuleList(
+        (0): ROIAlign(output_size=(7, 7), spatial_scale=0.25, sampling_ratio=2, aligned=True)
+        (1): ROIAlign(output_size=(7, 7), spatial_scale=0.125, sampling_ratio=2, aligned=True)
+        (2): ROIAlign(output_size=(7, 7), spatial_scale=0.0625, sampling_ratio=2, aligned=True)
+        (3): ROIAlign(output_size=(7, 7), spatial_scale=0.03125, sampling_ratio=2, aligned=True)
+      )
+    )
+    (box_head): ModuleList(
+      (0): FastRCNNConvFCHead(
+        (fc1): Linear(in_features=12544, out_features=1024, bias=True)
+        (fc2): Linear(in_features=1024, out_features=1024, bias=True)
+      )
+      (1): FastRCNNConvFCHead(
+        (fc1): Linear(in_features=12544, out_features=1024, bias=True)
+        (fc2): Linear(in_features=1024, out_features=1024, bias=True)
+      )
+      (2): FastRCNNConvFCHead(
+        (fc1): Linear(in_features=12544, out_features=1024, bias=True)
+        (fc2): Linear(in_features=1024, out_features=1024, bias=True)
+      )
+    )
+    (box_predictor): ModuleList(
+      (0): FastRCNNOutputLayers(
+        (cls_score): Linear(in_features=1024, out_features=16, bias=True)
+        (bbox_pred): Linear(in_features=1024, out_features=4, bias=True)
+      )
+      (1): FastRCNNOutputLayers(
+        (cls_score): Linear(in_features=1024, out_features=16, bias=True)
+        (bbox_pred): Linear(in_features=1024, out_features=4, bias=True)
+      )
+      (2): FastRCNNOutputLayers(
+        (cls_score): Linear(in_features=1024, out_features=16, bias=True)
+        (bbox_pred): Linear(in_features=1024, out_features=4, bias=True)
+      )
+    )
+  )
+)
+[05/08 18:18:45] fvcore.common.checkpoint INFO: Loading checkpoint from /ssd_scratch/cvit/myfolder/idd_data_coco/model_final_480dd8.pkl
+[05/08 18:18:45] fvcore.common.checkpoint INFO: Reading a file from 'Detectron2 Model Zoo'
+[05/08 18:18:45] fvcore.common.checkpoint WARNING: 'roi_heads.box_predictor.0.cls_score.weight' has shape (81, 1024) in the checkpoint but (16, 1024) in the model! Skipped.
+[05/08 18:18:45] fvcore.common.checkpoint WARNING: 'roi_heads.box_predictor.0.cls_score.bias' has shape (81,) in the checkpoint but (16,) in the model! Skipped.
+[05/08 18:18:45] fvcore.common.checkpoint WARNING: 'roi_heads.box_predictor.1.cls_score.weight' has shape (81, 1024) in the checkpoint but (16, 1024) in the model! Skipped.
+[05/08 18:18:45] fvcore.common.checkpoint WARNING: 'roi_heads.box_predictor.1.cls_score.bias' has shape (81,) in the checkpoint but (16,) in the model! Skipped.
+[05/08 18:18:45] fvcore.common.checkpoint WARNING: 'roi_heads.box_predictor.2.cls_score.weight' has shape (81, 1024) in the checkpoint but (16, 1024) in the model! Skipped.
+[05/08 18:18:45] fvcore.common.checkpoint WARNING: 'roi_heads.box_predictor.2.cls_score.bias' has shape (81,) in the checkpoint but (16,) in the model! Skipped.
+[05/08 18:18:45] fvcore.common.checkpoint INFO: Some model parameters are not in the checkpoint:
+  [34mpixel_mean[0m
+  [34mpixel_std[0m
+  [34mroi_heads.box_predictor.0.cls_score.{weight, bias}[0m
+  [34mroi_heads.box_predictor.1.cls_score.{weight, bias}[0m
+  [34mroi_heads.box_predictor.2.cls_score.{weight, bias}[0m
+[05/08 18:18:45] fvcore.common.checkpoint INFO: The checkpoint contains parameters not used by the model:
+  [35mroi_heads.mask_head.mask_fcn1.{weight, bias}[0m
+  [35mroi_heads.mask_head.mask_fcn2.{weight, bias}[0m
+  [35mroi_heads.mask_head.mask_fcn3.{weight, bias}[0m
+  [35mroi_heads.mask_head.mask_fcn4.{weight, bias}[0m
+  [35mroi_heads.mask_head.deconv.{weight, bias}[0m
+  [35mroi_heads.mask_head.predictor.{weight, bias}[0m
+[05/08 18:18:47] detectron2.data.datasets.coco INFO: Loading /ssd_scratch/cvit/myfolder/idd_data_coco/idd_train_annotation.json takes 2.06 seconds.
+[05/08 18:18:47] detectron2.data.datasets.coco WARNING: 
+Category ids in annotations are not in [1, #categories]! We'll apply a mapping for you.
+
+[05/08 18:18:47] detectron2.data.datasets.coco INFO: Loaded 31569 images in COCO format from /ssd_scratch/cvit/myfolder/idd_data_coco/idd_train_annotation.json
+[05/08 18:18:48] detectron2.data.build INFO: Removed 0 images with no usable annotations. 31569 images left.
+[05/08 18:18:49] detectron2.data.build INFO: Distribution of instances among all 15 categories:
+[36m|   category    | #instances   |   category    | #instances   |   category   | #instances   |
+|:-------------:|:-------------|:-------------:|:-------------|:------------:|:-------------|
+|      car      | 65676        |      bus      | 13829        | autorickshaw | 24498        |
+| vehicle fal.. | 14992        |     truck     | 20759        |  motorcycle  | 78119        |
+|     rider     | 73108        |    person     | 70319        |   bicycle    | 2573         |
+|    animal     | 4764         | traffic sign  | 9916         |    train     | 47           |
+|    trailer    | 11           | traffic light | 2780         |   caravan    | 125          |
+|               |              |               |              |              |              |
+|     total     | 381516       |               |              |              |              |[0m
+[05/08 18:18:49] detectron2.data.common INFO: Serializing 31569 elements to byte tensors and concatenating them all ...
+[05/08 18:18:50] detectron2.data.common INFO: Serialized dataset takes 18.66 MiB
+[05/08 18:18:50] detectron2.data.detection_utils INFO: TransformGens used in training: [ResizeShortestEdge(short_edge_length=(800, 832, 864, 896, 928, 960, 992, 1024), max_size=2048, sample_style='choice'), RandomFlip()]
+[05/08 18:18:50] detectron2.data.build INFO: Using training sampler TrainingSampler
+[05/08 18:18:51] detectron2 INFO: Starting training from iteration 0
+[05/08 21:24:52] detectron2.data.datasets.coco WARNING: 
+Category ids in annotations are not in [1, #categories]! We'll apply a mapping for you.
+
+[05/08 21:24:52] detectron2.data.datasets.coco INFO: Loaded 10225 images in COCO format from /ssd_scratch/cvit/myfolder/idd_data_coco/idd_val_annotation.json
+[05/08 21:24:53] detectron2.data.build INFO: Distribution of instances among all 15 categories:
+[36m|   category    | #instances   |   category    | #instances   |   category   | #instances   |
+|:-------------:|:-------------|:-------------:|:-------------|:------------:|:-------------|
+|      car      | 24844        |      bus      | 4916         | autorickshaw | 7782         |
+| vehicle fal.. | 6089         |     truck     | 7078         |  motorcycle  | 25489        |
+|     rider     | 24518        |    person     | 18078        |   bicycle    | 569          |
+|    animal     | 1460         | traffic sign  | 4287         |    train     | 13           |
+|    trailer    | 7            | traffic light | 919          |   caravan    | 11           |
+|               |              |               |              |              |              |
+|     total     | 126060       |               |              |              |              |[0m
+[05/08 21:24:53] detectron2.data.common INFO: Serializing 10225 elements to byte tensors and concatenating them all ...
+[05/08 21:24:53] detectron2.data.common INFO: Serialized dataset takes 6.09 MiB
+[05/08 21:24:53] detectron2.evaluation.evaluator INFO: Start inference on 2557 images
+[05/08 21:24:59] detectron2.evaluation.evaluator INFO: Inference done 11/2557. 0.1422 s / img. ETA=0:06:06
+[05/08 21:25:04] detectron2.evaluation.evaluator INFO: Inference done 46/2557. 0.1421 s / img. ETA=0:06:01
+[05/08 21:25:09] detectron2.evaluation.evaluator INFO: Inference done 81/2557. 0.1419 s / img. ETA=0:05:55
+[05/08 21:25:14] detectron2.evaluation.evaluator INFO: Inference done 116/2557. 0.1419 s / img. ETA=0:05:50
+[05/08 21:25:19] detectron2.evaluation.evaluator INFO: Inference done 151/2557. 0.1421 s / img. ETA=0:05:46
+[05/08 21:25:24] detectron2.evaluation.evaluator INFO: Inference done 186/2557. 0.1422 s / img. ETA=0:05:41
+[05/08 21:25:29] detectron2.evaluation.evaluator INFO: Inference done 221/2557. 0.1424 s / img. ETA=0:05:36
+[05/08 21:25:34] detectron2.evaluation.evaluator INFO: Inference done 256/2557. 0.1425 s / img. ETA=0:05:32
+[05/08 21:25:39] detectron2.evaluation.evaluator INFO: Inference done 291/2557. 0.1425 s / img. ETA=0:05:27
+[05/08 21:25:44] detectron2.evaluation.evaluator INFO: Inference done 326/2557. 0.1425 s / img. ETA=0:05:22
+[05/08 21:25:49] detectron2.evaluation.evaluator INFO: Inference done 361/2557. 0.1426 s / img. ETA=0:05:17
+[05/08 21:25:54] detectron2.evaluation.evaluator INFO: Inference done 396/2557. 0.1429 s / img. ETA=0:05:12
+[05/08 21:25:59] detectron2.evaluation.evaluator INFO: Inference done 430/2557. 0.1431 s / img. ETA=0:05:08
+[05/08 21:26:04] detectron2.evaluation.evaluator INFO: Inference done 464/2557. 0.1433 s / img. ETA=0:05:03
+[05/08 21:26:09] detectron2.evaluation.evaluator INFO: Inference done 498/2557. 0.1434 s / img. ETA=0:04:59
+[05/08 21:26:14] detectron2.evaluation.evaluator INFO: Inference done 533/2557. 0.1435 s / img. ETA=0:04:54
+[05/08 21:26:20] detectron2.evaluation.evaluator INFO: Inference done 568/2557. 0.1436 s / img. ETA=0:04:49
+[05/08 21:26:25] detectron2.evaluation.evaluator INFO: Inference done 602/2557. 0.1437 s / img. ETA=0:04:44
+[05/08 21:26:30] detectron2.evaluation.evaluator INFO: Inference done 637/2557. 0.1437 s / img. ETA=0:04:39
+[05/08 21:26:35] detectron2.evaluation.evaluator INFO: Inference done 672/2557. 0.1437 s / img. ETA=0:04:34
+[05/08 21:26:40] detectron2.evaluation.evaluator INFO: Inference done 706/2557. 0.1437 s / img. ETA=0:04:29
+[05/08 21:26:45] detectron2.evaluation.evaluator INFO: Inference done 741/2557. 0.1437 s / img. ETA=0:04:24
+[05/08 21:26:50] detectron2.evaluation.evaluator INFO: Inference done 776/2557. 0.1437 s / img. ETA=0:04:19
+[05/08 21:26:55] detectron2.evaluation.evaluator INFO: Inference done 811/2557. 0.1437 s / img. ETA=0:04:14
+[05/08 21:27:00] detectron2.evaluation.evaluator INFO: Inference done 846/2557. 0.1437 s / img. ETA=0:04:09
+[05/08 21:27:05] detectron2.evaluation.evaluator INFO: Inference done 881/2557. 0.1438 s / img. ETA=0:04:04
+[05/08 21:27:10] detectron2.evaluation.evaluator INFO: Inference done 915/2557. 0.1438 s / img. ETA=0:03:59
+[05/08 21:27:15] detectron2.evaluation.evaluator INFO: Inference done 949/2557. 0.1439 s / img. ETA=0:03:54
+[05/08 21:27:20] detectron2.evaluation.evaluator INFO: Inference done 983/2557. 0.1439 s / img. ETA=0:03:49
+[05/08 21:27:25] detectron2.evaluation.evaluator INFO: Inference done 1017/2557. 0.1441 s / img. ETA=0:03:44
+[05/08 21:27:30] detectron2.evaluation.evaluator INFO: Inference done 1052/2557. 0.1440 s / img. ETA=0:03:39
+[05/08 21:27:35] detectron2.evaluation.evaluator INFO: Inference done 1086/2557. 0.1441 s / img. ETA=0:03:34
+[05/08 21:27:41] detectron2.evaluation.evaluator INFO: Inference done 1121/2557. 0.1441 s / img. ETA=0:03:29
+[05/08 21:27:46] detectron2.evaluation.evaluator INFO: Inference done 1156/2557. 0.1441 s / img. ETA=0:03:24
+[05/08 21:27:51] detectron2.evaluation.evaluator INFO: Inference done 1190/2557. 0.1442 s / img. ETA=0:03:19
+[05/08 21:27:56] detectron2.evaluation.evaluator INFO: Inference done 1224/2557. 0.1442 s / img. ETA=0:03:14
+[05/08 21:28:01] detectron2.evaluation.evaluator INFO: Inference done 1259/2557. 0.1442 s / img. ETA=0:03:09
+[05/08 21:28:06] detectron2.evaluation.evaluator INFO: Inference done 1294/2557. 0.1442 s / img. ETA=0:03:04
+[05/08 21:28:11] detectron2.evaluation.evaluator INFO: Inference done 1328/2557. 0.1442 s / img. ETA=0:02:59
+[05/08 21:28:16] detectron2.evaluation.evaluator INFO: Inference done 1362/2557. 0.1443 s / img. ETA=0:02:54
+[05/08 21:28:21] detectron2.evaluation.evaluator INFO: Inference done 1397/2557. 0.1443 s / img. ETA=0:02:49
+[05/08 21:28:26] detectron2.evaluation.evaluator INFO: Inference done 1431/2557. 0.1443 s / img. ETA=0:02:44
+[05/08 21:28:31] detectron2.evaluation.evaluator INFO: Inference done 1465/2557. 0.1444 s / img. ETA=0:02:39
+[05/08 21:28:36] detectron2.evaluation.evaluator INFO: Inference done 1500/2557. 0.1443 s / img. ETA=0:02:34
+[05/08 21:28:41] detectron2.evaluation.evaluator INFO: Inference done 1535/2557. 0.1443 s / img. ETA=0:02:29
+[05/08 21:28:46] detectron2.evaluation.evaluator INFO: Inference done 1569/2557. 0.1444 s / img. ETA=0:02:24
+[05/08 21:28:51] detectron2.evaluation.evaluator INFO: Inference done 1603/2557. 0.1444 s / img. ETA=0:02:19
+[05/08 21:28:56] detectron2.evaluation.evaluator INFO: Inference done 1637/2557. 0.1444 s / img. ETA=0:02:14
+[05/08 21:29:01] detectron2.evaluation.evaluator INFO: Inference done 1671/2557. 0.1445 s / img. ETA=0:02:09
+[05/08 21:29:06] detectron2.evaluation.evaluator INFO: Inference done 1705/2557. 0.1445 s / img. ETA=0:02:04
+[05/08 21:29:11] detectron2.evaluation.evaluator INFO: Inference done 1739/2557. 0.1445 s / img. ETA=0:01:59
+[05/08 21:29:17] detectron2.evaluation.evaluator INFO: Inference done 1774/2557. 0.1445 s / img. ETA=0:01:54
+[05/08 21:29:22] detectron2.evaluation.evaluator INFO: Inference done 1808/2557. 0.1445 s / img. ETA=0:01:49
+[05/08 21:29:27] detectron2.evaluation.evaluator INFO: Inference done 1843/2557. 0.1445 s / img. ETA=0:01:44
+[05/08 21:29:32] detectron2.evaluation.evaluator INFO: Inference done 1877/2557. 0.1445 s / img. ETA=0:01:39
+[05/08 21:29:37] detectron2.evaluation.evaluator INFO: Inference done 1912/2557. 0.1445 s / img. ETA=0:01:34
+[05/08 21:29:42] detectron2.evaluation.evaluator INFO: Inference done 1946/2557. 0.1446 s / img. ETA=0:01:29
+[05/08 21:29:47] detectron2.evaluation.evaluator INFO: Inference done 1980/2557. 0.1446 s / img. ETA=0:01:24
+[05/08 21:29:52] detectron2.evaluation.evaluator INFO: Inference done 2014/2557. 0.1446 s / img. ETA=0:01:19
+[05/08 21:29:57] detectron2.evaluation.evaluator INFO: Inference done 2049/2557. 0.1446 s / img. ETA=0:01:14
+[05/08 21:30:02] detectron2.evaluation.evaluator INFO: Inference done 2083/2557. 0.1446 s / img. ETA=0:01:09
+[05/08 21:30:07] detectron2.evaluation.evaluator INFO: Inference done 2118/2557. 0.1446 s / img. ETA=0:01:04
+[05/08 21:30:12] detectron2.evaluation.evaluator INFO: Inference done 2153/2557. 0.1446 s / img. ETA=0:00:59
+[05/08 21:30:17] detectron2.evaluation.evaluator INFO: Inference done 2187/2557. 0.1447 s / img. ETA=0:00:54
+[05/08 21:30:23] detectron2.evaluation.evaluator INFO: Inference done 2222/2557. 0.1447 s / img. ETA=0:00:49
+[05/08 21:30:28] detectron2.evaluation.evaluator INFO: Inference done 2256/2557. 0.1447 s / img. ETA=0:00:44
+[05/08 21:30:33] detectron2.evaluation.evaluator INFO: Inference done 2290/2557. 0.1447 s / img. ETA=0:00:39
+[05/08 21:30:38] detectron2.evaluation.evaluator INFO: Inference done 2325/2557. 0.1447 s / img. ETA=0:00:33
+[05/08 21:30:43] detectron2.evaluation.evaluator INFO: Inference done 2360/2557. 0.1447 s / img. ETA=0:00:28
+[05/08 21:30:48] detectron2.evaluation.evaluator INFO: Inference done 2395/2557. 0.1447 s / img. ETA=0:00:23
+[05/08 21:30:53] detectron2.evaluation.evaluator INFO: Inference done 2430/2557. 0.1447 s / img. ETA=0:00:18
+[05/08 21:30:58] detectron2.evaluation.evaluator INFO: Inference done 2464/2557. 0.1447 s / img. ETA=0:00:13
+[05/08 21:31:03] detectron2.evaluation.evaluator INFO: Inference done 2498/2557. 0.1447 s / img. ETA=0:00:08
+[05/08 21:31:08] detectron2.evaluation.evaluator INFO: Inference done 2532/2557. 0.1447 s / img. ETA=0:00:03
+[05/08 21:31:12] detectron2.evaluation.evaluator INFO: Total inference time: 0:06:14.237555 (0.146645 s / img per device, on 4 devices)
+[05/08 21:31:12] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:06:09 (0.144722 s / img per device, on 4 devices)
+[05/09 00:38:46] detectron2.data.datasets.coco WARNING: 
+Category ids in annotations are not in [1, #categories]! We'll apply a mapping for you.
+
+[05/09 00:38:46] detectron2.data.datasets.coco INFO: Loaded 10225 images in COCO format from /ssd_scratch/cvit/myfolder/idd_data_coco/idd_val_annotation.json
+[05/09 00:38:47] detectron2.data.common INFO: Serializing 10225 elements to byte tensors and concatenating them all ...
+[05/09 00:38:47] detectron2.data.common INFO: Serialized dataset takes 6.09 MiB
+[05/09 00:38:48] detectron2.evaluation.evaluator INFO: Start inference on 2557 images
+[05/09 00:38:53] detectron2.evaluation.evaluator INFO: Inference done 11/2557. 0.1407 s / img. ETA=0:06:02
+[05/09 00:38:58] detectron2.evaluation.evaluator INFO: Inference done 46/2557. 0.1420 s / img. ETA=0:06:01
+[05/09 00:39:03] detectron2.evaluation.evaluator INFO: Inference done 81/2557. 0.1418 s / img. ETA=0:05:55
+[05/09 00:39:08] detectron2.evaluation.evaluator INFO: Inference done 116/2557. 0.1417 s / img. ETA=0:05:50
+[05/09 00:39:13] detectron2.evaluation.evaluator INFO: Inference done 150/2557. 0.1426 s / img. ETA=0:05:47
+[05/09 00:39:18] detectron2.evaluation.evaluator INFO: Inference done 185/2557. 0.1424 s / img. ETA=0:05:42
+[05/09 00:39:23] detectron2.evaluation.evaluator INFO: Inference done 220/2557. 0.1424 s / img. ETA=0:05:37
+[05/09 00:39:28] detectron2.evaluation.evaluator INFO: Inference done 255/2557. 0.1424 s / img. ETA=0:05:32
+[05/09 00:39:33] detectron2.evaluation.evaluator INFO: Inference done 290/2557. 0.1426 s / img. ETA=0:05:27
+[05/09 00:39:38] detectron2.evaluation.evaluator INFO: Inference done 325/2557. 0.1427 s / img. ETA=0:05:22
+[05/09 00:39:43] detectron2.evaluation.evaluator INFO: Inference done 360/2557. 0.1428 s / img. ETA=0:05:17
+[05/09 00:39:49] detectron2.evaluation.evaluator INFO: Inference done 395/2557. 0.1430 s / img. ETA=0:05:13
+[05/09 00:39:54] detectron2.evaluation.evaluator INFO: Inference done 430/2557. 0.1431 s / img. ETA=0:05:08
+[05/09 00:39:59] detectron2.evaluation.evaluator INFO: Inference done 465/2557. 0.1432 s / img. ETA=0:05:03
+[05/09 00:40:04] detectron2.evaluation.evaluator INFO: Inference done 500/2557. 0.1433 s / img. ETA=0:04:58
+[05/09 00:40:09] detectron2.evaluation.evaluator INFO: Inference done 534/2557. 0.1434 s / img. ETA=0:04:53
+[05/09 00:40:14] detectron2.evaluation.evaluator INFO: Inference done 568/2557. 0.1435 s / img. ETA=0:04:49
+[05/09 00:40:19] detectron2.evaluation.evaluator INFO: Inference done 603/2557. 0.1436 s / img. ETA=0:04:44
+[05/09 00:40:24] detectron2.evaluation.evaluator INFO: Inference done 638/2557. 0.1436 s / img. ETA=0:04:39
+[05/09 00:40:29] detectron2.evaluation.evaluator INFO: Inference done 673/2557. 0.1436 s / img. ETA=0:04:34
+[05/09 00:40:34] detectron2.evaluation.evaluator INFO: Inference done 708/2557. 0.1436 s / img. ETA=0:04:28
+[05/09 00:40:40] detectron2.evaluation.evaluator INFO: Inference done 743/2557. 0.1437 s / img. ETA=0:04:23
+[05/09 00:40:45] detectron2.evaluation.evaluator INFO: Inference done 778/2557. 0.1437 s / img. ETA=0:04:18
+[05/09 00:40:50] detectron2.evaluation.evaluator INFO: Inference done 813/2557. 0.1437 s / img. ETA=0:04:13
+[05/09 00:40:55] detectron2.evaluation.evaluator INFO: Inference done 848/2557. 0.1437 s / img. ETA=0:04:08
+[05/09 00:41:00] detectron2.evaluation.evaluator INFO: Inference done 883/2557. 0.1437 s / img. ETA=0:04:03
+[05/09 00:41:05] detectron2.evaluation.evaluator INFO: Inference done 918/2557. 0.1437 s / img. ETA=0:03:58
+[05/09 00:41:10] detectron2.evaluation.evaluator INFO: Inference done 952/2557. 0.1438 s / img. ETA=0:03:53
+[05/09 00:41:15] detectron2.evaluation.evaluator INFO: Inference done 987/2557. 0.1438 s / img. ETA=0:03:48
+[05/09 00:41:20] detectron2.evaluation.evaluator INFO: Inference done 1022/2557. 0.1438 s / img. ETA=0:03:43
+[05/09 00:41:25] detectron2.evaluation.evaluator INFO: Inference done 1057/2557. 0.1438 s / img. ETA=0:03:38
+[05/09 00:41:30] detectron2.evaluation.evaluator INFO: Inference done 1092/2557. 0.1438 s / img. ETA=0:03:33
+[05/09 00:41:35] detectron2.evaluation.evaluator INFO: Inference done 1126/2557. 0.1439 s / img. ETA=0:03:28
+[05/09 00:41:41] detectron2.evaluation.evaluator INFO: Inference done 1161/2557. 0.1439 s / img. ETA=0:03:23
+[05/09 00:41:46] detectron2.evaluation.evaluator INFO: Inference done 1196/2557. 0.1439 s / img. ETA=0:03:18
+[05/09 00:41:51] detectron2.evaluation.evaluator INFO: Inference done 1231/2557. 0.1439 s / img. ETA=0:03:13
+[05/09 00:41:56] detectron2.evaluation.evaluator INFO: Inference done 1266/2557. 0.1440 s / img. ETA=0:03:08
+[05/09 00:42:01] detectron2.evaluation.evaluator INFO: Inference done 1301/2557. 0.1440 s / img. ETA=0:03:03
+[05/09 00:42:06] detectron2.evaluation.evaluator INFO: Inference done 1335/2557. 0.1440 s / img. ETA=0:02:58
+[05/09 00:42:11] detectron2.evaluation.evaluator INFO: Inference done 1370/2557. 0.1440 s / img. ETA=0:02:53
+[05/09 00:42:16] detectron2.evaluation.evaluator INFO: Inference done 1404/2557. 0.1440 s / img. ETA=0:02:48
+[05/09 00:42:21] detectron2.evaluation.evaluator INFO: Inference done 1438/2557. 0.1441 s / img. ETA=0:02:43
+[05/09 00:42:26] detectron2.evaluation.evaluator INFO: Inference done 1473/2557. 0.1441 s / img. ETA=0:02:38
+[05/09 00:42:31] detectron2.evaluation.evaluator INFO: Inference done 1508/2557. 0.1441 s / img. ETA=0:02:33
+[05/09 00:42:37] detectron2.evaluation.evaluator INFO: Inference done 1543/2557. 0.1441 s / img. ETA=0:02:27
+[05/09 00:42:42] detectron2.evaluation.evaluator INFO: Inference done 1577/2557. 0.1441 s / img. ETA=0:02:23
+[05/09 00:42:47] detectron2.evaluation.evaluator INFO: Inference done 1612/2557. 0.1441 s / img. ETA=0:02:17
+[05/09 00:42:52] detectron2.evaluation.evaluator INFO: Inference done 1647/2557. 0.1441 s / img. ETA=0:02:12
+[05/09 00:42:57] detectron2.evaluation.evaluator INFO: Inference done 1681/2557. 0.1442 s / img. ETA=0:02:07
+[05/09 00:43:02] detectron2.evaluation.evaluator INFO: Inference done 1715/2557. 0.1442 s / img. ETA=0:02:02
+[05/09 00:43:07] detectron2.evaluation.evaluator INFO: Inference done 1750/2557. 0.1442 s / img. ETA=0:01:57
+[05/09 00:43:12] detectron2.evaluation.evaluator INFO: Inference done 1785/2557. 0.1442 s / img. ETA=0:01:52
+[05/09 00:43:17] detectron2.evaluation.evaluator INFO: Inference done 1819/2557. 0.1442 s / img. ETA=0:01:47
+[05/09 00:43:22] detectron2.evaluation.evaluator INFO: Inference done 1853/2557. 0.1442 s / img. ETA=0:01:42
+[05/09 00:43:27] detectron2.evaluation.evaluator INFO: Inference done 1888/2557. 0.1442 s / img. ETA=0:01:37
+[05/09 00:43:32] detectron2.evaluation.evaluator INFO: Inference done 1922/2557. 0.1443 s / img. ETA=0:01:32
+[05/09 00:43:37] detectron2.evaluation.evaluator INFO: Inference done 1957/2557. 0.1443 s / img. ETA=0:01:27
+[05/09 00:43:42] detectron2.evaluation.evaluator INFO: Inference done 1991/2557. 0.1443 s / img. ETA=0:01:22
+[05/09 00:43:47] detectron2.evaluation.evaluator INFO: Inference done 2026/2557. 0.1443 s / img. ETA=0:01:17
+[05/09 00:43:53] detectron2.evaluation.evaluator INFO: Inference done 2061/2557. 0.1443 s / img. ETA=0:01:12
+[05/09 00:43:58] detectron2.evaluation.evaluator INFO: Inference done 2096/2557. 0.1443 s / img. ETA=0:01:07
+[05/09 00:44:03] detectron2.evaluation.evaluator INFO: Inference done 2130/2557. 0.1443 s / img. ETA=0:01:02
+[05/09 00:44:08] detectron2.evaluation.evaluator INFO: Inference done 2165/2557. 0.1443 s / img. ETA=0:00:57
+[05/09 00:44:13] detectron2.evaluation.evaluator INFO: Inference done 2199/2557. 0.1443 s / img. ETA=0:00:52
+[05/09 00:44:18] detectron2.evaluation.evaluator INFO: Inference done 2234/2557. 0.1443 s / img. ETA=0:00:47
+[05/09 00:44:23] detectron2.evaluation.evaluator INFO: Inference done 2269/2557. 0.1443 s / img. ETA=0:00:42
+[05/09 00:44:28] detectron2.evaluation.evaluator INFO: Inference done 2304/2557. 0.1443 s / img. ETA=0:00:36
+[05/09 00:44:33] detectron2.evaluation.evaluator INFO: Inference done 2338/2557. 0.1444 s / img. ETA=0:00:32
+[05/09 00:44:38] detectron2.evaluation.evaluator INFO: Inference done 2373/2557. 0.1444 s / img. ETA=0:00:26
+[05/09 00:44:44] detectron2.evaluation.evaluator INFO: Inference done 2408/2557. 0.1444 s / img. ETA=0:00:21
+[05/09 00:44:49] detectron2.evaluation.evaluator INFO: Inference done 2443/2557. 0.1444 s / img. ETA=0:00:16
+[05/09 00:44:54] detectron2.evaluation.evaluator INFO: Inference done 2478/2557. 0.1444 s / img. ETA=0:00:11
+[05/09 00:44:59] detectron2.evaluation.evaluator INFO: Inference done 2512/2557. 0.1444 s / img. ETA=0:00:06
+[05/09 00:45:04] detectron2.evaluation.evaluator INFO: Inference done 2546/2557. 0.1444 s / img. ETA=0:00:01
+[05/09 00:45:06] detectron2.evaluation.evaluator INFO: Total inference time: 0:06:13.439957 (0.146332 s / img per device, on 4 devices)
+[05/09 00:45:06] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:06:08 (0.144416 s / img per device, on 4 devices)
+[05/09 03:53:21] detectron2.data.datasets.coco WARNING: 
+Category ids in annotations are not in [1, #categories]! We'll apply a mapping for you.
+
+[05/09 03:53:22] detectron2.data.datasets.coco INFO: Loaded 10225 images in COCO format from /ssd_scratch/cvit/myfolder/idd_data_coco/idd_val_annotation.json
+[05/09 03:53:22] detectron2.data.common INFO: Serializing 10225 elements to byte tensors and concatenating them all ...
+[05/09 03:53:22] detectron2.data.common INFO: Serialized dataset takes 6.09 MiB
+[05/09 03:53:23] detectron2.evaluation.evaluator INFO: Start inference on 2557 images
+[05/09 03:53:28] detectron2.evaluation.evaluator INFO: Inference done 11/2557. 0.1419 s / img. ETA=0:06:05
+[05/09 03:53:33] detectron2.evaluation.evaluator INFO: Inference done 46/2557. 0.1421 s / img. ETA=0:06:01
+[05/09 03:53:38] detectron2.evaluation.evaluator INFO: Inference done 81/2557. 0.1422 s / img. ETA=0:05:56
+[05/09 03:53:43] detectron2.evaluation.evaluator INFO: Inference done 116/2557. 0.1422 s / img. ETA=0:05:51
+[05/09 03:53:48] detectron2.evaluation.evaluator INFO: Inference done 151/2557. 0.1425 s / img. ETA=0:05:47
+[05/09 03:53:53] detectron2.evaluation.evaluator INFO: Inference done 186/2557. 0.1425 s / img. ETA=0:05:42
+[05/09 03:53:58] detectron2.evaluation.evaluator INFO: Inference done 221/2557. 0.1425 s / img. ETA=0:05:37
+[05/09 03:54:03] detectron2.evaluation.evaluator INFO: Inference done 256/2557. 0.1426 s / img. ETA=0:05:32
+[05/09 03:54:09] detectron2.evaluation.evaluator INFO: Inference done 291/2557. 0.1428 s / img. ETA=0:05:27
+[05/09 03:54:14] detectron2.evaluation.evaluator INFO: Inference done 326/2557. 0.1430 s / img. ETA=0:05:23
+[05/09 03:54:19] detectron2.evaluation.evaluator INFO: Inference done 361/2557. 0.1432 s / img. ETA=0:05:18
+[05/09 03:54:24] detectron2.evaluation.evaluator INFO: Inference done 395/2557. 0.1434 s / img. ETA=0:05:14
+[05/09 03:54:29] detectron2.evaluation.evaluator INFO: Inference done 430/2557. 0.1436 s / img. ETA=0:05:09
+[05/09 03:54:34] detectron2.evaluation.evaluator INFO: Inference done 465/2557. 0.1436 s / img. ETA=0:05:04
+[05/09 03:54:39] detectron2.evaluation.evaluator INFO: Inference done 499/2557. 0.1438 s / img. ETA=0:04:59
+[05/09 03:54:44] detectron2.evaluation.evaluator INFO: Inference done 534/2557. 0.1438 s / img. ETA=0:04:54
+[05/09 03:54:49] detectron2.evaluation.evaluator INFO: Inference done 569/2557. 0.1438 s / img. ETA=0:04:49
+[05/09 03:54:54] detectron2.evaluation.evaluator INFO: Inference done 604/2557. 0.1439 s / img. ETA=0:04:44
+[05/09 03:55:00] detectron2.evaluation.evaluator INFO: Inference done 638/2557. 0.1441 s / img. ETA=0:04:40
+[05/09 03:55:05] detectron2.evaluation.evaluator INFO: Inference done 673/2557. 0.1441 s / img. ETA=0:04:35
+[05/09 03:55:10] detectron2.evaluation.evaluator INFO: Inference done 708/2557. 0.1440 s / img. ETA=0:04:29
+[05/09 03:55:15] detectron2.evaluation.evaluator INFO: Inference done 743/2557. 0.1440 s / img. ETA=0:04:24
+[05/09 03:55:20] detectron2.evaluation.evaluator INFO: Inference done 778/2557. 0.1440 s / img. ETA=0:04:19
+[05/09 03:55:25] detectron2.evaluation.evaluator INFO: Inference done 813/2557. 0.1440 s / img. ETA=0:04:14
+[05/09 03:55:30] detectron2.evaluation.evaluator INFO: Inference done 847/2557. 0.1441 s / img. ETA=0:04:09
+[05/09 03:55:35] detectron2.evaluation.evaluator INFO: Inference done 882/2557. 0.1441 s / img. ETA=0:04:04
+[05/09 03:55:40] detectron2.evaluation.evaluator INFO: Inference done 916/2557. 0.1441 s / img. ETA=0:03:59
+[05/09 03:55:45] detectron2.evaluation.evaluator INFO: Inference done 950/2557. 0.1442 s / img. ETA=0:03:54
+[05/09 03:55:50] detectron2.evaluation.evaluator INFO: Inference done 985/2557. 0.1442 s / img. ETA=0:03:49
+[05/09 03:55:55] detectron2.evaluation.evaluator INFO: Inference done 1020/2557. 0.1442 s / img. ETA=0:03:44
+[05/09 03:56:00] detectron2.evaluation.evaluator INFO: Inference done 1054/2557. 0.1442 s / img. ETA=0:03:39
+[05/09 03:56:06] detectron2.evaluation.evaluator INFO: Inference done 1089/2557. 0.1443 s / img. ETA=0:03:34
+[05/09 03:56:11] detectron2.evaluation.evaluator INFO: Inference done 1124/2557. 0.1443 s / img. ETA=0:03:29
+[05/09 03:56:16] detectron2.evaluation.evaluator INFO: Inference done 1158/2557. 0.1443 s / img. ETA=0:03:24
+[05/09 03:56:21] detectron2.evaluation.evaluator INFO: Inference done 1193/2557. 0.1444 s / img. ETA=0:03:19
+[05/09 03:56:26] detectron2.evaluation.evaluator INFO: Inference done 1227/2557. 0.1444 s / img. ETA=0:03:14
+[05/09 03:56:31] detectron2.evaluation.evaluator INFO: Inference done 1262/2557. 0.1444 s / img. ETA=0:03:09
+[05/09 03:56:36] detectron2.evaluation.evaluator INFO: Inference done 1296/2557. 0.1444 s / img. ETA=0:03:04
+[05/09 03:56:41] detectron2.evaluation.evaluator INFO: Inference done 1330/2557. 0.1444 s / img. ETA=0:02:59
+[05/09 03:56:46] detectron2.evaluation.evaluator INFO: Inference done 1364/2557. 0.1445 s / img. ETA=0:02:54
+[05/09 03:56:51] detectron2.evaluation.evaluator INFO: Inference done 1398/2557. 0.1445 s / img. ETA=0:02:49
+[05/09 03:56:56] detectron2.evaluation.evaluator INFO: Inference done 1433/2557. 0.1445 s / img. ETA=0:02:44
+[05/09 03:57:01] detectron2.evaluation.evaluator INFO: Inference done 1468/2557. 0.1445 s / img. ETA=0:02:39
+[05/09 03:57:06] detectron2.evaluation.evaluator INFO: Inference done 1503/2557. 0.1445 s / img. ETA=0:02:34
+[05/09 03:57:11] detectron2.evaluation.evaluator INFO: Inference done 1537/2557. 0.1445 s / img. ETA=0:02:29
+[05/09 03:57:17] detectron2.evaluation.evaluator INFO: Inference done 1572/2557. 0.1445 s / img. ETA=0:02:24
+[05/09 03:57:22] detectron2.evaluation.evaluator INFO: Inference done 1607/2557. 0.1445 s / img. ETA=0:02:19
+[05/09 03:57:27] detectron2.evaluation.evaluator INFO: Inference done 1642/2557. 0.1445 s / img. ETA=0:02:13
+[05/09 03:57:32] detectron2.evaluation.evaluator INFO: Inference done 1676/2557. 0.1445 s / img. ETA=0:02:08
+[05/09 03:57:37] detectron2.evaluation.evaluator INFO: Inference done 1710/2557. 0.1446 s / img. ETA=0:02:04
+[05/09 03:57:42] detectron2.evaluation.evaluator INFO: Inference done 1745/2557. 0.1446 s / img. ETA=0:01:58
+[05/09 03:57:47] detectron2.evaluation.evaluator INFO: Inference done 1779/2557. 0.1446 s / img. ETA=0:01:53
+[05/09 03:57:52] detectron2.evaluation.evaluator INFO: Inference done 1813/2557. 0.1446 s / img. ETA=0:01:48
+[05/09 03:57:57] detectron2.evaluation.evaluator INFO: Inference done 1847/2557. 0.1446 s / img. ETA=0:01:44
+[05/09 03:58:02] detectron2.evaluation.evaluator INFO: Inference done 1882/2557. 0.1446 s / img. ETA=0:01:38
+[05/09 03:58:07] detectron2.evaluation.evaluator INFO: Inference done 1917/2557. 0.1446 s / img. ETA=0:01:33
+[05/09 03:58:12] detectron2.evaluation.evaluator INFO: Inference done 1952/2557. 0.1446 s / img. ETA=0:01:28
+[05/09 03:58:18] detectron2.evaluation.evaluator INFO: Inference done 1987/2557. 0.1446 s / img. ETA=0:01:23
+[05/09 03:58:23] detectron2.evaluation.evaluator INFO: Inference done 2022/2557. 0.1446 s / img. ETA=0:01:18
+[05/09 03:58:28] detectron2.evaluation.evaluator INFO: Inference done 2056/2557. 0.1446 s / img. ETA=0:01:13
+[05/09 03:58:33] detectron2.evaluation.evaluator INFO: Inference done 2091/2557. 0.1446 s / img. ETA=0:01:08
+[05/09 03:58:38] detectron2.evaluation.evaluator INFO: Inference done 2125/2557. 0.1447 s / img. ETA=0:01:03
+[05/09 03:58:43] detectron2.evaluation.evaluator INFO: Inference done 2159/2557. 0.1447 s / img. ETA=0:00:58
+[05/09 03:58:48] detectron2.evaluation.evaluator INFO: Inference done 2193/2557. 0.1447 s / img. ETA=0:00:53
+[05/09 03:58:53] detectron2.evaluation.evaluator INFO: Inference done 2227/2557. 0.1447 s / img. ETA=0:00:48
+[05/09 03:58:58] detectron2.evaluation.evaluator INFO: Inference done 2262/2557. 0.1447 s / img. ETA=0:00:43
+[05/09 03:59:03] detectron2.evaluation.evaluator INFO: Inference done 2296/2557. 0.1447 s / img. ETA=0:00:38
+[05/09 03:59:08] detectron2.evaluation.evaluator INFO: Inference done 2330/2557. 0.1447 s / img. ETA=0:00:33
+[05/09 03:59:13] detectron2.evaluation.evaluator INFO: Inference done 2364/2557. 0.1447 s / img. ETA=0:00:28
+[05/09 03:59:18] detectron2.evaluation.evaluator INFO: Inference done 2399/2557. 0.1447 s / img. ETA=0:00:23
+[05/09 03:59:23] detectron2.evaluation.evaluator INFO: Inference done 2434/2557. 0.1447 s / img. ETA=0:00:18
+[05/09 03:59:28] detectron2.evaluation.evaluator INFO: Inference done 2469/2557. 0.1447 s / img. ETA=0:00:12
+[05/09 03:59:34] detectron2.evaluation.evaluator INFO: Inference done 2504/2557. 0.1447 s / img. ETA=0:00:07
+[05/09 03:59:39] detectron2.evaluation.evaluator INFO: Inference done 2538/2557. 0.1448 s / img. ETA=0:00:02
+[05/09 03:59:42] detectron2.evaluation.evaluator INFO: Total inference time: 0:06:14.398801 (0.146708 s / img per device, on 4 devices)
+[05/09 03:59:42] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:06:09 (0.144758 s / img per device, on 4 devices)
+[05/09 07:08:01] detectron2.data.datasets.coco WARNING: 
+Category ids in annotations are not in [1, #categories]! We'll apply a mapping for you.
+
+[05/09 07:08:01] detectron2.data.datasets.coco INFO: Loaded 10225 images in COCO format from /ssd_scratch/cvit/myfolder/idd_data_coco/idd_val_annotation.json
+[05/09 07:08:02] detectron2.data.common INFO: Serializing 10225 elements to byte tensors and concatenating them all ...
+[05/09 07:08:02] detectron2.data.common INFO: Serialized dataset takes 6.09 MiB
+[05/09 07:08:02] detectron2.evaluation.evaluator INFO: Start inference on 2557 images
+[05/09 07:08:07] detectron2.evaluation.evaluator INFO: Inference done 11/2557. 0.1417 s / img. ETA=0:06:05
+[05/09 07:08:12] detectron2.evaluation.evaluator INFO: Inference done 46/2557. 0.1417 s / img. ETA=0:06:00
+[05/09 07:08:17] detectron2.evaluation.evaluator INFO: Inference done 81/2557. 0.1416 s / img. ETA=0:05:55
+[05/09 07:08:22] detectron2.evaluation.evaluator INFO: Inference done 116/2557. 0.1418 s / img. ETA=0:05:50
+[05/09 07:08:27] detectron2.evaluation.evaluator INFO: Inference done 151/2557. 0.1420 s / img. ETA=0:05:46
+[05/09 07:08:32] detectron2.evaluation.evaluator INFO: Inference done 186/2557. 0.1421 s / img. ETA=0:05:41
+[05/09 07:08:38] detectron2.evaluation.evaluator INFO: Inference done 221/2557. 0.1423 s / img. ETA=0:05:36
+[05/09 07:08:43] detectron2.evaluation.evaluator INFO: Inference done 256/2557. 0.1424 s / img. ETA=0:05:32
+[05/09 07:08:48] detectron2.evaluation.evaluator INFO: Inference done 291/2557. 0.1426 s / img. ETA=0:05:27
+[05/09 07:08:53] detectron2.evaluation.evaluator INFO: Inference done 326/2557. 0.1426 s / img. ETA=0:05:22
+[05/09 07:08:58] detectron2.evaluation.evaluator INFO: Inference done 360/2557. 0.1429 s / img. ETA=0:05:18
+[05/09 07:09:03] detectron2.evaluation.evaluator INFO: Inference done 394/2557. 0.1432 s / img. ETA=0:05:13
+[05/09 07:09:08] detectron2.evaluation.evaluator INFO: Inference done 428/2557. 0.1435 s / img. ETA=0:05:09
+[05/09 07:09:13] detectron2.evaluation.evaluator INFO: Inference done 463/2557. 0.1435 s / img. ETA=0:05:04
+[05/09 07:09:18] detectron2.evaluation.evaluator INFO: Inference done 497/2557. 0.1437 s / img. ETA=0:04:59
+[05/09 07:09:23] detectron2.evaluation.evaluator INFO: Inference done 532/2557. 0.1437 s / img. ETA=0:04:54
+[05/09 07:09:28] detectron2.evaluation.evaluator INFO: Inference done 567/2557. 0.1438 s / img. ETA=0:04:49
+[05/09 07:09:33] detectron2.evaluation.evaluator INFO: Inference done 602/2557. 0.1439 s / img. ETA=0:04:44
+[05/09 07:09:39] detectron2.evaluation.evaluator INFO: Inference done 637/2557. 0.1439 s / img. ETA=0:04:39
+[05/09 07:09:44] detectron2.evaluation.evaluator INFO: Inference done 672/2557. 0.1440 s / img. ETA=0:04:34
+[05/09 07:09:49] detectron2.evaluation.evaluator INFO: Inference done 707/2557. 0.1440 s / img. ETA=0:04:29
+[05/09 07:09:54] detectron2.evaluation.evaluator INFO: Inference done 741/2557. 0.1440 s / img. ETA=0:04:25
+[05/09 07:09:59] detectron2.evaluation.evaluator INFO: Inference done 776/2557. 0.1441 s / img. ETA=0:04:20
+[05/09 07:10:04] detectron2.evaluation.evaluator INFO: Inference done 809/2557. 0.1444 s / img. ETA=0:04:15
+[05/09 07:10:09] detectron2.evaluation.evaluator INFO: Inference done 844/2557. 0.1444 s / img. ETA=0:04:10
+[05/09 07:10:14] detectron2.evaluation.evaluator INFO: Inference done 879/2557. 0.1444 s / img. ETA=0:04:05
+[05/09 07:10:19] detectron2.evaluation.evaluator INFO: Inference done 914/2557. 0.1444 s / img. ETA=0:04:00
+[05/09 07:10:25] detectron2.evaluation.evaluator INFO: Inference done 949/2557. 0.1444 s / img. ETA=0:03:55
+[05/09 07:10:30] detectron2.evaluation.evaluator INFO: Inference done 984/2557. 0.1444 s / img. ETA=0:03:50
+[05/09 07:10:35] detectron2.evaluation.evaluator INFO: Inference done 1018/2557. 0.1444 s / img. ETA=0:03:45
+[05/09 07:10:40] detectron2.evaluation.evaluator INFO: Inference done 1053/2557. 0.1444 s / img. ETA=0:03:40
+[05/09 07:10:45] detectron2.evaluation.evaluator INFO: Inference done 1087/2557. 0.1445 s / img. ETA=0:03:35
+[05/09 07:10:50] detectron2.evaluation.evaluator INFO: Inference done 1122/2557. 0.1445 s / img. ETA=0:03:30
+[05/09 07:10:55] detectron2.evaluation.evaluator INFO: Inference done 1157/2557. 0.1445 s / img. ETA=0:03:24
+[05/09 07:11:00] detectron2.evaluation.evaluator INFO: Inference done 1191/2557. 0.1445 s / img. ETA=0:03:20
+[05/09 07:11:05] detectron2.evaluation.evaluator INFO: Inference done 1226/2557. 0.1445 s / img. ETA=0:03:14
+[05/09 07:11:10] detectron2.evaluation.evaluator INFO: Inference done 1261/2557. 0.1445 s / img. ETA=0:03:09
+[05/09 07:11:15] detectron2.evaluation.evaluator INFO: Inference done 1296/2557. 0.1445 s / img. ETA=0:03:04
+[05/09 07:11:20] detectron2.evaluation.evaluator INFO: Inference done 1330/2557. 0.1446 s / img. ETA=0:02:59
+[05/09 07:11:25] detectron2.evaluation.evaluator INFO: Inference done 1364/2557. 0.1446 s / img. ETA=0:02:54
+[05/09 07:11:31] detectron2.evaluation.evaluator INFO: Inference done 1399/2557. 0.1446 s / img. ETA=0:02:49
+[05/09 07:11:36] detectron2.evaluation.evaluator INFO: Inference done 1433/2557. 0.1446 s / img. ETA=0:02:44
+[05/09 07:11:41] detectron2.evaluation.evaluator INFO: Inference done 1468/2557. 0.1446 s / img. ETA=0:02:39
+[05/09 07:11:46] detectron2.evaluation.evaluator INFO: Inference done 1503/2557. 0.1446 s / img. ETA=0:02:34
+[05/09 07:11:51] detectron2.evaluation.evaluator INFO: Inference done 1538/2557. 0.1446 s / img. ETA=0:02:29
+[05/09 07:11:56] detectron2.evaluation.evaluator INFO: Inference done 1572/2557. 0.1446 s / img. ETA=0:02:24
+[05/09 07:12:01] detectron2.evaluation.evaluator INFO: Inference done 1606/2557. 0.1447 s / img. ETA=0:02:19
+[05/09 07:12:06] detectron2.evaluation.evaluator INFO: Inference done 1640/2557. 0.1447 s / img. ETA=0:02:14
+[05/09 07:12:11] detectron2.evaluation.evaluator INFO: Inference done 1675/2557. 0.1447 s / img. ETA=0:02:09
+[05/09 07:12:16] detectron2.evaluation.evaluator INFO: Inference done 1710/2557. 0.1447 s / img. ETA=0:02:04
+[05/09 07:12:21] detectron2.evaluation.evaluator INFO: Inference done 1744/2557. 0.1447 s / img. ETA=0:01:59
+[05/09 07:12:27] detectron2.evaluation.evaluator INFO: Inference done 1779/2557. 0.1447 s / img. ETA=0:01:54
+[05/09 07:12:32] detectron2.evaluation.evaluator INFO: Inference done 1813/2557. 0.1447 s / img. ETA=0:01:49
+[05/09 07:12:37] detectron2.evaluation.evaluator INFO: Inference done 1847/2557. 0.1447 s / img. ETA=0:01:44
+[05/09 07:12:42] detectron2.evaluation.evaluator INFO: Inference done 1882/2557. 0.1447 s / img. ETA=0:01:38
+[05/09 07:12:47] detectron2.evaluation.evaluator INFO: Inference done 1917/2557. 0.1447 s / img. ETA=0:01:33
+[05/09 07:12:52] detectron2.evaluation.evaluator INFO: Inference done 1951/2557. 0.1448 s / img. ETA=0:01:28
+[05/09 07:12:57] detectron2.evaluation.evaluator INFO: Inference done 1986/2557. 0.1448 s / img. ETA=0:01:23
+[05/09 07:13:02] detectron2.evaluation.evaluator INFO: Inference done 2020/2557. 0.1448 s / img. ETA=0:01:18
+[05/09 07:13:07] detectron2.evaluation.evaluator INFO: Inference done 2055/2557. 0.1447 s / img. ETA=0:01:13
+[05/09 07:13:12] detectron2.evaluation.evaluator INFO: Inference done 2090/2557. 0.1447 s / img. ETA=0:01:08
+[05/09 07:13:17] detectron2.evaluation.evaluator INFO: Inference done 2124/2557. 0.1448 s / img. ETA=0:01:03
+[05/09 07:13:22] detectron2.evaluation.evaluator INFO: Inference done 2158/2557. 0.1448 s / img. ETA=0:00:58
+[05/09 07:13:27] detectron2.evaluation.evaluator INFO: Inference done 2193/2557. 0.1448 s / img. ETA=0:00:53
+[05/09 07:13:32] detectron2.evaluation.evaluator INFO: Inference done 2227/2557. 0.1448 s / img. ETA=0:00:48
+[05/09 07:13:38] detectron2.evaluation.evaluator INFO: Inference done 2262/2557. 0.1448 s / img. ETA=0:00:43
+[05/09 07:13:43] detectron2.evaluation.evaluator INFO: Inference done 2296/2557. 0.1448 s / img. ETA=0:00:38
+[05/09 07:13:48] detectron2.evaluation.evaluator INFO: Inference done 2330/2557. 0.1448 s / img. ETA=0:00:33
+[05/09 07:13:53] detectron2.evaluation.evaluator INFO: Inference done 2364/2557. 0.1449 s / img. ETA=0:00:28
+[05/09 07:13:58] detectron2.evaluation.evaluator INFO: Inference done 2398/2557. 0.1449 s / img. ETA=0:00:23
+[05/09 07:14:03] detectron2.evaluation.evaluator INFO: Inference done 2433/2557. 0.1449 s / img. ETA=0:00:18
+[05/09 07:14:08] detectron2.evaluation.evaluator INFO: Inference done 2468/2557. 0.1449 s / img. ETA=0:00:13
+[05/09 07:14:13] detectron2.evaluation.evaluator INFO: Inference done 2502/2557. 0.1449 s / img. ETA=0:00:08
+[05/09 07:14:18] detectron2.evaluation.evaluator INFO: Inference done 2536/2557. 0.1449 s / img. ETA=0:00:03
+[05/09 07:14:21] detectron2.evaluation.evaluator INFO: Total inference time: 0:06:14.802396 (0.146866 s / img per device, on 4 devices)
+[05/09 07:14:21] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:06:09 (0.144902 s / img per device, on 4 devices)
+[05/09 10:22:59] detectron2.data.datasets.coco WARNING: 
+Category ids in annotations are not in [1, #categories]! We'll apply a mapping for you.
+
+[05/09 10:22:59] detectron2.data.datasets.coco INFO: Loaded 10225 images in COCO format from /ssd_scratch/cvit/myfolder/idd_data_coco/idd_val_annotation.json
+[05/09 10:23:00] detectron2.data.common INFO: Serializing 10225 elements to byte tensors and concatenating them all ...
+[05/09 10:23:00] detectron2.data.common INFO: Serialized dataset takes 6.09 MiB
+[05/09 10:23:01] detectron2.evaluation.evaluator INFO: Start inference on 2557 images
+[05/09 10:23:06] detectron2.evaluation.evaluator INFO: Inference done 11/2557. 0.1422 s / img. ETA=0:06:06
+[05/09 10:23:11] detectron2.evaluation.evaluator INFO: Inference done 46/2557. 0.1432 s / img. ETA=0:06:04
+[05/09 10:23:16] detectron2.evaluation.evaluator INFO: Inference done 81/2557. 0.1426 s / img. ETA=0:05:57
+[05/09 10:23:21] detectron2.evaluation.evaluator INFO: Inference done 116/2557. 0.1426 s / img. ETA=0:05:52
+[05/09 10:23:26] detectron2.evaluation.evaluator INFO: Inference done 151/2557. 0.1428 s / img. ETA=0:05:48
+[05/09 10:23:31] detectron2.evaluation.evaluator INFO: Inference done 185/2557. 0.1436 s / img. ETA=0:05:45
+[05/09 10:23:36] detectron2.evaluation.evaluator INFO: Inference done 220/2557. 0.1438 s / img. ETA=0:05:40
+[05/09 10:23:41] detectron2.evaluation.evaluator INFO: Inference done 255/2557. 0.1438 s / img. ETA=0:05:35
+[05/09 10:23:46] detectron2.evaluation.evaluator INFO: Inference done 289/2557. 0.1439 s / img. ETA=0:05:30
+[05/09 10:23:51] detectron2.evaluation.evaluator INFO: Inference done 324/2557. 0.1440 s / img. ETA=0:05:25
+[05/09 10:23:56] detectron2.evaluation.evaluator INFO: Inference done 358/2557. 0.1443 s / img. ETA=0:05:21
+[05/09 10:24:02] detectron2.evaluation.evaluator INFO: Inference done 393/2557. 0.1443 s / img. ETA=0:05:16
+[05/09 10:24:07] detectron2.evaluation.evaluator INFO: Inference done 428/2557. 0.1444 s / img. ETA=0:05:11
+[05/09 10:24:12] detectron2.evaluation.evaluator INFO: Inference done 462/2557. 0.1446 s / img. ETA=0:05:06
+[05/09 10:24:17] detectron2.evaluation.evaluator INFO: Inference done 496/2557. 0.1447 s / img. ETA=0:05:02
+[05/09 10:24:22] detectron2.evaluation.evaluator INFO: Inference done 530/2557. 0.1448 s / img. ETA=0:04:57
+[05/09 10:24:27] detectron2.evaluation.evaluator INFO: Inference done 564/2557. 0.1449 s / img. ETA=0:04:52
+[05/09 10:24:32] detectron2.evaluation.evaluator INFO: Inference done 598/2557. 0.1449 s / img. ETA=0:04:47
+[05/09 10:24:37] detectron2.evaluation.evaluator INFO: Inference done 632/2557. 0.1450 s / img. ETA=0:04:42
+[05/09 10:24:42] detectron2.evaluation.evaluator INFO: Inference done 666/2557. 0.1450 s / img. ETA=0:04:37
+[05/09 10:24:47] detectron2.evaluation.evaluator INFO: Inference done 701/2557. 0.1450 s / img. ETA=0:04:32
+[05/09 10:24:52] detectron2.evaluation.evaluator INFO: Inference done 736/2557. 0.1450 s / img. ETA=0:04:27
+[05/09 10:24:57] detectron2.evaluation.evaluator INFO: Inference done 770/2557. 0.1450 s / img. ETA=0:04:22
+[05/09 10:25:02] detectron2.evaluation.evaluator INFO: Inference done 805/2557. 0.1450 s / img. ETA=0:04:17
+[05/09 10:25:07] detectron2.evaluation.evaluator INFO: Inference done 839/2557. 0.1451 s / img. ETA=0:04:12
+[05/09 10:25:12] detectron2.evaluation.evaluator INFO: Inference done 874/2557. 0.1451 s / img. ETA=0:04:07
+[05/09 10:25:18] detectron2.evaluation.evaluator INFO: Inference done 909/2557. 0.1451 s / img. ETA=0:04:02
+[05/09 10:25:23] detectron2.evaluation.evaluator INFO: Inference done 944/2557. 0.1451 s / img. ETA=0:03:57
+[05/09 10:25:28] detectron2.evaluation.evaluator INFO: Inference done 978/2557. 0.1451 s / img. ETA=0:03:52
+[05/09 10:25:33] detectron2.evaluation.evaluator INFO: Inference done 1012/2557. 0.1451 s / img. ETA=0:03:47
+[05/09 10:25:38] detectron2.evaluation.evaluator INFO: Inference done 1046/2557. 0.1452 s / img. ETA=0:03:42
+[05/09 10:25:43] detectron2.evaluation.evaluator INFO: Inference done 1080/2557. 0.1452 s / img. ETA=0:03:37
+[05/09 10:25:48] detectron2.evaluation.evaluator INFO: Inference done 1114/2557. 0.1452 s / img. ETA=0:03:32
+[05/09 10:25:53] detectron2.evaluation.evaluator INFO: Inference done 1148/2557. 0.1452 s / img. ETA=0:03:27
+[05/09 10:25:58] detectron2.evaluation.evaluator INFO: Inference done 1182/2557. 0.1452 s / img. ETA=0:03:22
+[05/09 10:26:03] detectron2.evaluation.evaluator INFO: Inference done 1217/2557. 0.1452 s / img. ETA=0:03:17
+[05/09 10:26:08] detectron2.evaluation.evaluator INFO: Inference done 1251/2557. 0.1453 s / img. ETA=0:03:12
+[05/09 10:26:13] detectron2.evaluation.evaluator INFO: Inference done 1285/2557. 0.1453 s / img. ETA=0:03:07
+[05/09 10:26:18] detectron2.evaluation.evaluator INFO: Inference done 1319/2557. 0.1454 s / img. ETA=0:03:02
+[05/09 10:26:23] detectron2.evaluation.evaluator INFO: Inference done 1353/2557. 0.1454 s / img. ETA=0:02:57
+[05/09 10:26:28] detectron2.evaluation.evaluator INFO: Inference done 1387/2557. 0.1454 s / img. ETA=0:02:52
+[05/09 10:26:33] detectron2.evaluation.evaluator INFO: Inference done 1421/2557. 0.1455 s / img. ETA=0:02:47
+[05/09 10:26:38] detectron2.evaluation.evaluator INFO: Inference done 1455/2557. 0.1455 s / img. ETA=0:02:42
+[05/09 10:26:43] detectron2.evaluation.evaluator INFO: Inference done 1489/2557. 0.1455 s / img. ETA=0:02:37
+[05/09 10:26:49] detectron2.evaluation.evaluator INFO: Inference done 1523/2557. 0.1455 s / img. ETA=0:02:32
+[05/09 10:26:54] detectron2.evaluation.evaluator INFO: Inference done 1558/2557. 0.1455 s / img. ETA=0:02:27
+[05/09 10:26:59] detectron2.evaluation.evaluator INFO: Inference done 1592/2557. 0.1455 s / img. ETA=0:02:22
+[05/09 10:27:04] detectron2.evaluation.evaluator INFO: Inference done 1626/2557. 0.1456 s / img. ETA=0:02:17
+[05/09 10:27:09] detectron2.evaluation.evaluator INFO: Inference done 1660/2557. 0.1456 s / img. ETA=0:02:12
+[05/09 10:27:14] detectron2.evaluation.evaluator INFO: Inference done 1694/2557. 0.1456 s / img. ETA=0:02:07
+[05/09 10:27:19] detectron2.evaluation.evaluator INFO: Inference done 1729/2557. 0.1456 s / img. ETA=0:02:02
+[05/09 10:27:24] detectron2.evaluation.evaluator INFO: Inference done 1764/2557. 0.1456 s / img. ETA=0:01:56
+[05/09 10:27:29] detectron2.evaluation.evaluator INFO: Inference done 1798/2557. 0.1456 s / img. ETA=0:01:51
+[05/09 10:27:34] detectron2.evaluation.evaluator INFO: Inference done 1833/2557. 0.1456 s / img. ETA=0:01:46
+[05/09 10:27:39] detectron2.evaluation.evaluator INFO: Inference done 1867/2557. 0.1456 s / img. ETA=0:01:41
+[05/09 10:27:45] detectron2.evaluation.evaluator INFO: Inference done 1902/2557. 0.1456 s / img. ETA=0:01:36
+[05/09 10:27:50] detectron2.evaluation.evaluator INFO: Inference done 1936/2557. 0.1456 s / img. ETA=0:01:31
+[05/09 10:27:55] detectron2.evaluation.evaluator INFO: Inference done 1970/2557. 0.1456 s / img. ETA=0:01:26
+[05/09 10:28:00] detectron2.evaluation.evaluator INFO: Inference done 2004/2557. 0.1457 s / img. ETA=0:01:21
+[05/09 10:28:05] detectron2.evaluation.evaluator INFO: Inference done 2038/2557. 0.1457 s / img. ETA=0:01:16
+[05/09 10:28:10] detectron2.evaluation.evaluator INFO: Inference done 2073/2557. 0.1457 s / img. ETA=0:01:11
+[05/09 10:28:15] detectron2.evaluation.evaluator INFO: Inference done 2108/2557. 0.1457 s / img. ETA=0:01:06
+[05/09 10:28:20] detectron2.evaluation.evaluator INFO: Inference done 2142/2557. 0.1457 s / img. ETA=0:01:01
+[05/09 10:28:25] detectron2.evaluation.evaluator INFO: Inference done 2176/2557. 0.1457 s / img. ETA=0:00:56
+[05/09 10:28:30] detectron2.evaluation.evaluator INFO: Inference done 2210/2557. 0.1457 s / img. ETA=0:00:51
+[05/09 10:28:35] detectron2.evaluation.evaluator INFO: Inference done 2244/2557. 0.1457 s / img. ETA=0:00:46
+[05/09 10:28:40] detectron2.evaluation.evaluator INFO: Inference done 2278/2557. 0.1457 s / img. ETA=0:00:41
+[05/09 10:28:45] detectron2.evaluation.evaluator INFO: Inference done 2312/2557. 0.1457 s / img. ETA=0:00:36
+[05/09 10:28:50] detectron2.evaluation.evaluator INFO: Inference done 2347/2557. 0.1457 s / img. ETA=0:00:30
+[05/09 10:28:56] detectron2.evaluation.evaluator INFO: Inference done 2381/2557. 0.1458 s / img. ETA=0:00:25
+[05/09 10:29:01] detectron2.evaluation.evaluator INFO: Inference done 2416/2557. 0.1457 s / img. ETA=0:00:20
+[05/09 10:29:06] detectron2.evaluation.evaluator INFO: Inference done 2450/2557. 0.1458 s / img. ETA=0:00:15
+[05/09 10:29:11] detectron2.evaluation.evaluator INFO: Inference done 2485/2557. 0.1457 s / img. ETA=0:00:10
+[05/09 10:29:16] detectron2.evaluation.evaluator INFO: Inference done 2519/2557. 0.1457 s / img. ETA=0:00:05
+[05/09 10:29:21] detectron2.evaluation.evaluator INFO: Inference done 2553/2557. 0.1458 s / img. ETA=0:00:00
+[05/09 10:29:22] detectron2.evaluation.evaluator INFO: Total inference time: 0:06:16.875661 (0.147679 s / img per device, on 4 devices)
+[05/09 10:29:22] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:06:11 (0.145748 s / img per device, on 4 devices)
+[05/09 13:38:11] detectron2.data.datasets.coco WARNING: 
+Category ids in annotations are not in [1, #categories]! We'll apply a mapping for you.
+
+[05/09 13:38:11] detectron2.data.datasets.coco INFO: Loaded 10225 images in COCO format from /ssd_scratch/cvit/myfolder/idd_data_coco/idd_val_annotation.json
+[05/09 13:38:12] detectron2.data.common INFO: Serializing 10225 elements to byte tensors and concatenating them all ...
+[05/09 13:38:12] detectron2.data.common INFO: Serialized dataset takes 6.09 MiB
+[05/09 13:38:13] detectron2.evaluation.evaluator INFO: Start inference on 2557 images
+[05/09 13:38:18] detectron2.evaluation.evaluator INFO: Inference done 11/2557. 0.1412 s / img. ETA=0:06:03
+[05/09 13:38:23] detectron2.evaluation.evaluator INFO: Inference done 46/2557. 0.1415 s / img. ETA=0:05:59
+[05/09 13:38:28] detectron2.evaluation.evaluator INFO: Inference done 81/2557. 0.1415 s / img. ETA=0:05:54
+[05/09 13:38:33] detectron2.evaluation.evaluator INFO: Inference done 116/2557. 0.1416 s / img. ETA=0:05:49
+[05/09 13:38:38] detectron2.evaluation.evaluator INFO: Inference done 151/2557. 0.1421 s / img. ETA=0:05:46
+[05/09 13:38:43] detectron2.evaluation.evaluator INFO: Inference done 186/2557. 0.1424 s / img. ETA=0:05:41
+[05/09 13:38:49] detectron2.evaluation.evaluator INFO: Inference done 221/2557. 0.1428 s / img. ETA=0:05:37
+[05/09 13:38:54] detectron2.evaluation.evaluator INFO: Inference done 256/2557. 0.1431 s / img. ETA=0:05:33
+[05/09 13:38:59] detectron2.evaluation.evaluator INFO: Inference done 290/2557. 0.1434 s / img. ETA=0:05:29
+[05/09 13:39:04] detectron2.evaluation.evaluator INFO: Inference done 325/2557. 0.1435 s / img. ETA=0:05:24
+[05/09 13:39:09] detectron2.evaluation.evaluator INFO: Inference done 359/2557. 0.1440 s / img. ETA=0:05:20
+[05/09 13:39:14] detectron2.evaluation.evaluator INFO: Inference done 393/2557. 0.1441 s / img. ETA=0:05:15
+[05/09 13:39:19] detectron2.evaluation.evaluator INFO: Inference done 427/2557. 0.1444 s / img. ETA=0:05:11
+[05/09 13:39:24] detectron2.evaluation.evaluator INFO: Inference done 461/2557. 0.1445 s / img. ETA=0:05:06
+[05/09 13:39:29] detectron2.evaluation.evaluator INFO: Inference done 495/2557. 0.1446 s / img. ETA=0:05:01
+[05/09 13:39:34] detectron2.evaluation.evaluator INFO: Inference done 529/2557. 0.1448 s / img. ETA=0:04:57
+[05/09 13:39:39] detectron2.evaluation.evaluator INFO: Inference done 564/2557. 0.1447 s / img. ETA=0:04:52
+[05/09 13:39:44] detectron2.evaluation.evaluator INFO: Inference done 599/2557. 0.1447 s / img. ETA=0:04:46
+[05/09 13:39:49] detectron2.evaluation.evaluator INFO: Inference done 633/2557. 0.1447 s / img. ETA=0:04:41
+[05/09 13:39:54] detectron2.evaluation.evaluator INFO: Inference done 668/2557. 0.1446 s / img. ETA=0:04:36
+[05/09 13:39:59] detectron2.evaluation.evaluator INFO: Inference done 703/2557. 0.1446 s / img. ETA=0:04:31
+[05/09 13:40:05] detectron2.evaluation.evaluator INFO: Inference done 737/2557. 0.1447 s / img. ETA=0:04:26
+[05/09 13:40:10] detectron2.evaluation.evaluator INFO: Inference done 772/2557. 0.1447 s / img. ETA=0:04:21
+[05/09 13:40:15] detectron2.evaluation.evaluator INFO: Inference done 807/2557. 0.1447 s / img. ETA=0:04:16
+[05/09 13:40:20] detectron2.evaluation.evaluator INFO: Inference done 841/2557. 0.1447 s / img. ETA=0:04:11
+[05/09 13:40:25] detectron2.evaluation.evaluator INFO: Inference done 875/2557. 0.1447 s / img. ETA=0:04:06
+[05/09 13:40:30] detectron2.evaluation.evaluator INFO: Inference done 910/2557. 0.1447 s / img. ETA=0:04:01
+[05/09 13:40:35] detectron2.evaluation.evaluator INFO: Inference done 945/2557. 0.1447 s / img. ETA=0:03:56
+[05/09 13:40:40] detectron2.evaluation.evaluator INFO: Inference done 979/2557. 0.1448 s / img. ETA=0:03:51
+[05/09 13:40:45] detectron2.evaluation.evaluator INFO: Inference done 1013/2557. 0.1449 s / img. ETA=0:03:46
+[05/09 13:40:50] detectron2.evaluation.evaluator INFO: Inference done 1048/2557. 0.1448 s / img. ETA=0:03:41
+[05/09 13:40:55] detectron2.evaluation.evaluator INFO: Inference done 1083/2557. 0.1448 s / img. ETA=0:03:36
+[05/09 13:41:00] detectron2.evaluation.evaluator INFO: Inference done 1118/2557. 0.1448 s / img. ETA=0:03:30
+[05/09 13:41:05] detectron2.evaluation.evaluator INFO: Inference done 1152/2557. 0.1448 s / img. ETA=0:03:26
+[05/09 13:41:11] detectron2.evaluation.evaluator INFO: Inference done 1185/2557. 0.1450 s / img. ETA=0:03:21
+[05/09 13:41:16] detectron2.evaluation.evaluator INFO: Inference done 1219/2557. 0.1450 s / img. ETA=0:03:16
+[05/09 13:41:21] detectron2.evaluation.evaluator INFO: Inference done 1254/2557. 0.1450 s / img. ETA=0:03:11
+[05/09 13:41:26] detectron2.evaluation.evaluator INFO: Inference done 1289/2557. 0.1450 s / img. ETA=0:03:06
+[05/09 13:41:31] detectron2.evaluation.evaluator INFO: Inference done 1323/2557. 0.1451 s / img. ETA=0:03:01
+[05/09 13:41:36] detectron2.evaluation.evaluator INFO: Inference done 1358/2557. 0.1450 s / img. ETA=0:02:56
+[05/09 13:41:41] detectron2.evaluation.evaluator INFO: Inference done 1393/2557. 0.1450 s / img. ETA=0:02:50
+[05/09 13:41:46] detectron2.evaluation.evaluator INFO: Inference done 1427/2557. 0.1451 s / img. ETA=0:02:46
+[05/09 13:41:51] detectron2.evaluation.evaluator INFO: Inference done 1462/2557. 0.1451 s / img. ETA=0:02:40
+[05/09 13:41:56] detectron2.evaluation.evaluator INFO: Inference done 1496/2557. 0.1451 s / img. ETA=0:02:35
+[05/09 13:42:01] detectron2.evaluation.evaluator INFO: Inference done 1530/2557. 0.1451 s / img. ETA=0:02:30
+[05/09 13:42:06] detectron2.evaluation.evaluator INFO: Inference done 1564/2557. 0.1452 s / img. ETA=0:02:25
+[05/09 13:42:12] detectron2.evaluation.evaluator INFO: Inference done 1599/2557. 0.1452 s / img. ETA=0:02:20
+[05/09 13:42:17] detectron2.evaluation.evaluator INFO: Inference done 1633/2557. 0.1452 s / img. ETA=0:02:15
+[05/09 13:42:22] detectron2.evaluation.evaluator INFO: Inference done 1667/2557. 0.1452 s / img. ETA=0:02:10
+[05/09 13:42:27] detectron2.evaluation.evaluator INFO: Inference done 1701/2557. 0.1452 s / img. ETA=0:02:05
+[05/09 13:42:32] detectron2.evaluation.evaluator INFO: Inference done 1735/2557. 0.1452 s / img. ETA=0:02:00
+[05/09 13:42:37] detectron2.evaluation.evaluator INFO: Inference done 1769/2557. 0.1453 s / img. ETA=0:01:55
+[05/09 13:42:42] detectron2.evaluation.evaluator INFO: Inference done 1803/2557. 0.1453 s / img. ETA=0:01:50
+[05/09 13:42:47] detectron2.evaluation.evaluator INFO: Inference done 1838/2557. 0.1453 s / img. ETA=0:01:45
+[05/09 13:42:52] detectron2.evaluation.evaluator INFO: Inference done 1872/2557. 0.1453 s / img. ETA=0:01:40
+[05/09 13:42:57] detectron2.evaluation.evaluator INFO: Inference done 1906/2557. 0.1453 s / img. ETA=0:01:35
+[05/09 13:43:02] detectron2.evaluation.evaluator INFO: Inference done 1940/2557. 0.1453 s / img. ETA=0:01:30
+[05/09 13:43:07] detectron2.evaluation.evaluator INFO: Inference done 1974/2557. 0.1453 s / img. ETA=0:01:25
+[05/09 13:43:12] detectron2.evaluation.evaluator INFO: Inference done 2009/2557. 0.1453 s / img. ETA=0:01:20
+[05/09 13:43:17] detectron2.evaluation.evaluator INFO: Inference done 2044/2557. 0.1453 s / img. ETA=0:01:15
+[05/09 13:43:22] detectron2.evaluation.evaluator INFO: Inference done 2079/2557. 0.1453 s / img. ETA=0:01:10
+[05/09 13:43:28] detectron2.evaluation.evaluator INFO: Inference done 2113/2557. 0.1453 s / img. ETA=0:01:05
+[05/09 13:43:33] detectron2.evaluation.evaluator INFO: Inference done 2147/2557. 0.1453 s / img. ETA=0:01:00
+[05/09 13:43:38] detectron2.evaluation.evaluator INFO: Inference done 2181/2557. 0.1454 s / img. ETA=0:00:55
+[05/09 13:43:43] detectron2.evaluation.evaluator INFO: Inference done 2215/2557. 0.1454 s / img. ETA=0:00:50
+[05/09 13:43:48] detectron2.evaluation.evaluator INFO: Inference done 2250/2557. 0.1454 s / img. ETA=0:00:45
+[05/09 13:43:53] detectron2.evaluation.evaluator INFO: Inference done 2285/2557. 0.1453 s / img. ETA=0:00:40
+[05/09 13:43:58] detectron2.evaluation.evaluator INFO: Inference done 2319/2557. 0.1453 s / img. ETA=0:00:35
+[05/09 13:44:03] detectron2.evaluation.evaluator INFO: Inference done 2354/2557. 0.1453 s / img. ETA=0:00:29
+[05/09 13:44:08] detectron2.evaluation.evaluator INFO: Inference done 2388/2557. 0.1454 s / img. ETA=0:00:24
+[05/09 13:44:13] detectron2.evaluation.evaluator INFO: Inference done 2422/2557. 0.1454 s / img. ETA=0:00:19
+[05/09 13:44:18] detectron2.evaluation.evaluator INFO: Inference done 2456/2557. 0.1454 s / img. ETA=0:00:14
+[05/09 13:44:23] detectron2.evaluation.evaluator INFO: Inference done 2490/2557. 0.1454 s / img. ETA=0:00:09
+[05/09 13:44:28] detectron2.evaluation.evaluator INFO: Inference done 2524/2557. 0.1454 s / img. ETA=0:00:04
+[05/09 13:44:33] detectron2.evaluation.evaluator INFO: Total inference time: 0:06:16.051929 (0.147356 s / img per device, on 4 devices)
+[05/09 13:44:33] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:06:11 (0.145454 s / img per device, on 4 devices)
+[05/09 16:53:32] detectron2.data.datasets.coco WARNING: 
+Category ids in annotations are not in [1, #categories]! We'll apply a mapping for you.
+
+[05/09 16:53:32] detectron2.data.datasets.coco INFO: Loaded 10225 images in COCO format from /ssd_scratch/cvit/myfolder/idd_data_coco/idd_val_annotation.json
+[05/09 16:53:33] detectron2.data.common INFO: Serializing 10225 elements to byte tensors and concatenating them all ...
+[05/09 16:53:33] detectron2.data.common INFO: Serialized dataset takes 6.09 MiB
+[05/09 16:53:34] detectron2.evaluation.evaluator INFO: Start inference on 2557 images
+[05/09 16:53:40] detectron2.evaluation.evaluator INFO: Inference done 11/2557. 0.1419 s / img. ETA=0:06:05
+[05/09 16:53:45] detectron2.evaluation.evaluator INFO: Inference done 46/2557. 0.1431 s / img. ETA=0:06:03
+[05/09 16:53:50] detectron2.evaluation.evaluator INFO: Inference done 81/2557. 0.1428 s / img. ETA=0:05:58
+[05/09 16:53:55] detectron2.evaluation.evaluator INFO: Inference done 116/2557. 0.1428 s / img. ETA=0:05:53
+[05/09 16:54:00] detectron2.evaluation.evaluator INFO: Inference done 151/2557. 0.1431 s / img. ETA=0:05:48
+[05/09 16:54:05] detectron2.evaluation.evaluator INFO: Inference done 185/2557. 0.1435 s / img. ETA=0:05:44
+[05/09 16:54:10] detectron2.evaluation.evaluator INFO: Inference done 220/2557. 0.1438 s / img. ETA=0:05:40
+[05/09 16:54:15] detectron2.evaluation.evaluator INFO: Inference done 255/2557. 0.1439 s / img. ETA=0:05:35
+[05/09 16:54:20] detectron2.evaluation.evaluator INFO: Inference done 290/2557. 0.1439 s / img. ETA=0:05:30
+[05/09 16:54:25] detectron2.evaluation.evaluator INFO: Inference done 325/2557. 0.1439 s / img. ETA=0:05:25
+[05/09 16:54:30] detectron2.evaluation.evaluator INFO: Inference done 359/2557. 0.1443 s / img. ETA=0:05:21
+[05/09 16:54:35] detectron2.evaluation.evaluator INFO: Inference done 393/2557. 0.1446 s / img. ETA=0:05:16
+[05/09 16:54:41] detectron2.evaluation.evaluator INFO: Inference done 427/2557. 0.1449 s / img. ETA=0:05:12
+[05/09 16:54:46] detectron2.evaluation.evaluator INFO: Inference done 461/2557. 0.1451 s / img. ETA=0:05:08
+[05/09 16:54:51] detectron2.evaluation.evaluator INFO: Inference done 495/2557. 0.1452 s / img. ETA=0:05:03
+[05/09 16:54:56] detectron2.evaluation.evaluator INFO: Inference done 530/2557. 0.1451 s / img. ETA=0:04:57
+[05/09 16:55:01] detectron2.evaluation.evaluator INFO: Inference done 565/2557. 0.1451 s / img. ETA=0:04:52
+[05/09 16:55:06] detectron2.evaluation.evaluator INFO: Inference done 599/2557. 0.1452 s / img. ETA=0:04:47
+[05/09 16:55:11] detectron2.evaluation.evaluator INFO: Inference done 634/2557. 0.1452 s / img. ETA=0:04:42
+[05/09 16:55:16] detectron2.evaluation.evaluator INFO: Inference done 668/2557. 0.1454 s / img. ETA=0:04:38
+[05/09 16:55:21] detectron2.evaluation.evaluator INFO: Inference done 703/2557. 0.1453 s / img. ETA=0:04:32
+[05/09 16:55:27] detectron2.evaluation.evaluator INFO: Inference done 738/2557. 0.1453 s / img. ETA=0:04:27
+[05/09 16:55:32] detectron2.evaluation.evaluator INFO: Inference done 773/2557. 0.1453 s / img. ETA=0:04:22
+[05/09 16:55:37] detectron2.evaluation.evaluator INFO: Inference done 807/2557. 0.1453 s / img. ETA=0:04:17
+[05/09 16:55:42] detectron2.evaluation.evaluator INFO: Inference done 841/2557. 0.1453 s / img. ETA=0:04:12
+[05/09 16:55:47] detectron2.evaluation.evaluator INFO: Inference done 876/2557. 0.1453 s / img. ETA=0:04:07
+[05/09 16:55:52] detectron2.evaluation.evaluator INFO: Inference done 910/2557. 0.1453 s / img. ETA=0:04:02
+[05/09 16:55:57] detectron2.evaluation.evaluator INFO: Inference done 945/2557. 0.1452 s / img. ETA=0:03:57
+[05/09 16:56:02] detectron2.evaluation.evaluator INFO: Inference done 979/2557. 0.1453 s / img. ETA=0:03:52
+[05/09 16:56:07] detectron2.evaluation.evaluator INFO: Inference done 1013/2557. 0.1453 s / img. ETA=0:03:47
+[05/09 16:56:12] detectron2.evaluation.evaluator INFO: Inference done 1048/2557. 0.1453 s / img. ETA=0:03:42
+[05/09 16:56:17] detectron2.evaluation.evaluator INFO: Inference done 1083/2557. 0.1453 s / img. ETA=0:03:36
+[05/09 16:56:22] detectron2.evaluation.evaluator INFO: Inference done 1118/2557. 0.1452 s / img. ETA=0:03:31
+[05/09 16:56:27] detectron2.evaluation.evaluator INFO: Inference done 1152/2557. 0.1453 s / img. ETA=0:03:26
+[05/09 16:56:33] detectron2.evaluation.evaluator INFO: Inference done 1187/2557. 0.1453 s / img. ETA=0:03:21
+[05/09 16:56:38] detectron2.evaluation.evaluator INFO: Inference done 1221/2557. 0.1453 s / img. ETA=0:03:16
+[05/09 16:56:43] detectron2.evaluation.evaluator INFO: Inference done 1256/2557. 0.1453 s / img. ETA=0:03:11
+[05/09 16:56:48] detectron2.evaluation.evaluator INFO: Inference done 1291/2557. 0.1453 s / img. ETA=0:03:06
+[05/09 16:56:53] detectron2.evaluation.evaluator INFO: Inference done 1325/2557. 0.1453 s / img. ETA=0:03:01
+[05/09 16:56:58] detectron2.evaluation.evaluator INFO: Inference done 1358/2557. 0.1455 s / img. ETA=0:02:56
+[05/09 16:57:03] detectron2.evaluation.evaluator INFO: Inference done 1392/2557. 0.1455 s / img. ETA=0:02:51
+[05/09 16:57:08] detectron2.evaluation.evaluator INFO: Inference done 1426/2557. 0.1456 s / img. ETA=0:02:46
+[05/09 16:57:13] detectron2.evaluation.evaluator INFO: Inference done 1461/2557. 0.1455 s / img. ETA=0:02:41
+[05/09 16:57:18] detectron2.evaluation.evaluator INFO: Inference done 1495/2557. 0.1455 s / img. ETA=0:02:36
+[05/09 16:57:23] detectron2.evaluation.evaluator INFO: Inference done 1529/2557. 0.1456 s / img. ETA=0:02:31
+[05/09 16:57:28] detectron2.evaluation.evaluator INFO: Inference done 1563/2557. 0.1456 s / img. ETA=0:02:26
+[05/09 16:57:34] detectron2.evaluation.evaluator INFO: Inference done 1598/2557. 0.1456 s / img. ETA=0:02:21
+[05/09 16:57:39] detectron2.evaluation.evaluator INFO: Inference done 1633/2557. 0.1456 s / img. ETA=0:02:16
+[05/09 16:57:44] detectron2.evaluation.evaluator INFO: Inference done 1667/2557. 0.1456 s / img. ETA=0:02:11
+[05/09 16:57:49] detectron2.evaluation.evaluator INFO: Inference done 1702/2557. 0.1455 s / img. ETA=0:02:06
+[05/09 16:57:54] detectron2.evaluation.evaluator INFO: Inference done 1736/2557. 0.1456 s / img. ETA=0:02:01
+[05/09 16:57:59] detectron2.evaluation.evaluator INFO: Inference done 1770/2557. 0.1456 s / img. ETA=0:01:56
+[05/09 16:58:04] detectron2.evaluation.evaluator INFO: Inference done 1804/2557. 0.1456 s / img. ETA=0:01:51
+[05/09 16:58:09] detectron2.evaluation.evaluator INFO: Inference done 1838/2557. 0.1456 s / img. ETA=0:01:46
+[05/09 16:58:14] detectron2.evaluation.evaluator INFO: Inference done 1872/2557. 0.1456 s / img. ETA=0:01:41
+[05/09 16:58:19] detectron2.evaluation.evaluator INFO: Inference done 1906/2557. 0.1456 s / img. ETA=0:01:36
+[05/09 16:58:24] detectron2.evaluation.evaluator INFO: Inference done 1940/2557. 0.1456 s / img. ETA=0:01:30
+[05/09 16:58:29] detectron2.evaluation.evaluator INFO: Inference done 1975/2557. 0.1456 s / img. ETA=0:01:25
+[05/09 16:58:34] detectron2.evaluation.evaluator INFO: Inference done 2009/2557. 0.1456 s / img. ETA=0:01:20
+[05/09 16:58:39] detectron2.evaluation.evaluator INFO: Inference done 2044/2557. 0.1456 s / img. ETA=0:01:15
+[05/09 16:58:44] detectron2.evaluation.evaluator INFO: Inference done 2078/2557. 0.1456 s / img. ETA=0:01:10
+[05/09 16:58:49] detectron2.evaluation.evaluator INFO: Inference done 2112/2557. 0.1457 s / img. ETA=0:01:05
+[05/09 16:58:55] detectron2.evaluation.evaluator INFO: Inference done 2146/2557. 0.1457 s / img. ETA=0:01:00
+[05/09 16:59:00] detectron2.evaluation.evaluator INFO: Inference done 2180/2557. 0.1457 s / img. ETA=0:00:55
+[05/09 16:59:05] detectron2.evaluation.evaluator INFO: Inference done 2214/2557. 0.1457 s / img. ETA=0:00:50
+[05/09 16:59:10] detectron2.evaluation.evaluator INFO: Inference done 2248/2557. 0.1457 s / img. ETA=0:00:45
+[05/09 16:59:15] detectron2.evaluation.evaluator INFO: Inference done 2282/2557. 0.1457 s / img. ETA=0:00:40
+[05/09 16:59:20] detectron2.evaluation.evaluator INFO: Inference done 2317/2557. 0.1457 s / img. ETA=0:00:35
+[05/09 16:59:25] detectron2.evaluation.evaluator INFO: Inference done 2351/2557. 0.1457 s / img. ETA=0:00:30
+[05/09 16:59:30] detectron2.evaluation.evaluator INFO: Inference done 2385/2557. 0.1457 s / img. ETA=0:00:25
+[05/09 16:59:35] detectron2.evaluation.evaluator INFO: Inference done 2420/2557. 0.1457 s / img. ETA=0:00:20
+[05/09 16:59:40] detectron2.evaluation.evaluator INFO: Inference done 2455/2557. 0.1457 s / img. ETA=0:00:15
+[05/09 16:59:45] detectron2.evaluation.evaluator INFO: Inference done 2489/2557. 0.1457 s / img. ETA=0:00:10
+[05/09 16:59:50] detectron2.evaluation.evaluator INFO: Inference done 2523/2557. 0.1458 s / img. ETA=0:00:05
+[05/09 16:59:55] detectron2.evaluation.evaluator INFO: Total inference time: 0:06:16.817633 (0.147656 s / img per device, on 4 devices)
+[05/09 16:59:55] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:06:11 (0.145746 s / img per device, on 4 devices)
+[05/09 20:08:40] detectron2.data.datasets.coco INFO: Loading /ssd_scratch/cvit/myfolder/idd_data_coco/idd_val_annotation.json takes 1.06 seconds.
+[05/09 20:08:40] detectron2.data.datasets.coco WARNING: 
+Category ids in annotations are not in [1, #categories]! We'll apply a mapping for you.
+
+[05/09 20:08:40] detectron2.data.datasets.coco INFO: Loaded 10225 images in COCO format from /ssd_scratch/cvit/myfolder/idd_data_coco/idd_val_annotation.json
+[05/09 20:08:41] detectron2.data.common INFO: Serializing 10225 elements to byte tensors and concatenating them all ...
+[05/09 20:08:41] detectron2.data.common INFO: Serialized dataset takes 6.09 MiB
+[05/09 20:08:42] detectron2.evaluation.evaluator INFO: Start inference on 2557 images
+[05/09 20:08:47] detectron2.evaluation.evaluator INFO: Inference done 11/2557. 0.1420 s / img. ETA=0:06:06
+[05/09 20:08:52] detectron2.evaluation.evaluator INFO: Inference done 46/2557. 0.1423 s / img. ETA=0:06:02
+[05/09 20:08:57] detectron2.evaluation.evaluator INFO: Inference done 81/2557. 0.1420 s / img. ETA=0:05:56
+[05/09 20:09:02] detectron2.evaluation.evaluator INFO: Inference done 116/2557. 0.1420 s / img. ETA=0:05:51
+[05/09 20:09:07] detectron2.evaluation.evaluator INFO: Inference done 151/2557. 0.1423 s / img. ETA=0:05:46
+[05/09 20:09:12] detectron2.evaluation.evaluator INFO: Inference done 186/2557. 0.1424 s / img. ETA=0:05:42
+[05/09 20:09:17] detectron2.evaluation.evaluator INFO: Inference done 221/2557. 0.1426 s / img. ETA=0:05:37
+[05/09 20:09:22] detectron2.evaluation.evaluator INFO: Inference done 256/2557. 0.1428 s / img. ETA=0:05:32
+[05/09 20:09:27] detectron2.evaluation.evaluator INFO: Inference done 291/2557. 0.1429 s / img. ETA=0:05:28
+[05/09 20:09:33] detectron2.evaluation.evaluator INFO: Inference done 326/2557. 0.1431 s / img. ETA=0:05:23
+[05/09 20:09:38] detectron2.evaluation.evaluator INFO: Inference done 360/2557. 0.1434 s / img. ETA=0:05:19
+[05/09 20:09:43] detectron2.evaluation.evaluator INFO: Inference done 395/2557. 0.1435 s / img. ETA=0:05:14
+[05/09 20:09:48] detectron2.evaluation.evaluator INFO: Inference done 430/2557. 0.1436 s / img. ETA=0:05:09
+[05/09 20:09:53] detectron2.evaluation.evaluator INFO: Inference done 465/2557. 0.1437 s / img. ETA=0:05:04
+[05/09 20:09:58] detectron2.evaluation.evaluator INFO: Inference done 500/2557. 0.1438 s / img. ETA=0:04:59
+[05/09 20:10:03] detectron2.evaluation.evaluator INFO: Inference done 535/2557. 0.1438 s / img. ETA=0:04:54
+[05/09 20:10:08] detectron2.evaluation.evaluator INFO: Inference done 569/2557. 0.1440 s / img. ETA=0:04:49
+[05/09 20:10:13] detectron2.evaluation.evaluator INFO: Inference done 603/2557. 0.1442 s / img. ETA=0:04:45
+[05/09 20:10:18] detectron2.evaluation.evaluator INFO: Inference done 638/2557. 0.1442 s / img. ETA=0:04:40
+[05/09 20:10:24] detectron2.evaluation.evaluator INFO: Inference done 673/2557. 0.1442 s / img. ETA=0:04:35
+[05/09 20:10:29] detectron2.evaluation.evaluator INFO: Inference done 708/2557. 0.1441 s / img. ETA=0:04:29
+[05/09 20:10:34] detectron2.evaluation.evaluator INFO: Inference done 742/2557. 0.1442 s / img. ETA=0:04:25
+[05/09 20:10:39] detectron2.evaluation.evaluator INFO: Inference done 776/2557. 0.1443 s / img. ETA=0:04:20
+[05/09 20:10:44] detectron2.evaluation.evaluator INFO: Inference done 811/2557. 0.1443 s / img. ETA=0:04:15
+[05/09 20:10:49] detectron2.evaluation.evaluator INFO: Inference done 845/2557. 0.1443 s / img. ETA=0:04:10
+[05/09 20:10:54] detectron2.evaluation.evaluator INFO: Inference done 880/2557. 0.1443 s / img. ETA=0:04:05
+[05/09 20:10:59] detectron2.evaluation.evaluator INFO: Inference done 915/2557. 0.1443 s / img. ETA=0:04:00
+[05/09 20:11:04] detectron2.evaluation.evaluator INFO: Inference done 950/2557. 0.1443 s / img. ETA=0:03:54
+[05/09 20:11:09] detectron2.evaluation.evaluator INFO: Inference done 984/2557. 0.1444 s / img. ETA=0:03:50
+[05/09 20:11:14] detectron2.evaluation.evaluator INFO: Inference done 1019/2557. 0.1444 s / img. ETA=0:03:44
+[05/09 20:11:19] detectron2.evaluation.evaluator INFO: Inference done 1054/2557. 0.1444 s / img. ETA=0:03:39
+[05/09 20:11:25] detectron2.evaluation.evaluator INFO: Inference done 1089/2557. 0.1444 s / img. ETA=0:03:34
+[05/09 20:11:30] detectron2.evaluation.evaluator INFO: Inference done 1123/2557. 0.1444 s / img. ETA=0:03:29
+[05/09 20:11:35] detectron2.evaluation.evaluator INFO: Inference done 1158/2557. 0.1444 s / img. ETA=0:03:24
+[05/09 20:11:40] detectron2.evaluation.evaluator INFO: Inference done 1192/2557. 0.1444 s / img. ETA=0:03:19
+[05/09 20:11:45] detectron2.evaluation.evaluator INFO: Inference done 1226/2557. 0.1445 s / img. ETA=0:03:14
+[05/09 20:11:50] detectron2.evaluation.evaluator INFO: Inference done 1261/2557. 0.1445 s / img. ETA=0:03:09
+[05/09 20:11:55] detectron2.evaluation.evaluator INFO: Inference done 1296/2557. 0.1445 s / img. ETA=0:03:04
+[05/09 20:12:00] detectron2.evaluation.evaluator INFO: Inference done 1330/2557. 0.1446 s / img. ETA=0:02:59
+[05/09 20:12:05] detectron2.evaluation.evaluator INFO: Inference done 1364/2557. 0.1446 s / img. ETA=0:02:54
+[05/09 20:12:10] detectron2.evaluation.evaluator INFO: Inference done 1398/2557. 0.1446 s / img. ETA=0:02:49
+[05/09 20:12:15] detectron2.evaluation.evaluator INFO: Inference done 1432/2557. 0.1446 s / img. ETA=0:02:44
+[05/09 20:12:20] detectron2.evaluation.evaluator INFO: Inference done 1467/2557. 0.1447 s / img. ETA=0:02:39
+[05/09 20:12:25] detectron2.evaluation.evaluator INFO: Inference done 1502/2557. 0.1446 s / img. ETA=0:02:34
+[05/09 20:12:30] detectron2.evaluation.evaluator INFO: Inference done 1536/2557. 0.1447 s / img. ETA=0:02:29
+[05/09 20:12:35] detectron2.evaluation.evaluator INFO: Inference done 1571/2557. 0.1447 s / img. ETA=0:02:24
+[05/09 20:12:40] detectron2.evaluation.evaluator INFO: Inference done 1605/2557. 0.1447 s / img. ETA=0:02:19
+[05/09 20:12:45] detectron2.evaluation.evaluator INFO: Inference done 1639/2557. 0.1447 s / img. ETA=0:02:14
+[05/09 20:12:50] detectron2.evaluation.evaluator INFO: Inference done 1673/2557. 0.1447 s / img. ETA=0:02:09
+[05/09 20:12:56] detectron2.evaluation.evaluator INFO: Inference done 1708/2557. 0.1447 s / img. ETA=0:02:04
+[05/09 20:13:01] detectron2.evaluation.evaluator INFO: Inference done 1742/2557. 0.1447 s / img. ETA=0:01:59
+[05/09 20:13:06] detectron2.evaluation.evaluator INFO: Inference done 1776/2557. 0.1448 s / img. ETA=0:01:54
+[05/09 20:13:11] detectron2.evaluation.evaluator INFO: Inference done 1810/2557. 0.1448 s / img. ETA=0:01:49
+[05/09 20:13:16] detectron2.evaluation.evaluator INFO: Inference done 1844/2557. 0.1448 s / img. ETA=0:01:44
+[05/09 20:13:21] detectron2.evaluation.evaluator INFO: Inference done 1878/2557. 0.1448 s / img. ETA=0:01:39
+[05/09 20:13:26] detectron2.evaluation.evaluator INFO: Inference done 1913/2557. 0.1448 s / img. ETA=0:01:34
+[05/09 20:13:31] detectron2.evaluation.evaluator INFO: Inference done 1947/2557. 0.1448 s / img. ETA=0:01:29
+[05/09 20:13:36] detectron2.evaluation.evaluator INFO: Inference done 1981/2557. 0.1449 s / img. ETA=0:01:24
+[05/09 20:13:41] detectron2.evaluation.evaluator INFO: Inference done 2016/2557. 0.1449 s / img. ETA=0:01:19
+[05/09 20:13:46] detectron2.evaluation.evaluator INFO: Inference done 2051/2557. 0.1449 s / img. ETA=0:01:14
+[05/09 20:13:51] detectron2.evaluation.evaluator INFO: Inference done 2086/2557. 0.1449 s / img. ETA=0:01:09
+[05/09 20:13:56] detectron2.evaluation.evaluator INFO: Inference done 2121/2557. 0.1449 s / img. ETA=0:01:03
+[05/09 20:14:02] detectron2.evaluation.evaluator INFO: Inference done 2156/2557. 0.1449 s / img. ETA=0:00:58
+[05/09 20:14:07] detectron2.evaluation.evaluator INFO: Inference done 2190/2557. 0.1449 s / img. ETA=0:00:53
+[05/09 20:14:12] detectron2.evaluation.evaluator INFO: Inference done 2225/2557. 0.1449 s / img. ETA=0:00:48
+[05/09 20:14:17] detectron2.evaluation.evaluator INFO: Inference done 2260/2557. 0.1449 s / img. ETA=0:00:43
+[05/09 20:14:22] detectron2.evaluation.evaluator INFO: Inference done 2294/2557. 0.1449 s / img. ETA=0:00:38
+[05/09 20:14:27] detectron2.evaluation.evaluator INFO: Inference done 2329/2557. 0.1449 s / img. ETA=0:00:33
+[05/09 20:14:32] detectron2.evaluation.evaluator INFO: Inference done 2363/2557. 0.1449 s / img. ETA=0:00:28
+[05/09 20:14:37] detectron2.evaluation.evaluator INFO: Inference done 2397/2557. 0.1449 s / img. ETA=0:00:23
+[05/09 20:14:42] detectron2.evaluation.evaluator INFO: Inference done 2431/2557. 0.1449 s / img. ETA=0:00:18
+[05/09 20:14:47] detectron2.evaluation.evaluator INFO: Inference done 2465/2557. 0.1449 s / img. ETA=0:00:13
+[05/09 20:14:52] detectron2.evaluation.evaluator INFO: Inference done 2499/2557. 0.1449 s / img. ETA=0:00:08
+[05/09 20:14:57] detectron2.evaluation.evaluator INFO: Inference done 2533/2557. 0.1450 s / img. ETA=0:00:03
+[05/09 20:15:01] detectron2.evaluation.evaluator INFO: Total inference time: 0:06:14.865859 (0.146891 s / img per device, on 4 devices)
+[05/09 20:15:01] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:06:09 (0.144952 s / img per device, on 4 devices)
+[05/09 23:23:20] detectron2.data.datasets.coco WARNING: 
+Category ids in annotations are not in [1, #categories]! We'll apply a mapping for you.
+
+[05/09 23:23:20] detectron2.data.datasets.coco INFO: Loaded 10225 images in COCO format from /ssd_scratch/cvit/myfolder/idd_data_coco/idd_val_annotation.json
+[05/09 23:23:20] detectron2.data.common INFO: Serializing 10225 elements to byte tensors and concatenating them all ...
+[05/09 23:23:21] detectron2.data.common INFO: Serialized dataset takes 6.09 MiB
+[05/09 23:23:21] detectron2.evaluation.evaluator INFO: Start inference on 2557 images
+[05/09 23:23:26] detectron2.evaluation.evaluator INFO: Inference done 11/2557. 0.1424 s / img. ETA=0:06:06
+[05/09 23:23:32] detectron2.evaluation.evaluator INFO: Inference done 46/2557. 0.1430 s / img. ETA=0:06:03
+[05/09 23:23:37] detectron2.evaluation.evaluator INFO: Inference done 81/2557. 0.1429 s / img. ETA=0:05:58
+[05/09 23:23:42] detectron2.evaluation.evaluator INFO: Inference done 116/2557. 0.1427 s / img. ETA=0:05:53
+[05/09 23:23:47] detectron2.evaluation.evaluator INFO: Inference done 151/2557. 0.1428 s / img. ETA=0:05:48
+[05/09 23:23:52] detectron2.evaluation.evaluator INFO: Inference done 186/2557. 0.1429 s / img. ETA=0:05:43
+[05/09 23:23:57] detectron2.evaluation.evaluator INFO: Inference done 221/2557. 0.1430 s / img. ETA=0:05:38
+[05/09 23:24:02] detectron2.evaluation.evaluator INFO: Inference done 256/2557. 0.1431 s / img. ETA=0:05:33
+[05/09 23:24:07] detectron2.evaluation.evaluator INFO: Inference done 291/2557. 0.1433 s / img. ETA=0:05:28
+[05/09 23:24:12] detectron2.evaluation.evaluator INFO: Inference done 326/2557. 0.1434 s / img. ETA=0:05:24
+[05/09 23:24:17] detectron2.evaluation.evaluator INFO: Inference done 360/2557. 0.1438 s / img. ETA=0:05:20
+[05/09 23:24:22] detectron2.evaluation.evaluator INFO: Inference done 394/2557. 0.1440 s / img. ETA=0:05:15
+[05/09 23:24:27] detectron2.evaluation.evaluator INFO: Inference done 428/2557. 0.1442 s / img. ETA=0:05:11
+[05/09 23:24:32] detectron2.evaluation.evaluator INFO: Inference done 462/2557. 0.1444 s / img. ETA=0:05:06
+[05/09 23:24:38] detectron2.evaluation.evaluator INFO: Inference done 497/2557. 0.1444 s / img. ETA=0:05:01
+[05/09 23:24:43] detectron2.evaluation.evaluator INFO: Inference done 531/2557. 0.1445 s / img. ETA=0:04:56
+[05/09 23:24:48] detectron2.evaluation.evaluator INFO: Inference done 565/2557. 0.1446 s / img. ETA=0:04:51
+[05/09 23:24:53] detectron2.evaluation.evaluator INFO: Inference done 599/2557. 0.1447 s / img. ETA=0:04:46
+[05/09 23:24:58] detectron2.evaluation.evaluator INFO: Inference done 634/2557. 0.1447 s / img. ETA=0:04:41
+[05/09 23:25:03] detectron2.evaluation.evaluator INFO: Inference done 668/2557. 0.1448 s / img. ETA=0:04:37
+[05/09 23:25:08] detectron2.evaluation.evaluator INFO: Inference done 701/2557. 0.1451 s / img. ETA=0:04:32
+[05/09 23:25:13] detectron2.evaluation.evaluator INFO: Inference done 735/2557. 0.1451 s / img. ETA=0:04:27
+[05/09 23:25:18] detectron2.evaluation.evaluator INFO: Inference done 770/2557. 0.1451 s / img. ETA=0:04:22
+[05/09 23:25:23] detectron2.evaluation.evaluator INFO: Inference done 804/2557. 0.1451 s / img. ETA=0:04:17
+[05/09 23:25:28] detectron2.evaluation.evaluator INFO: Inference done 838/2557. 0.1452 s / img. ETA=0:04:12
+[05/09 23:25:33] detectron2.evaluation.evaluator INFO: Inference done 872/2557. 0.1452 s / img. ETA=0:04:07
+[05/09 23:25:38] detectron2.evaluation.evaluator INFO: Inference done 907/2557. 0.1452 s / img. ETA=0:04:02
+[05/09 23:25:43] detectron2.evaluation.evaluator INFO: Inference done 941/2557. 0.1452 s / img. ETA=0:03:57
+[05/09 23:25:48] detectron2.evaluation.evaluator INFO: Inference done 976/2557. 0.1452 s / img. ETA=0:03:52
+[05/09 23:25:53] detectron2.evaluation.evaluator INFO: Inference done 1010/2557. 0.1452 s / img. ETA=0:03:47
+[05/09 23:25:59] detectron2.evaluation.evaluator INFO: Inference done 1045/2557. 0.1452 s / img. ETA=0:03:42
+[05/09 23:26:04] detectron2.evaluation.evaluator INFO: Inference done 1079/2557. 0.1452 s / img. ETA=0:03:37
+[05/09 23:26:09] detectron2.evaluation.evaluator INFO: Inference done 1113/2557. 0.1453 s / img. ETA=0:03:32
+[05/09 23:26:14] detectron2.evaluation.evaluator INFO: Inference done 1147/2557. 0.1453 s / img. ETA=0:03:27
+[05/09 23:26:19] detectron2.evaluation.evaluator INFO: Inference done 1182/2557. 0.1453 s / img. ETA=0:03:22
+[05/09 23:26:24] detectron2.evaluation.evaluator INFO: Inference done 1217/2557. 0.1453 s / img. ETA=0:03:17
+[05/09 23:26:29] detectron2.evaluation.evaluator INFO: Inference done 1251/2557. 0.1453 s / img. ETA=0:03:12
+[05/09 23:26:34] detectron2.evaluation.evaluator INFO: Inference done 1285/2557. 0.1453 s / img. ETA=0:03:07
+[05/09 23:26:39] detectron2.evaluation.evaluator INFO: Inference done 1319/2557. 0.1454 s / img. ETA=0:03:02
+[05/09 23:26:44] detectron2.evaluation.evaluator INFO: Inference done 1353/2557. 0.1454 s / img. ETA=0:02:57
+[05/09 23:26:49] detectron2.evaluation.evaluator INFO: Inference done 1387/2557. 0.1454 s / img. ETA=0:02:52
+[05/09 23:26:54] detectron2.evaluation.evaluator INFO: Inference done 1421/2557. 0.1454 s / img. ETA=0:02:47
+[05/09 23:26:59] detectron2.evaluation.evaluator INFO: Inference done 1455/2557. 0.1454 s / img. ETA=0:02:42
+[05/09 23:27:04] detectron2.evaluation.evaluator INFO: Inference done 1489/2557. 0.1455 s / img. ETA=0:02:37
+[05/09 23:27:09] detectron2.evaluation.evaluator INFO: Inference done 1524/2557. 0.1455 s / img. ETA=0:02:32
+[05/09 23:27:14] detectron2.evaluation.evaluator INFO: Inference done 1558/2557. 0.1455 s / img. ETA=0:02:27
+[05/09 23:27:19] detectron2.evaluation.evaluator INFO: Inference done 1592/2557. 0.1455 s / img. ETA=0:02:22
+[05/09 23:27:24] detectron2.evaluation.evaluator INFO: Inference done 1626/2557. 0.1455 s / img. ETA=0:02:17
+[05/09 23:27:29] detectron2.evaluation.evaluator INFO: Inference done 1660/2557. 0.1455 s / img. ETA=0:02:12
+[05/09 23:27:35] detectron2.evaluation.evaluator INFO: Inference done 1694/2557. 0.1455 s / img. ETA=0:02:07
+[05/09 23:27:40] detectron2.evaluation.evaluator INFO: Inference done 1728/2557. 0.1455 s / img. ETA=0:02:02
+[05/09 23:27:45] detectron2.evaluation.evaluator INFO: Inference done 1762/2557. 0.1455 s / img. ETA=0:01:57
+[05/09 23:27:50] detectron2.evaluation.evaluator INFO: Inference done 1796/2557. 0.1455 s / img. ETA=0:01:52
+[05/09 23:27:55] detectron2.evaluation.evaluator INFO: Inference done 1830/2557. 0.1456 s / img. ETA=0:01:47
+[05/09 23:28:00] detectron2.evaluation.evaluator INFO: Inference done 1864/2557. 0.1456 s / img. ETA=0:01:42
+[05/09 23:28:05] detectron2.evaluation.evaluator INFO: Inference done 1898/2557. 0.1455 s / img. ETA=0:01:37
+[05/09 23:28:10] detectron2.evaluation.evaluator INFO: Inference done 1932/2557. 0.1456 s / img. ETA=0:01:32
+[05/09 23:28:15] detectron2.evaluation.evaluator INFO: Inference done 1966/2557. 0.1456 s / img. ETA=0:01:27
+[05/09 23:28:20] detectron2.evaluation.evaluator INFO: Inference done 2000/2557. 0.1456 s / img. ETA=0:01:22
+[05/09 23:28:25] detectron2.evaluation.evaluator INFO: Inference done 2035/2557. 0.1455 s / img. ETA=0:01:16
+[05/09 23:28:30] detectron2.evaluation.evaluator INFO: Inference done 2070/2557. 0.1455 s / img. ETA=0:01:11
+[05/09 23:28:35] detectron2.evaluation.evaluator INFO: Inference done 2104/2557. 0.1455 s / img. ETA=0:01:06
+[05/09 23:28:40] detectron2.evaluation.evaluator INFO: Inference done 2138/2557. 0.1455 s / img. ETA=0:01:01
+[05/09 23:28:45] detectron2.evaluation.evaluator INFO: Inference done 2172/2557. 0.1455 s / img. ETA=0:00:56
+[05/09 23:28:50] detectron2.evaluation.evaluator INFO: Inference done 2206/2557. 0.1456 s / img. ETA=0:00:51
+[05/09 23:28:55] detectron2.evaluation.evaluator INFO: Inference done 2240/2557. 0.1456 s / img. ETA=0:00:46
+[05/09 23:29:00] detectron2.evaluation.evaluator INFO: Inference done 2274/2557. 0.1456 s / img. ETA=0:00:41
+[05/09 23:29:05] detectron2.evaluation.evaluator INFO: Inference done 2308/2557. 0.1456 s / img. ETA=0:00:36
+[05/09 23:29:10] detectron2.evaluation.evaluator INFO: Inference done 2342/2557. 0.1456 s / img. ETA=0:00:31
+[05/09 23:29:15] detectron2.evaluation.evaluator INFO: Inference done 2377/2557. 0.1456 s / img. ETA=0:00:26
+[05/09 23:29:20] detectron2.evaluation.evaluator INFO: Inference done 2411/2557. 0.1456 s / img. ETA=0:00:21
+[05/09 23:29:25] detectron2.evaluation.evaluator INFO: Inference done 2445/2557. 0.1456 s / img. ETA=0:00:16
+[05/09 23:29:30] detectron2.evaluation.evaluator INFO: Inference done 2479/2557. 0.1456 s / img. ETA=0:00:11
+[05/09 23:29:36] detectron2.evaluation.evaluator INFO: Inference done 2513/2557. 0.1456 s / img. ETA=0:00:06
+[05/09 23:29:41] detectron2.evaluation.evaluator INFO: Inference done 2548/2557. 0.1456 s / img. ETA=0:00:01
+[05/09 23:29:42] detectron2.evaluation.evaluator INFO: Total inference time: 0:06:16.599845 (0.147570 s / img per device, on 4 devices)
+[05/09 23:29:42] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:06:11 (0.145630 s / img per device, on 4 devices)
+[05/10 02:38:03] detectron2.data.datasets.coco WARNING: 
+Category ids in annotations are not in [1, #categories]! We'll apply a mapping for you.
+
+[05/10 02:38:03] detectron2.data.datasets.coco INFO: Loaded 10225 images in COCO format from /ssd_scratch/cvit/myfolder/idd_data_coco/idd_val_annotation.json
+[05/10 02:38:04] detectron2.data.common INFO: Serializing 10225 elements to byte tensors and concatenating them all ...
+[05/10 02:38:04] detectron2.data.common INFO: Serialized dataset takes 6.09 MiB
+[05/10 02:38:05] detectron2.evaluation.evaluator INFO: Start inference on 2557 images
+[05/10 02:38:10] detectron2.evaluation.evaluator INFO: Inference done 11/2557. 0.1413 s / img. ETA=0:06:03
+[05/10 02:38:15] detectron2.evaluation.evaluator INFO: Inference done 46/2557. 0.1427 s / img. ETA=0:06:02
+[05/10 02:38:20] detectron2.evaluation.evaluator INFO: Inference done 81/2557. 0.1425 s / img. ETA=0:05:57
+[05/10 02:38:25] detectron2.evaluation.evaluator INFO: Inference done 116/2557. 0.1424 s / img. ETA=0:05:52
+[05/10 02:38:31] detectron2.evaluation.evaluator INFO: Inference done 151/2557. 0.1426 s / img. ETA=0:05:47
+[05/10 02:38:36] detectron2.evaluation.evaluator INFO: Inference done 186/2557. 0.1427 s / img. ETA=0:05:42
+[05/10 02:38:41] detectron2.evaluation.evaluator INFO: Inference done 221/2557. 0.1427 s / img. ETA=0:05:37
+[05/10 02:38:46] detectron2.evaluation.evaluator INFO: Inference done 256/2557. 0.1431 s / img. ETA=0:05:33
+[05/10 02:38:51] detectron2.evaluation.evaluator INFO: Inference done 291/2557. 0.1432 s / img. ETA=0:05:28
+[05/10 02:38:56] detectron2.evaluation.evaluator INFO: Inference done 325/2557. 0.1435 s / img. ETA=0:05:24
+[05/10 02:39:01] detectron2.evaluation.evaluator INFO: Inference done 359/2557. 0.1437 s / img. ETA=0:05:19
+[05/10 02:39:06] detectron2.evaluation.evaluator INFO: Inference done 393/2557. 0.1439 s / img. ETA=0:05:15
+[05/10 02:39:11] detectron2.evaluation.evaluator INFO: Inference done 427/2557. 0.1441 s / img. ETA=0:05:10
+[05/10 02:39:16] detectron2.evaluation.evaluator INFO: Inference done 461/2557. 0.1443 s / img. ETA=0:05:06
+[05/10 02:39:21] detectron2.evaluation.evaluator INFO: Inference done 495/2557. 0.1444 s / img. ETA=0:05:01
+[05/10 02:39:26] detectron2.evaluation.evaluator INFO: Inference done 529/2557. 0.1446 s / img. ETA=0:04:56
+[05/10 02:39:31] detectron2.evaluation.evaluator INFO: Inference done 563/2557. 0.1446 s / img. ETA=0:04:52
+[05/10 02:39:36] detectron2.evaluation.evaluator INFO: Inference done 597/2557. 0.1447 s / img. ETA=0:04:47
+[05/10 02:39:41] detectron2.evaluation.evaluator INFO: Inference done 632/2557. 0.1447 s / img. ETA=0:04:42
+[05/10 02:39:46] detectron2.evaluation.evaluator INFO: Inference done 667/2557. 0.1447 s / img. ETA=0:04:36
+[05/10 02:39:52] detectron2.evaluation.evaluator INFO: Inference done 702/2557. 0.1446 s / img. ETA=0:04:31
+[05/10 02:39:57] detectron2.evaluation.evaluator INFO: Inference done 736/2557. 0.1447 s / img. ETA=0:04:26
+[05/10 02:40:02] detectron2.evaluation.evaluator INFO: Inference done 770/2557. 0.1447 s / img. ETA=0:04:21
+[05/10 02:40:07] detectron2.evaluation.evaluator INFO: Inference done 804/2557. 0.1448 s / img. ETA=0:04:17
+[05/10 02:40:12] detectron2.evaluation.evaluator INFO: Inference done 839/2557. 0.1448 s / img. ETA=0:04:11
+[05/10 02:40:17] detectron2.evaluation.evaluator INFO: Inference done 874/2557. 0.1448 s / img. ETA=0:04:06
+[05/10 02:40:22] detectron2.evaluation.evaluator INFO: Inference done 909/2557. 0.1448 s / img. ETA=0:04:01
+[05/10 02:40:27] detectron2.evaluation.evaluator INFO: Inference done 942/2557. 0.1450 s / img. ETA=0:03:57
+[05/10 02:40:32] detectron2.evaluation.evaluator INFO: Inference done 976/2557. 0.1450 s / img. ETA=0:03:52
+[05/10 02:40:37] detectron2.evaluation.evaluator INFO: Inference done 1010/2557. 0.1450 s / img. ETA=0:03:47
+[05/10 02:40:42] detectron2.evaluation.evaluator INFO: Inference done 1044/2557. 0.1451 s / img. ETA=0:03:42
+[05/10 02:40:47] detectron2.evaluation.evaluator INFO: Inference done 1078/2557. 0.1451 s / img. ETA=0:03:37
+[05/10 02:40:52] detectron2.evaluation.evaluator INFO: Inference done 1113/2557. 0.1451 s / img. ETA=0:03:32
+[05/10 02:40:57] detectron2.evaluation.evaluator INFO: Inference done 1147/2557. 0.1451 s / img. ETA=0:03:27
+[05/10 02:41:02] detectron2.evaluation.evaluator INFO: Inference done 1182/2557. 0.1451 s / img. ETA=0:03:22
+[05/10 02:41:07] detectron2.evaluation.evaluator INFO: Inference done 1216/2557. 0.1451 s / img. ETA=0:03:17
+[05/10 02:41:12] detectron2.evaluation.evaluator INFO: Inference done 1250/2557. 0.1451 s / img. ETA=0:03:12
+[05/10 02:41:17] detectron2.evaluation.evaluator INFO: Inference done 1284/2557. 0.1451 s / img. ETA=0:03:07
+[05/10 02:41:22] detectron2.evaluation.evaluator INFO: Inference done 1318/2557. 0.1452 s / img. ETA=0:03:02
+[05/10 02:41:27] detectron2.evaluation.evaluator INFO: Inference done 1352/2557. 0.1452 s / img. ETA=0:02:57
+[05/10 02:41:33] detectron2.evaluation.evaluator INFO: Inference done 1386/2557. 0.1452 s / img. ETA=0:02:52
+[05/10 02:41:38] detectron2.evaluation.evaluator INFO: Inference done 1420/2557. 0.1452 s / img. ETA=0:02:47
+[05/10 02:41:43] detectron2.evaluation.evaluator INFO: Inference done 1454/2557. 0.1453 s / img. ETA=0:02:42
+[05/10 02:41:48] detectron2.evaluation.evaluator INFO: Inference done 1489/2557. 0.1452 s / img. ETA=0:02:37
+[05/10 02:41:53] detectron2.evaluation.evaluator INFO: Inference done 1523/2557. 0.1453 s / img. ETA=0:02:32
+[05/10 02:41:58] detectron2.evaluation.evaluator INFO: Inference done 1558/2557. 0.1453 s / img. ETA=0:02:26
+[05/10 02:42:03] detectron2.evaluation.evaluator INFO: Inference done 1593/2557. 0.1453 s / img. ETA=0:02:21
+[05/10 02:42:08] detectron2.evaluation.evaluator INFO: Inference done 1627/2557. 0.1453 s / img. ETA=0:02:16
+[05/10 02:42:13] detectron2.evaluation.evaluator INFO: Inference done 1661/2557. 0.1453 s / img. ETA=0:02:11
+[05/10 02:42:18] detectron2.evaluation.evaluator INFO: Inference done 1695/2557. 0.1453 s / img. ETA=0:02:06
+[05/10 02:42:23] detectron2.evaluation.evaluator INFO: Inference done 1730/2557. 0.1453 s / img. ETA=0:02:01
+[05/10 02:42:28] detectron2.evaluation.evaluator INFO: Inference done 1765/2557. 0.1453 s / img. ETA=0:01:56
+[05/10 02:42:33] detectron2.evaluation.evaluator INFO: Inference done 1799/2557. 0.1453 s / img. ETA=0:01:51
+[05/10 02:42:38] detectron2.evaluation.evaluator INFO: Inference done 1833/2557. 0.1453 s / img. ETA=0:01:46
+[05/10 02:42:44] detectron2.evaluation.evaluator INFO: Inference done 1867/2557. 0.1454 s / img. ETA=0:01:41
+[05/10 02:42:49] detectron2.evaluation.evaluator INFO: Inference done 1901/2557. 0.1454 s / img. ETA=0:01:36
+[05/10 02:42:54] detectron2.evaluation.evaluator INFO: Inference done 1935/2557. 0.1454 s / img. ETA=0:01:31
+[05/10 02:42:59] detectron2.evaluation.evaluator INFO: Inference done 1969/2557. 0.1454 s / img. ETA=0:01:26
+[05/10 02:43:04] detectron2.evaluation.evaluator INFO: Inference done 2003/2557. 0.1454 s / img. ETA=0:01:21
+[05/10 02:43:09] detectron2.evaluation.evaluator INFO: Inference done 2037/2557. 0.1454 s / img. ETA=0:01:16
+[05/10 02:43:14] detectron2.evaluation.evaluator INFO: Inference done 2072/2557. 0.1454 s / img. ETA=0:01:11
+[05/10 02:43:19] detectron2.evaluation.evaluator INFO: Inference done 2107/2557. 0.1454 s / img. ETA=0:01:06
+[05/10 02:43:24] detectron2.evaluation.evaluator INFO: Inference done 2142/2557. 0.1453 s / img. ETA=0:01:01
+[05/10 02:43:29] detectron2.evaluation.evaluator INFO: Inference done 2176/2557. 0.1454 s / img. ETA=0:00:56
+[05/10 02:43:34] detectron2.evaluation.evaluator INFO: Inference done 2210/2557. 0.1454 s / img. ETA=0:00:51
+[05/10 02:43:39] detectron2.evaluation.evaluator INFO: Inference done 2244/2557. 0.1454 s / img. ETA=0:00:46
+[05/10 02:43:44] detectron2.evaluation.evaluator INFO: Inference done 2279/2557. 0.1454 s / img. ETA=0:00:40
+[05/10 02:43:49] detectron2.evaluation.evaluator INFO: Inference done 2314/2557. 0.1454 s / img. ETA=0:00:35
+[05/10 02:43:55] detectron2.evaluation.evaluator INFO: Inference done 2348/2557. 0.1454 s / img. ETA=0:00:30
+[05/10 02:44:00] detectron2.evaluation.evaluator INFO: Inference done 2382/2557. 0.1455 s / img. ETA=0:00:25
+[05/10 02:44:05] detectron2.evaluation.evaluator INFO: Inference done 2416/2557. 0.1455 s / img. ETA=0:00:20
+[05/10 02:44:10] detectron2.evaluation.evaluator INFO: Inference done 2451/2557. 0.1455 s / img. ETA=0:00:15
+[05/10 02:44:15] detectron2.evaluation.evaluator INFO: Inference done 2486/2557. 0.1454 s / img. ETA=0:00:10
+[05/10 02:44:20] detectron2.evaluation.evaluator INFO: Inference done 2520/2557. 0.1454 s / img. ETA=0:00:05
+[05/10 02:44:25] detectron2.evaluation.evaluator INFO: Inference done 2554/2557. 0.1454 s / img. ETA=0:00:00
+[05/10 02:44:25] detectron2.evaluation.evaluator INFO: Total inference time: 0:06:16.059040 (0.147359 s / img per device, on 4 devices)
+[05/10 02:44:25] detectron2.evaluation.evaluator INFO: Total inference pure compute time: 0:06:11 (0.145436 s / img per device, on 4 devices)

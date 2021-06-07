@@ -1,0 +1,1471 @@
+==========================================
+SLURM_JOB_ID = 137580
+SLURM_NODELIST = gnode57
+SLURM_JOB_GPUS = 0,1,2,3
+==========================================
+Command Line Args: Namespace(config_file='', dist_url='auto', eval_only=False, machine_rank=0, num_gpus=4, num_machines=1, opts=[], resume=False)
+[32m[05/06 08:09:34 detectron2]: [0mRank of current process: 0. World size: 4
+[32m[05/06 08:09:34 detectron2]: [0mEnvironment info:
+------------------------  ---------------------------------------------------------------------------------------------
+sys.platform              linux
+Python                    3.7.6 (default, Jan  8 2020, 19:59:22) [GCC 7.3.0]
+numpy                     1.18.1
+detectron2                0.1.1 @/home/myfolder/detectron2_set2/detectron2
+detectron2 compiler       GCC 5.5
+detectron2 CUDA compiler  10.2
+detectron2 arch flags     sm_75
+DETECTRON2_ENV_MODULE     <not set>
+PyTorch                   1.4.0+cu100 @/home/myfolder/miniconda3/envs/det_trial/lib/python3.7/site-packages/torch
+PyTorch debug build       False
+CUDA available            True
+GPU 0,1,2,3               GeForce RTX 2080 Ti
+CUDA_HOME                 /usr/local/cuda
+NVCC                      Cuda compilation tools, release 10.2, V10.2.89
+Pillow                    6.2.2
+torchvision               0.5.0+cu100 @/home/myfolder/miniconda3/envs/det_trial/lib/python3.7/site-packages/torchvision
+torchvision arch flags    sm_35, sm_50, sm_60, sm_70, sm_75
+fvcore                    0.1.dev200114
+cv2                       4.1.2
+------------------------  ---------------------------------------------------------------------------------------------
+PyTorch built with:
+  - GCC 7.3
+  - Intel(R) Math Kernel Library Version 2019.0.4 Product Build 20190411 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v0.21.1 (Git Hash 7d2fd500bc78936d1d648ca713b901012f470dbc)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - NNPACK is enabled
+  - CUDA Runtime 10.0
+  - NVCC architecture flags: -gencode;arch=compute_37,code=sm_37;-gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_61,code=sm_61;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_37,code=compute_37
+  - CuDNN 7.6.3
+  - Magma 2.5.1
+  - Build settings: BLAS=MKL, BUILD_NAMEDTENSOR=OFF, BUILD_TYPE=Release, CXX_FLAGS= -Wno-deprecated -fvisibility-inlines-hidden -fopenmp -DUSE_FBGEMM -DUSE_QNNPACK -DUSE_PYTORCH_QNNPACK -O2 -fPIC -Wno-narrowing -Wall -Wextra -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wno-unused-function -Wno-unused-result -Wno-strict-overflow -Wno-strict-aliasing -Wno-error=deprecated-declarations -Wno-stringop-overflow -Wno-error=pedantic -Wno-error=redundant-decls -Wno-error=old-style-cast -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Wno-stringop-overflow, DISABLE_NUMA=1, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, PERF_WITH_AVX512=1, USE_CUDA=ON, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, USE_STATIC_DISPATCH=OFF, 
+
+[32m[05/06 08:09:34 detectron2]: [0mCommand line arguments: Namespace(config_file='', dist_url='auto', eval_only=False, machine_rank=0, num_gpus=4, num_machines=1, opts=[], resume=False)
+[32m[05/06 08:09:34 detectron2]: [0mRunning with full config:
+CUDNN_BENCHMARK: False
+DATALOADER:
+  ASPECT_RATIO_GROUPING: True
+  FILTER_EMPTY_ANNOTATIONS: True
+  NUM_WORKERS: 2
+  REPEAT_THRESHOLD: 0.0
+  SAMPLER_TRAIN: TrainingSampler
+DATASETS:
+  PRECOMPUTED_PROPOSAL_TOPK_TEST: 1000
+  PRECOMPUTED_PROPOSAL_TOPK_TRAIN: 2000
+  PROPOSAL_FILES_TEST: ()
+  PROPOSAL_FILES_TRAIN: ()
+  TEST: ('cityscapes_fine_inst_seg_val',)
+  TRAIN: ('cityscapes_fine_inst_seg_train',)
+GLOBAL:
+  HACK: 1.0
+INPUT:
+  CROP:
+    ENABLED: False
+    SIZE: [0.9, 0.9]
+    TYPE: relative_range
+  FORMAT: BGR
+  MASK_FORMAT: polygon
+  MAX_SIZE_TEST: 2048
+  MAX_SIZE_TRAIN: 2048
+  MIN_SIZE_TEST: 1024
+  MIN_SIZE_TRAIN: (800, 832, 864, 896, 928, 960, 992, 1024)
+  MIN_SIZE_TRAIN_SAMPLING: choice
+MODEL:
+  ANCHOR_GENERATOR:
+    ANGLES: [[-90, 0, 90]]
+    ASPECT_RATIOS: [[0.5, 1.0, 2.0]]
+    NAME: DefaultAnchorGenerator
+    OFFSET: 0.0
+    SIZES: [[32], [64], [128], [256], [512]]
+  BACKBONE:
+    FREEZE_AT: 2
+    NAME: build_resnet_fpn_backbone
+  DEVICE: cuda
+  FPN:
+    FUSE_TYPE: sum
+    IN_FEATURES: ['res2', 'res3', 'res4', 'res5']
+    NORM: 
+    OUT_CHANNELS: 256
+  KEYPOINT_ON: False
+  LOAD_PROPOSALS: False
+  MASK_ON: True
+  META_ARCHITECTURE: GeneralizedRCNN
+  PANOPTIC_FPN:
+    COMBINE:
+      ENABLED: True
+      INSTANCES_CONFIDENCE_THRESH: 0.5
+      OVERLAP_THRESH: 0.5
+      STUFF_AREA_LIMIT: 4096
+    INSTANCE_LOSS_WEIGHT: 1.0
+  PIXEL_MEAN: [103.53, 116.28, 123.675]
+  PIXEL_STD: [1.0, 1.0, 1.0]
+  PROPOSAL_GENERATOR:
+    MIN_SIZE: 0
+    NAME: RPN
+  RESNETS:
+    DEFORM_MODULATED: False
+    DEFORM_NUM_GROUPS: 1
+    DEFORM_ON_PER_STAGE: [False, False, False, False]
+    DEPTH: 50
+    NORM: FrozenBN
+    NUM_GROUPS: 1
+    OUT_FEATURES: ['res2', 'res3', 'res4', 'res5']
+    RES2_OUT_CHANNELS: 256
+    RES5_DILATION: 1
+    STEM_OUT_CHANNELS: 64
+    STRIDE_IN_1X1: True
+    WIDTH_PER_GROUP: 64
+  RETINANET:
+    BBOX_REG_WEIGHTS: (1.0, 1.0, 1.0, 1.0)
+    FOCAL_LOSS_ALPHA: 0.25
+    FOCAL_LOSS_GAMMA: 2.0
+    IN_FEATURES: ['p3', 'p4', 'p5', 'p6', 'p7']
+    IOU_LABELS: [0, -1, 1]
+    IOU_THRESHOLDS: [0.4, 0.5]
+    NMS_THRESH_TEST: 0.5
+    NUM_CLASSES: 80
+    NUM_CONVS: 4
+    PRIOR_PROB: 0.01
+    SCORE_THRESH_TEST: 0.05
+    SMOOTH_L1_LOSS_BETA: 0.1
+    TOPK_CANDIDATES_TEST: 1000
+  ROI_BOX_CASCADE_HEAD:
+    BBOX_REG_WEIGHTS: ((10.0, 10.0, 5.0, 5.0), (20.0, 20.0, 10.0, 10.0), (30.0, 30.0, 15.0, 15.0))
+    IOUS: (0.5, 0.6, 0.7)
+  ROI_BOX_HEAD:
+    BBOX_REG_WEIGHTS: (10.0, 10.0, 5.0, 5.0)
+    CLS_AGNOSTIC_BBOX_REG: True
+    CONV_DIM: 256
+    FC_DIM: 1024
+    NAME: FastRCNNConvFCHead
+    NORM: 
+    NUM_CONV: 0
+    NUM_FC: 2
+    POOLER_RESOLUTION: 7
+    POOLER_SAMPLING_RATIO: 2
+    POOLER_TYPE: ROIAlignV2
+    SMOOTH_L1_BETA: 0.0
+    TRAIN_ON_PRED_BOXES: False
+  ROI_HEADS:
+    BATCH_SIZE_PER_IMAGE: 128
+    IN_FEATURES: ['p2', 'p3', 'p4', 'p5']
+    IOU_LABELS: [0, 1]
+    IOU_THRESHOLDS: [0.5]
+    NAME: CascadeROIHeads
+    NMS_THRESH_TEST: 0.5
+    NUM_CLASSES: 8
+    POSITIVE_FRACTION: 0.25
+    PROPOSAL_APPEND_GT: True
+    SCORE_THRESH_TEST: 0.05
+  ROI_KEYPOINT_HEAD:
+    CONV_DIMS: (512, 512, 512, 512, 512, 512, 512, 512)
+    LOSS_WEIGHT: 1.0
+    MIN_KEYPOINTS_PER_IMAGE: 1
+    NAME: KRCNNConvDeconvUpsampleHead
+    NORMALIZE_LOSS_BY_VISIBLE_KEYPOINTS: True
+    NUM_KEYPOINTS: 17
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 0
+    POOLER_TYPE: ROIAlignV2
+  ROI_MASK_HEAD:
+    CLS_AGNOSTIC_MASK: False
+    CONV_DIM: 256
+    NAME: MaskRCNNConvUpsampleHead
+    NORM: 
+    NUM_CONV: 4
+    POOLER_RESOLUTION: 14
+    POOLER_SAMPLING_RATIO: 2
+    POOLER_TYPE: ROIAlignV2
+  RPN:
+    BATCH_SIZE_PER_IMAGE: 256
+    BBOX_REG_WEIGHTS: (1.0, 1.0, 1.0, 1.0)
+    BOUNDARY_THRESH: 1000
+    HEAD_NAME: StandardRPNHead
+    IN_FEATURES: ['p2', 'p3', 'p4', 'p5', 'p6']
+    IOU_LABELS: [0, -1, 1]
+    IOU_THRESHOLDS: [0.3, 0.7]
+    LOSS_WEIGHT: 1.0
+    NMS_THRESH: 0.7
+    POSITIVE_FRACTION: 0.5
+    POST_NMS_TOPK_TEST: 2000
+    POST_NMS_TOPK_TRAIN: 2000
+    PRE_NMS_TOPK_TEST: 2000
+    PRE_NMS_TOPK_TRAIN: 2000
+    SMOOTH_L1_BETA: 0.0
+  SEM_SEG_HEAD:
+    COMMON_STRIDE: 4
+    CONVS_DIM: 128
+    IGNORE_VALUE: 255
+    IN_FEATURES: ['p2', 'p3', 'p4', 'p5']
+    LOSS_WEIGHT: 1.0
+    NAME: SemSegFPNHead
+    NORM: GN
+    NUM_CLASSES: 54
+  WEIGHTS: /ssd_scratch/cvit/myfolder/cityscapes/CMRCNN_model_surgery_coco_to_cityscapes.pth
+OUTPUT_DIR: /ssd_scratch/cvit/myfolder/cityscapes/models/
+SEED: -1
+SOLVER:
+  BASE_LR: 0.001
+  BASE_MOMENTUM: 0.8
+  BIAS_LR_FACTOR: 1.0
+  CHECKPOINT_PERIOD: 2470
+  CLIP_GRADIENTS:
+    CLIP_TYPE: value
+    CLIP_VALUE: 1.0
+    ENABLED: False
+    NORM_TYPE: 2.0
+  CYCLE_MOMENTUM_SWITCH: True
+  GAMMA: 0.75
+  IMS_PER_BATCH: 12
+  LR_SCHEDULER_NAME: WarmupMultiStepLR
+  MAX_ITER: 29640
+  MAX_LR: 0.01
+  MAX_MOMENTUM: 0.9
+  MIN_LR: 0.001
+  MOMENTUM: 0.9
+  NESTEROV: False
+  SCALE_MODE: cycle
+  STEPS: (24700,)
+  STEP_SIZE_UP: 2000
+  WARMUP_FACTOR: 0.001
+  WARMUP_ITERS: 1000
+  WARMUP_METHOD: linear
+  WEIGHT_DECAY: 0.0001
+  WEIGHT_DECAY_BIAS: 0.0001
+  WEIGHT_DECAY_NORM: 0.0
+TEST:
+  AUG:
+    ENABLED: False
+    FLIP: True
+    MAX_SIZE: 4000
+    MIN_SIZES: (400, 500, 600, 700, 800, 900, 1000, 1100, 1200)
+  DETECTIONS_PER_IMAGE: 100
+  EVAL_PERIOD: 2470
+  EXPECTED_RESULTS: []
+  KEYPOINT_OKS_SIGMAS: []
+  PRECISE_BN:
+    ENABLED: False
+    NUM_ITER: 200
+VERSION: 2
+VIS_PERIOD: 0
+[32m[05/06 08:09:34 detectron2]: [0mFull config saved to /ssd_scratch/cvit/myfolder/cityscapes/models/config.yaml
+[32m[05/06 08:09:34 d2.utils.env]: [0mUsing a generated random seed 34955930
+[32m[05/06 08:09:35 detectron2]: [0mModel:
+GeneralizedRCNN(
+  (backbone): FPN(
+    (fpn_lateral2): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral3): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral4): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output4): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral5): Conv2d(2048, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output5): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (top_block): LastLevelMaxPool()
+    (bottom_up): ResNet(
+      (stem): BasicStem(
+        (conv1): Conv2d(
+          3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False
+          (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+        )
+      )
+      (res2): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+        )
+      )
+      (res3): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            256, 128, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+        (3): BottleneckBlock(
+          (conv1): Conv2d(
+            512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+      )
+      (res4): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            512, 256, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (3): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (4): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (5): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+      )
+      (res5): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            1024, 2048, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            1024, 512, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+        )
+      )
+    )
+  )
+  (proposal_generator): RPN(
+    (anchor_generator): DefaultAnchorGenerator(
+      (cell_anchors): BufferList()
+    )
+    (rpn_head): StandardRPNHead(
+      (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (objectness_logits): Conv2d(256, 3, kernel_size=(1, 1), stride=(1, 1))
+      (anchor_deltas): Conv2d(256, 12, kernel_size=(1, 1), stride=(1, 1))
+    )
+  )
+  (roi_heads): CascadeROIHeads(
+    (box_pooler): ROIPooler(
+      (level_poolers): ModuleList(
+        (0): ROIAlign(output_size=(7, 7), spatial_scale=0.25, sampling_ratio=2, aligned=True)
+        (1): ROIAlign(output_size=(7, 7), spatial_scale=0.125, sampling_ratio=2, aligned=True)
+        (2): ROIAlign(output_size=(7, 7), spatial_scale=0.0625, sampling_ratio=2, aligned=True)
+        (3): ROIAlign(output_size=(7, 7), spatial_scale=0.03125, sampling_ratio=2, aligned=True)
+      )
+    )
+    (box_head): ModuleList(
+      (0): FastRCNNConvFCHead(
+        (fc1): Linear(in_features=12544, out_features=1024, bias=True)
+        (fc2): Linear(in_features=1024, out_features=1024, bias=True)
+      )
+      (1): FastRCNNConvFCHead(
+        (fc1): Linear(in_features=12544, out_features=1024, bias=True)
+        (fc2): Linear(in_features=1024, out_features=1024, bias=True)
+      )
+      (2): FastRCNNConvFCHead(
+        (fc1): Linear(in_features=12544, out_features=1024, bias=True)
+        (fc2): Linear(in_features=1024, out_features=1024, bias=True)
+      )
+    )
+    (box_predictor): ModuleList(
+      (0): FastRCNNOutputLayers(
+        (cls_score): Linear(in_features=1024, out_features=9, bias=True)
+        (bbox_pred): Linear(in_features=1024, out_features=4, bias=True)
+      )
+      (1): FastRCNNOutputLayers(
+        (cls_score): Linear(in_features=1024, out_features=9, bias=True)
+        (bbox_pred): Linear(in_features=1024, out_features=4, bias=True)
+      )
+      (2): FastRCNNOutputLayers(
+        (cls_score): Linear(in_features=1024, out_features=9, bias=True)
+        (bbox_pred): Linear(in_features=1024, out_features=4, bias=True)
+      )
+    )
+    (mask_pooler): ROIPooler(
+      (level_poolers): ModuleList(
+        (0): ROIAlign(output_size=(14, 14), spatial_scale=0.25, sampling_ratio=2, aligned=True)
+        (1): ROIAlign(output_size=(14, 14), spatial_scale=0.125, sampling_ratio=2, aligned=True)
+        (2): ROIAlign(output_size=(14, 14), spatial_scale=0.0625, sampling_ratio=2, aligned=True)
+        (3): ROIAlign(output_size=(14, 14), spatial_scale=0.03125, sampling_ratio=2, aligned=True)
+      )
+    )
+    (mask_head): MaskRCNNConvUpsampleHead(
+      (mask_fcn1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (mask_fcn2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (mask_fcn3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (mask_fcn4): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (deconv): ConvTranspose2d(256, 256, kernel_size=(2, 2), stride=(2, 2))
+      (predictor): Conv2d(256, 8, kernel_size=(1, 1), stride=(1, 1))
+    )
+  )
+)
+[32m[05/06 08:09:36 fvcore.common.checkpoint]: [0mLoading checkpoint from /ssd_scratch/cvit/myfolder/cityscapes/CMRCNN_model_surgery_coco_to_cityscapes.pth
+[32m[05/06 08:09:36 fvcore.common.checkpoint]: [0mSome model parameters are not in the checkpoint:
+  [34mpixel_mean[0m
+  [34mpixel_std[0m
+[32m[05/06 08:09:38 d2.data.datasets.cityscapes]: [0m18 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/train'.
+[32m[05/06 08:09:38 d2.data.datasets.cityscapes]: [0mPreprocessing cityscapes annotations ...
+[32m[05/06 08:16:11 d2.data.datasets.cityscapes]: [0mLoaded 2975 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/train
+[32m[05/06 08:16:11 d2.data.build]: [0mRemoved 10 images with no usable annotations. 2965 images left.
+[32m[05/06 08:16:12 d2.data.build]: [0mDistribution of instances among all 8 categories:
+[36m|  category  | #instances   |  category  | #instances   |  category  | #instances   |
+|:----------:|:-------------|:----------:|:-------------|:----------:|:-------------|
+|   person   | 17910        |   rider    | 1778         |    car     | 26957        |
+|   truck    | 484          |    bus     | 380          |   train    | 168          |
+| motorcycle | 737          |  bicycle   | 3674         |            |              |
+|   total    | 52088        |            |              |            |              |[0m
+[32m[05/06 08:16:12 d2.data.common]: [0mSerializing 2965 elements to byte tensors and concatenating them all ...
+[32m[05/06 08:16:12 d2.data.common]: [0mSerialized dataset takes 67.18 MiB
+[32m[05/06 08:16:12 d2.data.detection_utils]: [0mTransformGens used in training: [ResizeShortestEdge(short_edge_length=(800, 832, 864, 896, 928, 960, 992, 1024), max_size=2048, sample_style='choice'), RandomFlip()]
+[32m[05/06 08:16:12 d2.data.build]: [0mUsing training sampler TrainingSampler
+[32m[05/06 08:16:15 detectron2]: [0mStarting training from iteration 0
+[32m[05/06 08:19:25 d2.utils.events]: [0m eta: N/A  iter: 247  total_loss: 3.623  loss_box_reg_stage0: 0.391  loss_box_reg_stage1: 0.699  loss_box_reg_stage2: 0.788  loss_cls_stage0: 0.395  loss_cls_stage1: 0.363  loss_cls_stage2: 0.435  loss_mask: 0.312  loss_rpn_cls: 0.052  loss_rpn_loc: 0.174  lr: 0.000247  max_mem: 7650M
+[32m[05/06 08:22:38 d2.utils.events]: [0m eta: 6:19:07  iter: 494  total_loss: 3.565  loss_box_reg_stage0: 0.400  loss_box_reg_stage1: 0.773  loss_box_reg_stage2: 0.882  loss_cls_stage0: 0.374  loss_cls_stage1: 0.338  loss_cls_stage2: 0.307  loss_mask: 0.305  loss_rpn_cls: 0.041  loss_rpn_loc: 0.172  lr: 0.000494  max_mem: 7650M
+[32m[05/06 08:25:52 d2.utils.events]: [0m eta: 6:17:30  iter: 741  total_loss: 3.214  loss_box_reg_stage0: 0.368  loss_box_reg_stage1: 0.733  loss_box_reg_stage2: 0.846  loss_cls_stage0: 0.293  loss_cls_stage1: 0.257  loss_cls_stage2: 0.246  loss_mask: 0.278  loss_rpn_cls: 0.034  loss_rpn_loc: 0.177  lr: 0.000740  max_mem: 7650M
+[32m[05/06 08:29:05 d2.utils.events]: [0m eta: 6:13:11  iter: 988  total_loss: 3.272  loss_box_reg_stage0: 0.387  loss_box_reg_stage1: 0.755  loss_box_reg_stage2: 0.881  loss_cls_stage0: 0.287  loss_cls_stage1: 0.255  loss_cls_stage2: 0.238  loss_mask: 0.283  loss_rpn_cls: 0.032  loss_rpn_loc: 0.161  lr: 0.000987  max_mem: 7650M
+[32m[05/06 08:32:18 d2.utils.events]: [0m eta: 6:10:02  iter: 1235  total_loss: 3.140  loss_box_reg_stage0: 0.357  loss_box_reg_stage1: 0.745  loss_box_reg_stage2: 0.890  loss_cls_stage0: 0.252  loss_cls_stage1: 0.223  loss_cls_stage2: 0.212  loss_mask: 0.275  loss_rpn_cls: 0.033  loss_rpn_loc: 0.152  lr: 0.001000  max_mem: 7650M
+[32m[05/06 08:35:31 d2.utils.events]: [0m eta: 6:06:01  iter: 1482  total_loss: 3.118  loss_box_reg_stage0: 0.370  loss_box_reg_stage1: 0.727  loss_box_reg_stage2: 0.848  loss_cls_stage0: 0.249  loss_cls_stage1: 0.221  loss_cls_stage2: 0.205  loss_mask: 0.263  loss_rpn_cls: 0.028  loss_rpn_loc: 0.163  lr: 0.001000  max_mem: 7650M
+[32m[05/06 08:38:44 d2.utils.events]: [0m eta: 6:04:19  iter: 1729  total_loss: 3.201  loss_box_reg_stage0: 0.353  loss_box_reg_stage1: 0.747  loss_box_reg_stage2: 0.871  loss_cls_stage0: 0.255  loss_cls_stage1: 0.221  loss_cls_stage2: 0.215  loss_mask: 0.270  loss_rpn_cls: 0.032  loss_rpn_loc: 0.165  lr: 0.001000  max_mem: 7650M
+[32m[05/06 08:41:57 d2.utils.events]: [0m eta: 5:59:56  iter: 1976  total_loss: 3.089  loss_box_reg_stage0: 0.357  loss_box_reg_stage1: 0.715  loss_box_reg_stage2: 0.882  loss_cls_stage0: 0.241  loss_cls_stage1: 0.216  loss_cls_stage2: 0.208  loss_mask: 0.263  loss_rpn_cls: 0.031  loss_rpn_loc: 0.154  lr: 0.001000  max_mem: 7650M
+[32m[05/06 08:45:10 d2.utils.events]: [0m eta: 5:56:38  iter: 2223  total_loss: 3.062  loss_box_reg_stage0: 0.365  loss_box_reg_stage1: 0.716  loss_box_reg_stage2: 0.869  loss_cls_stage0: 0.236  loss_cls_stage1: 0.211  loss_cls_stage2: 0.205  loss_mask: 0.274  loss_rpn_cls: 0.026  loss_rpn_loc: 0.160  lr: 0.001000  max_mem: 7650M
+[32m[05/06 08:48:22 fvcore.common.checkpoint]: [0mSaving checkpoint to /ssd_scratch/cvit/myfolder/cityscapes/models/model_0002469.pth
+[32m[05/06 08:48:23 d2.data.datasets.cityscapes]: [0m3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[32m[05/06 08:48:23 d2.data.datasets.cityscapes]: [0mPreprocessing cityscapes annotations ...
+[32m[05/06 08:49:53 d2.data.datasets.cityscapes]: [0mLoaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[32m[05/06 08:49:53 d2.data.build]: [0mDistribution of instances among all 8 categories:
+[36m|  category  | #instances   |  category  | #instances   |  category  | #instances   |
+|:----------:|:-------------|:----------:|:-------------|:----------:|:-------------|
+|   person   | 3399         |   rider    | 544          |    car     | 4656         |
+|   truck    | 93           |    bus     | 98           |   train    | 23           |
+| motorcycle | 149          |  bicycle   | 1169         |            |              |
+|   total    | 10131        |            |              |            |              |[0m
+[32m[05/06 08:49:53 d2.data.common]: [0mSerializing 500 elements to byte tensors and concatenating them all ...
+[32m[05/06 08:49:53 d2.data.common]: [0mSerialized dataset takes 12.85 MiB
+[32m[05/06 08:49:53 d2.evaluation.evaluator]: [0mStart inference on 125 images
+[32m[05/06 08:49:55 d2.evaluation.cityscapes_evaluation]: [0mWriting cityscapes results to temporary directory /tmp/cityscapes_eval_3lvqf7z7 ...
+[32m[05/06 08:50:10 d2.evaluation.evaluator]: [0mInference done 11/125. 0.1235 s / img. ETA=0:01:46
+[32m[05/06 08:50:15 d2.evaluation.evaluator]: [0mInference done 16/125. 0.1258 s / img. ETA=0:01:47
+[32m[05/06 08:50:20 d2.evaluation.evaluator]: [0mInference done 19/125. 0.1290 s / img. ETA=0:02:00
+[32m[05/06 08:50:25 d2.evaluation.evaluator]: [0mInference done 24/125. 0.1287 s / img. ETA=0:01:51
+[32m[05/06 08:50:30 d2.evaluation.evaluator]: [0mInference done 28/125. 0.1297 s / img. ETA=0:01:50
+[32m[05/06 08:50:36 d2.evaluation.evaluator]: [0mInference done 32/125. 0.1305 s / img. ETA=0:01:49
+[32m[05/06 08:50:43 d2.evaluation.evaluator]: [0mInference done 37/125. 0.1313 s / img. ETA=0:01:45
+[32m[05/06 08:50:48 d2.evaluation.evaluator]: [0mInference done 41/125. 0.1323 s / img. ETA=0:01:41
+[32m[05/06 08:50:53 d2.evaluation.evaluator]: [0mInference done 46/125. 0.1316 s / img. ETA=0:01:33
+[32m[05/06 08:50:58 d2.evaluation.evaluator]: [0mInference done 49/125. 0.1321 s / img. ETA=0:01:32
+[32m[05/06 08:51:03 d2.evaluation.evaluator]: [0mInference done 54/125. 0.1323 s / img. ETA=0:01:25
+[32m[05/06 08:51:09 d2.evaluation.evaluator]: [0mInference done 58/125. 0.1326 s / img. ETA=0:01:21
+[32m[05/06 08:51:15 d2.evaluation.evaluator]: [0mInference done 62/125. 0.1327 s / img. ETA=0:01:17
+[32m[05/06 08:51:20 d2.evaluation.evaluator]: [0mInference done 66/125. 0.1337 s / img. ETA=0:01:13
+[32m[05/06 08:51:26 d2.evaluation.evaluator]: [0mInference done 71/125. 0.1337 s / img. ETA=0:01:07
+[32m[05/06 08:51:33 d2.evaluation.evaluator]: [0mInference done 76/125. 0.1339 s / img. ETA=0:01:00
+[32m[05/06 08:51:40 d2.evaluation.evaluator]: [0mInference done 81/125. 0.1343 s / img. ETA=0:00:55
+[32m[05/06 08:51:45 d2.evaluation.evaluator]: [0mInference done 84/125. 0.1348 s / img. ETA=0:00:52
+[32m[05/06 08:51:51 d2.evaluation.evaluator]: [0mInference done 88/125. 0.1353 s / img. ETA=0:00:47
+[32m[05/06 08:51:57 d2.evaluation.evaluator]: [0mInference done 93/125. 0.1352 s / img. ETA=0:00:41
+[32m[05/06 08:52:02 d2.evaluation.evaluator]: [0mInference done 96/125. 0.1355 s / img. ETA=0:00:37
+[32m[05/06 08:52:08 d2.evaluation.evaluator]: [0mInference done 100/125. 0.1357 s / img. ETA=0:00:32
+[32m[05/06 08:52:14 d2.evaluation.evaluator]: [0mInference done 104/125. 0.1359 s / img. ETA=0:00:27
+[32m[05/06 08:52:20 d2.evaluation.evaluator]: [0mInference done 108/125. 0.1363 s / img. ETA=0:00:22
+[32m[05/06 08:52:25 d2.evaluation.evaluator]: [0mInference done 113/125. 0.1360 s / img. ETA=0:00:15
+[32m[05/06 08:52:31 d2.evaluation.evaluator]: [0mInference done 117/125. 0.1360 s / img. ETA=0:00:10
+[32m[05/06 08:52:38 d2.evaluation.evaluator]: [0mInference done 123/125. 0.1356 s / img. ETA=0:00:02
+[32m[05/06 08:52:39 d2.evaluation.evaluator]: [0mTotal inference time: 0:02:35.065537 (1.292213 s / img per device, on 4 devices)
+[32m[05/06 08:52:39 d2.evaluation.evaluator]: [0mTotal inference pure compute time: 0:00:16 (0.135517 s / img per device, on 4 devices)
+[32m[05/06 08:52:55 d2.evaluation.cityscapes_evaluation]: [0mEvaluating results under /tmp/cityscapes_eval_3lvqf7z7 ...
+Creating ground truth instances from png files.
+Processing 500 images...
+All images processed
+
+Matching 500 pairs of images...
+All images processed
+
+
+##################################################
+what           :             AP         AP_50%
+##################################################
+person         :          0.373          0.705
+rider          :          0.276          0.666
+car            :          0.535          0.794
+truck          :          0.348          0.465
+bus            :          0.587          0.763
+train          :          0.348          0.617
+motorcycle     :          0.195          0.431
+bicycle        :          0.212          0.568
+--------------------------------------------------
+average        :          0.359          0.626
+
+[32m[05/06 09:01:18 detectron2]: [0mEvaluation results for cityscapes_fine_inst_seg_val in csv format:
+[32m[05/06 09:01:18 d2.evaluation.testing]: [0mcopypaste: Task: segm
+[32m[05/06 09:01:18 d2.evaluation.testing]: [0mcopypaste: AP,AP50
+[32m[05/06 09:01:18 d2.evaluation.testing]: [0mcopypaste: 35.9114,62.5980
+[32m[05/06 09:01:19 d2.utils.events]: [0m eta: 1 day, 5:36:17  iter: 2470  total_loss: 3.085  loss_box_reg_stage0: 0.365  loss_box_reg_stage1: 0.730  loss_box_reg_stage2: 0.875  loss_cls_stage0: 0.237  loss_cls_stage1: 0.219  loss_cls_stage2: 0.213  loss_mask: 0.264  loss_rpn_cls: 0.034  loss_rpn_loc: 0.148  lr: 0.001000  max_mem: 7650M
+[32m[05/06 09:04:27 d2.utils.events]: [0m eta: 5:42:25  iter: 2717  total_loss: 2.896  loss_box_reg_stage0: 0.342  loss_box_reg_stage1: 0.714  loss_box_reg_stage2: 0.839  loss_cls_stage0: 0.226  loss_cls_stage1: 0.200  loss_cls_stage2: 0.195  loss_mask: 0.256  loss_rpn_cls: 0.028  loss_rpn_loc: 0.140  lr: 0.001000  max_mem: 7650M
+[32m[05/06 09:07:41 d2.utils.events]: [0m eta: 5:48:23  iter: 2964  total_loss: 3.024  loss_box_reg_stage0: 0.349  loss_box_reg_stage1: 0.707  loss_box_reg_stage2: 0.842  loss_cls_stage0: 0.236  loss_cls_stage1: 0.207  loss_cls_stage2: 0.199  loss_mask: 0.263  loss_rpn_cls: 0.030  loss_rpn_loc: 0.155  lr: 0.001000  max_mem: 7650M
+[32m[05/06 09:10:55 d2.utils.events]: [0m eta: 5:46:26  iter: 3211  total_loss: 3.056  loss_box_reg_stage0: 0.362  loss_box_reg_stage1: 0.726  loss_box_reg_stage2: 0.890  loss_cls_stage0: 0.236  loss_cls_stage1: 0.205  loss_cls_stage2: 0.188  loss_mask: 0.264  loss_rpn_cls: 0.029  loss_rpn_loc: 0.141  lr: 0.001000  max_mem: 7650M
+[32m[05/06 09:14:08 d2.utils.events]: [0m eta: 5:41:37  iter: 3458  total_loss: 3.089  loss_box_reg_stage0: 0.360  loss_box_reg_stage1: 0.738  loss_box_reg_stage2: 0.896  loss_cls_stage0: 0.229  loss_cls_stage1: 0.211  loss_cls_stage2: 0.202  loss_mask: 0.266  loss_rpn_cls: 0.026  loss_rpn_loc: 0.165  lr: 0.001000  max_mem: 7650M
+[32m[05/06 09:17:21 d2.utils.events]: [0m eta: 5:38:00  iter: 3705  total_loss: 3.049  loss_box_reg_stage0: 0.355  loss_box_reg_stage1: 0.742  loss_box_reg_stage2: 0.873  loss_cls_stage0: 0.230  loss_cls_stage1: 0.191  loss_cls_stage2: 0.197  loss_mask: 0.268  loss_rpn_cls: 0.025  loss_rpn_loc: 0.140  lr: 0.001000  max_mem: 7650M
+[32m[05/06 09:20:35 d2.utils.events]: [0m eta: 5:36:06  iter: 3952  total_loss: 3.080  loss_box_reg_stage0: 0.353  loss_box_reg_stage1: 0.732  loss_box_reg_stage2: 0.885  loss_cls_stage0: 0.231  loss_cls_stage1: 0.213  loss_cls_stage2: 0.200  loss_mask: 0.259  loss_rpn_cls: 0.027  loss_rpn_loc: 0.158  lr: 0.001000  max_mem: 7650M
+[32m[05/06 09:23:48 d2.utils.events]: [0m eta: 5:30:05  iter: 4199  total_loss: 2.931  loss_box_reg_stage0: 0.349  loss_box_reg_stage1: 0.692  loss_box_reg_stage2: 0.823  loss_cls_stage0: 0.212  loss_cls_stage1: 0.200  loss_cls_stage2: 0.185  loss_mask: 0.251  loss_rpn_cls: 0.026  loss_rpn_loc: 0.143  lr: 0.001000  max_mem: 7650M
+[32m[05/06 09:27:00 d2.utils.events]: [0m eta: 5:27:52  iter: 4446  total_loss: 2.916  loss_box_reg_stage0: 0.345  loss_box_reg_stage1: 0.694  loss_box_reg_stage2: 0.855  loss_cls_stage0: 0.222  loss_cls_stage1: 0.202  loss_cls_stage2: 0.188  loss_mask: 0.260  loss_rpn_cls: 0.027  loss_rpn_loc: 0.160  lr: 0.001000  max_mem: 7650M
+[32m[05/06 09:30:13 d2.utils.events]: [0m eta: 5:24:53  iter: 4693  total_loss: 3.010  loss_box_reg_stage0: 0.350  loss_box_reg_stage1: 0.706  loss_box_reg_stage2: 0.863  loss_cls_stage0: 0.223  loss_cls_stage1: 0.192  loss_cls_stage2: 0.193  loss_mask: 0.261  loss_rpn_cls: 0.026  loss_rpn_loc: 0.166  lr: 0.001000  max_mem: 7650M
+[32m[05/06 09:33:25 fvcore.common.checkpoint]: [0mSaving checkpoint to /ssd_scratch/cvit/myfolder/cityscapes/models/model_0004939.pth
+[32m[05/06 09:33:26 d2.data.datasets.cityscapes]: [0m3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[32m[05/06 09:33:26 d2.data.datasets.cityscapes]: [0mPreprocessing cityscapes annotations ...
+[32m[05/06 09:34:56 d2.data.datasets.cityscapes]: [0mLoaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[32m[05/06 09:34:56 d2.data.common]: [0mSerializing 500 elements to byte tensors and concatenating them all ...
+[32m[05/06 09:34:56 d2.data.common]: [0mSerialized dataset takes 12.85 MiB
+[32m[05/06 09:34:57 d2.evaluation.evaluator]: [0mStart inference on 125 images
+[32m[05/06 09:34:58 d2.evaluation.cityscapes_evaluation]: [0mWriting cityscapes results to temporary directory /tmp/cityscapes_eval_or_0vqvc ...
+[32m[05/06 09:35:13 d2.evaluation.evaluator]: [0mInference done 11/125. 0.1236 s / img. ETA=0:01:42
+[32m[05/06 09:35:19 d2.evaluation.evaluator]: [0mInference done 16/125. 0.1268 s / img. ETA=0:01:48
+[32m[05/06 09:35:24 d2.evaluation.evaluator]: [0mInference done 19/125. 0.1309 s / img. ETA=0:02:01
+[32m[05/06 09:35:29 d2.evaluation.evaluator]: [0mInference done 24/125. 0.1325 s / img. ETA=0:01:54
+[32m[05/06 09:35:34 d2.evaluation.evaluator]: [0mInference done 28/125. 0.1322 s / img. ETA=0:01:53
+[32m[05/06 09:35:41 d2.evaluation.evaluator]: [0mInference done 32/125. 0.1332 s / img. ETA=0:01:53
+[32m[05/06 09:35:46 d2.evaluation.evaluator]: [0mInference done 36/125. 0.1329 s / img. ETA=0:01:49
+[32m[05/06 09:35:51 d2.evaluation.evaluator]: [0mInference done 40/125. 0.1338 s / img. ETA=0:01:45
+[32m[05/06 09:35:57 d2.evaluation.evaluator]: [0mInference done 44/125. 0.1340 s / img. ETA=0:01:41
+[32m[05/06 09:36:03 d2.evaluation.evaluator]: [0mInference done 49/125. 0.1346 s / img. ETA=0:01:36
+[32m[05/06 09:36:09 d2.evaluation.evaluator]: [0mInference done 54/125. 0.1344 s / img. ETA=0:01:28
+[32m[05/06 09:36:15 d2.evaluation.evaluator]: [0mInference done 58/125. 0.1344 s / img. ETA=0:01:24
+[32m[05/06 09:36:20 d2.evaluation.evaluator]: [0mInference done 62/125. 0.1351 s / img. ETA=0:01:19
+[32m[05/06 09:36:25 d2.evaluation.evaluator]: [0mInference done 66/125. 0.1357 s / img. ETA=0:01:15
+[32m[05/06 09:36:31 d2.evaluation.evaluator]: [0mInference done 71/125. 0.1353 s / img. ETA=0:01:08
+[32m[05/06 09:36:37 d2.evaluation.evaluator]: [0mInference done 76/125. 0.1350 s / img. ETA=0:01:02
+[32m[05/06 09:36:44 d2.evaluation.evaluator]: [0mInference done 81/125. 0.1349 s / img. ETA=0:00:55
+[32m[05/06 09:36:49 d2.evaluation.evaluator]: [0mInference done 84/125. 0.1354 s / img. ETA=0:00:52
+[32m[05/06 09:36:56 d2.evaluation.evaluator]: [0mInference done 88/125. 0.1357 s / img. ETA=0:00:48
+[32m[05/06 09:37:01 d2.evaluation.evaluator]: [0mInference done 93/125. 0.1356 s / img. ETA=0:00:41
+[32m[05/06 09:37:06 d2.evaluation.evaluator]: [0mInference done 96/125. 0.1359 s / img. ETA=0:00:37
+[32m[05/06 09:37:12 d2.evaluation.evaluator]: [0mInference done 100/125. 0.1360 s / img. ETA=0:00:32
+[32m[05/06 09:37:18 d2.evaluation.evaluator]: [0mInference done 104/125. 0.1363 s / img. ETA=0:00:27
+[32m[05/06 09:37:24 d2.evaluation.evaluator]: [0mInference done 108/125. 0.1366 s / img. ETA=0:00:22
+[32m[05/06 09:37:30 d2.evaluation.evaluator]: [0mInference done 114/125. 0.1362 s / img. ETA=0:00:14
+[32m[05/06 09:37:36 d2.evaluation.evaluator]: [0mInference done 118/125. 0.1364 s / img. ETA=0:00:09
+[32m[05/06 09:37:41 d2.evaluation.evaluator]: [0mInference done 123/125. 0.1361 s / img. ETA=0:00:02
+[32m[05/06 09:37:43 d2.evaluation.evaluator]: [0mTotal inference time: 0:02:35.565161 (1.296376 s / img per device, on 4 devices)
+[32m[05/06 09:37:43 d2.evaluation.evaluator]: [0mTotal inference pure compute time: 0:00:16 (0.135989 s / img per device, on 4 devices)
+[32m[05/06 09:38:01 d2.evaluation.cityscapes_evaluation]: [0mEvaluating results under /tmp/cityscapes_eval_or_0vqvc ...
+Creating ground truth instances from png files.
+Processing 500 images...
+All images processed
+
+Matching 500 pairs of images...
+All images processed
+
+
+##################################################
+what           :             AP         AP_50%
+##################################################
+person         :          0.379          0.719
+rider          :          0.283          0.679
+car            :          0.541          0.799
+truck          :          0.370          0.509
+bus            :          0.610          0.808
+train          :          0.414          0.627
+motorcycle     :          0.215          0.463
+bicycle        :          0.223          0.579
+--------------------------------------------------
+average        :          0.379          0.648
+
+[32m[05/06 09:46:32 detectron2]: [0mEvaluation results for cityscapes_fine_inst_seg_val in csv format:
+[32m[05/06 09:46:32 d2.evaluation.testing]: [0mcopypaste: Task: segm
+[32m[05/06 09:46:32 d2.evaluation.testing]: [0mcopypaste: AP,AP50
+[32m[05/06 09:46:32 d2.evaluation.testing]: [0mcopypaste: 37.9359,64.7978
+[32m[05/06 09:46:33 d2.utils.events]: [0m eta: 1 day, 3:12:10  iter: 4940  total_loss: 2.912  loss_box_reg_stage0: 0.342  loss_box_reg_stage1: 0.706  loss_box_reg_stage2: 0.870  loss_cls_stage0: 0.219  loss_cls_stage1: 0.189  loss_cls_stage2: 0.181  loss_mask: 0.254  loss_rpn_cls: 0.028  loss_rpn_loc: 0.176  lr: 0.001000  max_mem: 7650M
+[32m[05/06 09:49:41 d2.utils.events]: [0m eta: 5:10:37  iter: 5187  total_loss: 2.993  loss_box_reg_stage0: 0.336  loss_box_reg_stage1: 0.706  loss_box_reg_stage2: 0.876  loss_cls_stage0: 0.210  loss_cls_stage1: 0.188  loss_cls_stage2: 0.174  loss_mask: 0.247  loss_rpn_cls: 0.022  loss_rpn_loc: 0.147  lr: 0.001000  max_mem: 7650M
+[32m[05/06 09:52:54 d2.utils.events]: [0m eta: 5:15:43  iter: 5434  total_loss: 2.950  loss_box_reg_stage0: 0.344  loss_box_reg_stage1: 0.695  loss_box_reg_stage2: 0.858  loss_cls_stage0: 0.226  loss_cls_stage1: 0.201  loss_cls_stage2: 0.181  loss_mask: 0.264  loss_rpn_cls: 0.026  loss_rpn_loc: 0.150  lr: 0.001000  max_mem: 7650M
+[32m[05/06 09:56:08 d2.utils.events]: [0m eta: 5:12:45  iter: 5681  total_loss: 2.838  loss_box_reg_stage0: 0.330  loss_box_reg_stage1: 0.697  loss_box_reg_stage2: 0.836  loss_cls_stage0: 0.209  loss_cls_stage1: 0.195  loss_cls_stage2: 0.183  loss_mask: 0.247  loss_rpn_cls: 0.022  loss_rpn_loc: 0.139  lr: 0.001000  max_mem: 7650M
+[32m[05/06 09:59:22 d2.utils.events]: [0m eta: 5:09:59  iter: 5928  total_loss: 3.008  loss_box_reg_stage0: 0.342  loss_box_reg_stage1: 0.705  loss_box_reg_stage2: 0.889  loss_cls_stage0: 0.217  loss_cls_stage1: 0.192  loss_cls_stage2: 0.187  loss_mask: 0.261  loss_rpn_cls: 0.026  loss_rpn_loc: 0.159  lr: 0.001000  max_mem: 7650M
+[32m[05/06 10:02:35 d2.utils.events]: [0m eta: 5:05:37  iter: 6175  total_loss: 2.824  loss_box_reg_stage0: 0.321  loss_box_reg_stage1: 0.668  loss_box_reg_stage2: 0.820  loss_cls_stage0: 0.198  loss_cls_stage1: 0.180  loss_cls_stage2: 0.165  loss_mask: 0.238  loss_rpn_cls: 0.023  loss_rpn_loc: 0.134  lr: 0.001000  max_mem: 7650M
+[32m[05/06 10:05:48 d2.utils.events]: [0m eta: 5:03:18  iter: 6422  total_loss: 2.881  loss_box_reg_stage0: 0.333  loss_box_reg_stage1: 0.686  loss_box_reg_stage2: 0.876  loss_cls_stage0: 0.207  loss_cls_stage1: 0.191  loss_cls_stage2: 0.180  loss_mask: 0.246  loss_rpn_cls: 0.023  loss_rpn_loc: 0.141  lr: 0.001000  max_mem: 7650M
+[32m[05/06 10:09:01 d2.utils.events]: [0m eta: 4:58:25  iter: 6669  total_loss: 2.927  loss_box_reg_stage0: 0.325  loss_box_reg_stage1: 0.703  loss_box_reg_stage2: 0.871  loss_cls_stage0: 0.222  loss_cls_stage1: 0.193  loss_cls_stage2: 0.179  loss_mask: 0.244  loss_rpn_cls: 0.024  loss_rpn_loc: 0.160  lr: 0.001000  max_mem: 7650M
+[32m[05/06 10:12:14 d2.utils.events]: [0m eta: 4:56:25  iter: 6916  total_loss: 2.858  loss_box_reg_stage0: 0.335  loss_box_reg_stage1: 0.699  loss_box_reg_stage2: 0.865  loss_cls_stage0: 0.204  loss_cls_stage1: 0.172  loss_cls_stage2: 0.171  loss_mask: 0.252  loss_rpn_cls: 0.021  loss_rpn_loc: 0.140  lr: 0.001000  max_mem: 7650M
+[32m[05/06 10:15:27 d2.utils.events]: [0m eta: 4:52:35  iter: 7163  total_loss: 2.659  loss_box_reg_stage0: 0.304  loss_box_reg_stage1: 0.636  loss_box_reg_stage2: 0.775  loss_cls_stage0: 0.193  loss_cls_stage1: 0.183  loss_cls_stage2: 0.165  loss_mask: 0.239  loss_rpn_cls: 0.025  loss_rpn_loc: 0.126  lr: 0.001000  max_mem: 7650M
+[32m[05/06 10:18:40 fvcore.common.checkpoint]: [0mSaving checkpoint to /ssd_scratch/cvit/myfolder/cityscapes/models/model_0007409.pth
+[32m[05/06 10:18:41 d2.data.datasets.cityscapes]: [0m3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[32m[05/06 10:18:41 d2.data.datasets.cityscapes]: [0mPreprocessing cityscapes annotations ...
+[32m[05/06 10:20:12 d2.data.datasets.cityscapes]: [0mLoaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[32m[05/06 10:20:12 d2.data.common]: [0mSerializing 500 elements to byte tensors and concatenating them all ...
+[32m[05/06 10:20:12 d2.data.common]: [0mSerialized dataset takes 12.85 MiB
+[32m[05/06 10:20:12 d2.evaluation.evaluator]: [0mStart inference on 125 images
+[32m[05/06 10:20:12 d2.evaluation.cityscapes_evaluation]: [0mWriting cityscapes results to temporary directory /tmp/cityscapes_eval_3yce6rbu ...
+[32m[05/06 10:20:27 d2.evaluation.evaluator]: [0mInference done 11/125. 0.1234 s / img. ETA=0:01:40
+[32m[05/06 10:20:32 d2.evaluation.evaluator]: [0mInference done 16/125. 0.1248 s / img. ETA=0:01:42
+[32m[05/06 10:20:37 d2.evaluation.evaluator]: [0mInference done 20/125. 0.1284 s / img. ETA=0:01:49
+[32m[05/06 10:20:42 d2.evaluation.evaluator]: [0mInference done 25/125. 0.1292 s / img. ETA=0:01:44
+[32m[05/06 10:20:48 d2.evaluation.evaluator]: [0mInference done 30/125. 0.1301 s / img. ETA=0:01:41
+[32m[05/06 10:20:54 d2.evaluation.evaluator]: [0mInference done 34/125. 0.1313 s / img. ETA=0:01:40
+[32m[05/06 10:21:00 d2.evaluation.evaluator]: [0mInference done 39/125. 0.1315 s / img. ETA=0:01:38
+[32m[05/06 10:21:06 d2.evaluation.evaluator]: [0mInference done 45/125. 0.1309 s / img. ETA=0:01:28
+[32m[05/06 10:21:12 d2.evaluation.evaluator]: [0mInference done 49/125. 0.1313 s / img. ETA=0:01:26
+[32m[05/06 10:21:17 d2.evaluation.evaluator]: [0mInference done 54/125. 0.1310 s / img. ETA=0:01:19
+[32m[05/06 10:21:23 d2.evaluation.evaluator]: [0mInference done 59/125. 0.1310 s / img. ETA=0:01:15
+[32m[05/06 10:21:29 d2.evaluation.evaluator]: [0mInference done 64/125. 0.1312 s / img. ETA=0:01:10
+[32m[05/06 10:21:35 d2.evaluation.evaluator]: [0mInference done 68/125. 0.1316 s / img. ETA=0:01:06
+[32m[05/06 10:21:40 d2.evaluation.evaluator]: [0mInference done 74/125. 0.1310 s / img. ETA=0:00:58
+[32m[05/06 10:21:46 d2.evaluation.evaluator]: [0mInference done 78/125. 0.1312 s / img. ETA=0:00:54
+[32m[05/06 10:21:51 d2.evaluation.evaluator]: [0mInference done 82/125. 0.1313 s / img. ETA=0:00:49
+[32m[05/06 10:21:56 d2.evaluation.evaluator]: [0mInference done 86/125. 0.1319 s / img. ETA=0:00:45
+[32m[05/06 10:22:02 d2.evaluation.evaluator]: [0mInference done 90/125. 0.1324 s / img. ETA=0:00:41
+[32m[05/06 10:22:07 d2.evaluation.evaluator]: [0mInference done 94/125. 0.1326 s / img. ETA=0:00:36
+[32m[05/06 10:22:12 d2.evaluation.evaluator]: [0mInference done 98/125. 0.1326 s / img. ETA=0:00:32
+[32m[05/06 10:22:18 d2.evaluation.evaluator]: [0mInference done 103/125. 0.1325 s / img. ETA=0:00:26
+[32m[05/06 10:22:24 d2.evaluation.evaluator]: [0mInference done 107/125. 0.1330 s / img. ETA=0:00:21
+[32m[05/06 10:22:29 d2.evaluation.evaluator]: [0mInference done 112/125. 0.1328 s / img. ETA=0:00:15
+[32m[05/06 10:22:34 d2.evaluation.evaluator]: [0mInference done 116/125. 0.1328 s / img. ETA=0:00:10
+[32m[05/06 10:22:40 d2.evaluation.evaluator]: [0mInference done 122/125. 0.1328 s / img. ETA=0:00:03
+[32m[05/06 10:22:43 d2.evaluation.evaluator]: [0mTotal inference time: 0:02:21.252326 (1.177103 s / img per device, on 4 devices)
+[32m[05/06 10:22:43 d2.evaluation.evaluator]: [0mTotal inference pure compute time: 0:00:15 (0.132562 s / img per device, on 4 devices)
+[32m[05/06 10:23:02 d2.evaluation.cityscapes_evaluation]: [0mEvaluating results under /tmp/cityscapes_eval_3yce6rbu ...
+Creating ground truth instances from png files.
+Processing 500 images...
+All images processed
+
+Matching 500 pairs of images...
+All images processed
+
+
+##################################################
+what           :             AP         AP_50%
+##################################################
+person         :          0.385          0.723
+rider          :          0.292          0.682
+car            :          0.546          0.802
+truck          :          0.391          0.532
+bus            :          0.616          0.805
+train          :          0.407          0.667
+motorcycle     :          0.218          0.474
+bicycle        :          0.229          0.591
+--------------------------------------------------
+average        :          0.385          0.660
+
+[32m[05/06 10:30:43 detectron2]: [0mEvaluation results for cityscapes_fine_inst_seg_val in csv format:
+[32m[05/06 10:30:43 d2.evaluation.testing]: [0mcopypaste: Task: segm
+[32m[05/06 10:30:43 d2.evaluation.testing]: [0mcopypaste: AP,AP50
+[32m[05/06 10:30:43 d2.evaluation.testing]: [0mcopypaste: 38.5485,65.9551
+[32m[05/06 10:30:43 d2.utils.events]: [0m eta: 22:54:29  iter: 7410  total_loss: 2.667  loss_box_reg_stage0: 0.325  loss_box_reg_stage1: 0.647  loss_box_reg_stage2: 0.782  loss_cls_stage0: 0.194  loss_cls_stage1: 0.171  loss_cls_stage2: 0.164  loss_mask: 0.246  loss_rpn_cls: 0.019  loss_rpn_loc: 0.151  lr: 0.001000  max_mem: 7650M
+[32m[05/06 10:33:52 d2.utils.events]: [0m eta: 4:39:57  iter: 7657  total_loss: 2.844  loss_box_reg_stage0: 0.333  loss_box_reg_stage1: 0.685  loss_box_reg_stage2: 0.794  loss_cls_stage0: 0.215  loss_cls_stage1: 0.196  loss_cls_stage2: 0.179  loss_mask: 0.252  loss_rpn_cls: 0.019  loss_rpn_loc: 0.130  lr: 0.001000  max_mem: 7650M
+[32m[05/06 10:37:07 d2.utils.events]: [0m eta: 4:45:43  iter: 7904  total_loss: 2.878  loss_box_reg_stage0: 0.345  loss_box_reg_stage1: 0.688  loss_box_reg_stage2: 0.858  loss_cls_stage0: 0.200  loss_cls_stage1: 0.180  loss_cls_stage2: 0.167  loss_mask: 0.252  loss_rpn_cls: 0.019  loss_rpn_loc: 0.145  lr: 0.001000  max_mem: 7650M
+[32m[05/06 10:40:20 d2.utils.events]: [0m eta: 4:40:35  iter: 8151  total_loss: 2.862  loss_box_reg_stage0: 0.340  loss_box_reg_stage1: 0.680  loss_box_reg_stage2: 0.845  loss_cls_stage0: 0.199  loss_cls_stage1: 0.181  loss_cls_stage2: 0.169  loss_mask: 0.262  loss_rpn_cls: 0.023  loss_rpn_loc: 0.165  lr: 0.001000  max_mem: 7650M
+[32m[05/06 10:43:35 d2.utils.events]: [0m eta: 4:38:56  iter: 8398  total_loss: 2.734  loss_box_reg_stage0: 0.331  loss_box_reg_stage1: 0.664  loss_box_reg_stage2: 0.799  loss_cls_stage0: 0.200  loss_cls_stage1: 0.180  loss_cls_stage2: 0.165  loss_mask: 0.253  loss_rpn_cls: 0.020  loss_rpn_loc: 0.136  lr: 0.001000  max_mem: 7650M
+[32m[05/06 10:46:48 d2.utils.events]: [0m eta: 4:33:51  iter: 8645  total_loss: 2.844  loss_box_reg_stage0: 0.323  loss_box_reg_stage1: 0.682  loss_box_reg_stage2: 0.830  loss_cls_stage0: 0.207  loss_cls_stage1: 0.179  loss_cls_stage2: 0.158  loss_mask: 0.251  loss_rpn_cls: 0.020  loss_rpn_loc: 0.176  lr: 0.001000  max_mem: 7650M
+[32m[05/06 10:50:02 d2.utils.events]: [0m eta: 4:30:43  iter: 8892  total_loss: 2.578  loss_box_reg_stage0: 0.303  loss_box_reg_stage1: 0.628  loss_box_reg_stage2: 0.782  loss_cls_stage0: 0.188  loss_cls_stage1: 0.174  loss_cls_stage2: 0.166  loss_mask: 0.232  loss_rpn_cls: 0.018  loss_rpn_loc: 0.116  lr: 0.001000  max_mem: 7650M
+[32m[05/06 10:53:15 d2.utils.events]: [0m eta: 4:26:54  iter: 9139  total_loss: 2.640  loss_box_reg_stage0: 0.307  loss_box_reg_stage1: 0.628  loss_box_reg_stage2: 0.811  loss_cls_stage0: 0.188  loss_cls_stage1: 0.166  loss_cls_stage2: 0.162  loss_mask: 0.233  loss_rpn_cls: 0.019  loss_rpn_loc: 0.130  lr: 0.001000  max_mem: 7650M
+[32m[05/06 10:56:27 d2.utils.events]: [0m eta: 4:22:49  iter: 9386  total_loss: 2.882  loss_box_reg_stage0: 0.326  loss_box_reg_stage1: 0.706  loss_box_reg_stage2: 0.857  loss_cls_stage0: 0.214  loss_cls_stage1: 0.193  loss_cls_stage2: 0.185  loss_mask: 0.247  loss_rpn_cls: 0.020  loss_rpn_loc: 0.163  lr: 0.001000  max_mem: 7650M
+[32m[05/06 10:59:40 d2.utils.events]: [0m eta: 4:20:45  iter: 9633  total_loss: 2.763  loss_box_reg_stage0: 0.326  loss_box_reg_stage1: 0.661  loss_box_reg_stage2: 0.853  loss_cls_stage0: 0.197  loss_cls_stage1: 0.177  loss_cls_stage2: 0.170  loss_mask: 0.245  loss_rpn_cls: 0.020  loss_rpn_loc: 0.136  lr: 0.001000  max_mem: 7650M
+[32m[05/06 11:02:52 fvcore.common.checkpoint]: [0mSaving checkpoint to /ssd_scratch/cvit/myfolder/cityscapes/models/model_0009879.pth
+[32m[05/06 11:02:53 d2.data.datasets.cityscapes]: [0m3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[32m[05/06 11:02:53 d2.data.datasets.cityscapes]: [0mPreprocessing cityscapes annotations ...
+[32m[05/06 11:04:24 d2.data.datasets.cityscapes]: [0mLoaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[32m[05/06 11:04:24 d2.data.common]: [0mSerializing 500 elements to byte tensors and concatenating them all ...
+[32m[05/06 11:04:24 d2.data.common]: [0mSerialized dataset takes 12.85 MiB
+[32m[05/06 11:04:24 d2.evaluation.evaluator]: [0mStart inference on 125 images
+[32m[05/06 11:04:25 d2.evaluation.cityscapes_evaluation]: [0mWriting cityscapes results to temporary directory /tmp/cityscapes_eval_qwu60av1 ...
+[32m[05/06 11:04:40 d2.evaluation.evaluator]: [0mInference done 11/125. 0.1253 s / img. ETA=0:01:39
+[32m[05/06 11:04:45 d2.evaluation.evaluator]: [0mInference done 16/125. 0.1254 s / img. ETA=0:01:41
+[32m[05/06 11:04:50 d2.evaluation.evaluator]: [0mInference done 20/125. 0.1281 s / img. ETA=0:01:50
+[32m[05/06 11:04:56 d2.evaluation.evaluator]: [0mInference done 25/125. 0.1295 s / img. ETA=0:01:46
+[32m[05/06 11:05:02 d2.evaluation.evaluator]: [0mInference done 30/125. 0.1294 s / img. ETA=0:01:44
+[32m[05/06 11:05:08 d2.evaluation.evaluator]: [0mInference done 34/125. 0.1304 s / img. ETA=0:01:43
+[32m[05/06 11:05:15 d2.evaluation.evaluator]: [0mInference done 39/125. 0.1311 s / img. ETA=0:01:40
+[32m[05/06 11:05:20 d2.evaluation.evaluator]: [0mInference done 44/125. 0.1307 s / img. ETA=0:01:34
+[32m[05/06 11:05:26 d2.evaluation.evaluator]: [0mInference done 49/125. 0.1306 s / img. ETA=0:01:28
+[32m[05/06 11:05:31 d2.evaluation.evaluator]: [0mInference done 54/125. 0.1307 s / img. ETA=0:01:22
+[32m[05/06 11:05:37 d2.evaluation.evaluator]: [0mInference done 58/125. 0.1312 s / img. ETA=0:01:18
+[32m[05/06 11:05:42 d2.evaluation.evaluator]: [0mInference done 62/125. 0.1313 s / img. ETA=0:01:14
+[32m[05/06 11:05:47 d2.evaluation.evaluator]: [0mInference done 66/125. 0.1318 s / img. ETA=0:01:09
+[32m[05/06 11:05:53 d2.evaluation.evaluator]: [0mInference done 71/125. 0.1315 s / img. ETA=0:01:03
+[32m[05/06 11:05:58 d2.evaluation.evaluator]: [0mInference done 76/125. 0.1313 s / img. ETA=0:00:57
+[32m[05/06 11:06:04 d2.evaluation.evaluator]: [0mInference done 81/125. 0.1314 s / img. ETA=0:00:51
+[32m[05/06 11:06:10 d2.evaluation.evaluator]: [0mInference done 85/125. 0.1317 s / img. ETA=0:00:47
+[32m[05/06 11:06:16 d2.evaluation.evaluator]: [0mInference done 89/125. 0.1320 s / img. ETA=0:00:43
+[32m[05/06 11:06:22 d2.evaluation.evaluator]: [0mInference done 94/125. 0.1322 s / img. ETA=0:00:37
+[32m[05/06 11:06:28 d2.evaluation.evaluator]: [0mInference done 98/125. 0.1323 s / img. ETA=0:00:32
+[32m[05/06 11:06:34 d2.evaluation.evaluator]: [0mInference done 103/125. 0.1323 s / img. ETA=0:00:26
+[32m[05/06 11:06:39 d2.evaluation.evaluator]: [0mInference done 106/125. 0.1327 s / img. ETA=0:00:23
+[32m[05/06 11:06:44 d2.evaluation.evaluator]: [0mInference done 110/125. 0.1326 s / img. ETA=0:00:18
+[32m[05/06 11:06:50 d2.evaluation.evaluator]: [0mInference done 116/125. 0.1326 s / img. ETA=0:00:10
+[32m[05/06 11:06:56 d2.evaluation.evaluator]: [0mInference done 122/125. 0.1324 s / img. ETA=0:00:03
+[32m[05/06 11:07:00 d2.evaluation.evaluator]: [0mTotal inference time: 0:02:24.951993 (1.207933 s / img per device, on 4 devices)
+[32m[05/06 11:07:00 d2.evaluation.evaluator]: [0mTotal inference pure compute time: 0:00:15 (0.132331 s / img per device, on 4 devices)
+[32m[05/06 11:07:18 d2.evaluation.cityscapes_evaluation]: [0mEvaluating results under /tmp/cityscapes_eval_qwu60av1 ...
+Creating ground truth instances from png files.
+Processing 500 images...
+All images processed
+
+Matching 500 pairs of images...
+All images processed
+
+
+##################################################
+what           :             AP         AP_50%
+##################################################
+person         :          0.389          0.729
+rider          :          0.297          0.681
+car            :          0.552          0.815
+truck          :          0.386          0.554
+bus            :          0.615          0.822
+train          :          0.449          0.671
+motorcycle     :          0.243          0.506
+bicycle        :          0.235          0.601
+--------------------------------------------------
+average        :          0.396          0.672
+
+[32m[05/06 11:15:15 detectron2]: [0mEvaluation results for cityscapes_fine_inst_seg_val in csv format:
+[32m[05/06 11:15:15 d2.evaluation.testing]: [0mcopypaste: Task: segm
+[32m[05/06 11:15:15 d2.evaluation.testing]: [0mcopypaste: AP,AP50
+[32m[05/06 11:15:15 d2.evaluation.testing]: [0mcopypaste: 39.5778,67.2387
+[32m[05/06 11:15:15 d2.utils.events]: [0m eta: 20:47:19  iter: 9880  total_loss: 2.740  loss_box_reg_stage0: 0.319  loss_box_reg_stage1: 0.650  loss_box_reg_stage2: 0.816  loss_cls_stage0: 0.202  loss_cls_stage1: 0.166  loss_cls_stage2: 0.154  loss_mask: 0.243  loss_rpn_cls: 0.023  loss_rpn_loc: 0.148  lr: 0.001000  max_mem: 7650M
+[32m[05/06 11:18:24 d2.utils.events]: [0m eta: 4:08:34  iter: 10127  total_loss: 2.833  loss_box_reg_stage0: 0.329  loss_box_reg_stage1: 0.671  loss_box_reg_stage2: 0.832  loss_cls_stage0: 0.200  loss_cls_stage1: 0.182  loss_cls_stage2: 0.173  loss_mask: 0.255  loss_rpn_cls: 0.021  loss_rpn_loc: 0.147  lr: 0.001000  max_mem: 7650M
+[32m[05/06 11:21:39 d2.utils.events]: [0m eta: 4:12:48  iter: 10374  total_loss: 2.670  loss_box_reg_stage0: 0.304  loss_box_reg_stage1: 0.636  loss_box_reg_stage2: 0.815  loss_cls_stage0: 0.182  loss_cls_stage1: 0.165  loss_cls_stage2: 0.145  loss_mask: 0.233  loss_rpn_cls: 0.019  loss_rpn_loc: 0.142  lr: 0.001000  max_mem: 7650M
+[32m[05/06 11:24:54 d2.utils.events]: [0m eta: 4:09:56  iter: 10621  total_loss: 2.672  loss_box_reg_stage0: 0.316  loss_box_reg_stage1: 0.665  loss_box_reg_stage2: 0.790  loss_cls_stage0: 0.199  loss_cls_stage1: 0.171  loss_cls_stage2: 0.159  loss_mask: 0.238  loss_rpn_cls: 0.020  loss_rpn_loc: 0.146  lr: 0.001000  max_mem: 7650M
+[32m[05/06 11:28:08 d2.utils.events]: [0m eta: 4:06:19  iter: 10868  total_loss: 2.716  loss_box_reg_stage0: 0.301  loss_box_reg_stage1: 0.636  loss_box_reg_stage2: 0.803  loss_cls_stage0: 0.191  loss_cls_stage1: 0.168  loss_cls_stage2: 0.158  loss_mask: 0.237  loss_rpn_cls: 0.017  loss_rpn_loc: 0.136  lr: 0.001000  max_mem: 7650M
+[32m[05/06 11:31:22 d2.utils.events]: [0m eta: 4:02:22  iter: 11115  total_loss: 2.575  loss_box_reg_stage0: 0.303  loss_box_reg_stage1: 0.603  loss_box_reg_stage2: 0.778  loss_cls_stage0: 0.179  loss_cls_stage1: 0.160  loss_cls_stage2: 0.146  loss_mask: 0.236  loss_rpn_cls: 0.019  loss_rpn_loc: 0.148  lr: 0.001000  max_mem: 7650M
+[32m[05/06 11:34:36 d2.utils.events]: [0m eta: 3:59:10  iter: 11362  total_loss: 2.580  loss_box_reg_stage0: 0.313  loss_box_reg_stage1: 0.645  loss_box_reg_stage2: 0.766  loss_cls_stage0: 0.180  loss_cls_stage1: 0.159  loss_cls_stage2: 0.146  loss_mask: 0.240  loss_rpn_cls: 0.015  loss_rpn_loc: 0.132  lr: 0.001000  max_mem: 7650M
+[32m[05/06 11:37:49 d2.utils.events]: [0m eta: 3:55:11  iter: 11609  total_loss: 2.814  loss_box_reg_stage0: 0.325  loss_box_reg_stage1: 0.675  loss_box_reg_stage2: 0.830  loss_cls_stage0: 0.203  loss_cls_stage1: 0.179  loss_cls_stage2: 0.154  loss_mask: 0.244  loss_rpn_cls: 0.018  loss_rpn_loc: 0.135  lr: 0.001000  max_mem: 7650M
+[32m[05/06 11:41:03 d2.utils.events]: [0m eta: 3:52:19  iter: 11856  total_loss: 2.726  loss_box_reg_stage0: 0.318  loss_box_reg_stage1: 0.654  loss_box_reg_stage2: 0.857  loss_cls_stage0: 0.197  loss_cls_stage1: 0.177  loss_cls_stage2: 0.157  loss_mask: 0.241  loss_rpn_cls: 0.019  loss_rpn_loc: 0.135  lr: 0.001000  max_mem: 7650M
+[32m[05/06 11:44:16 d2.utils.events]: [0m eta: 3:48:47  iter: 12103  total_loss: 2.691  loss_box_reg_stage0: 0.314  loss_box_reg_stage1: 0.640  loss_box_reg_stage2: 0.814  loss_cls_stage0: 0.184  loss_cls_stage1: 0.164  loss_cls_stage2: 0.149  loss_mask: 0.247  loss_rpn_cls: 0.020  loss_rpn_loc: 0.140  lr: 0.001000  max_mem: 7650M
+[32m[05/06 11:47:29 fvcore.common.checkpoint]: [0mSaving checkpoint to /ssd_scratch/cvit/myfolder/cityscapes/models/model_0012349.pth
+[32m[05/06 11:47:30 d2.data.datasets.cityscapes]: [0m3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[32m[05/06 11:47:30 d2.data.datasets.cityscapes]: [0mPreprocessing cityscapes annotations ...
+[32m[05/06 11:49:01 d2.data.datasets.cityscapes]: [0mLoaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[32m[05/06 11:49:01 d2.data.common]: [0mSerializing 500 elements to byte tensors and concatenating them all ...
+[32m[05/06 11:49:01 d2.data.common]: [0mSerialized dataset takes 12.85 MiB
+[32m[05/06 11:49:01 d2.evaluation.evaluator]: [0mStart inference on 125 images
+[32m[05/06 11:49:01 d2.evaluation.cityscapes_evaluation]: [0mWriting cityscapes results to temporary directory /tmp/cityscapes_eval_8uykt_8i ...
+[32m[05/06 11:49:15 d2.evaluation.evaluator]: [0mInference done 11/125. 0.1217 s / img. ETA=0:01:32
+[32m[05/06 11:49:22 d2.evaluation.evaluator]: [0mInference done 17/125. 0.1258 s / img. ETA=0:01:44
+[32m[05/06 11:49:28 d2.evaluation.evaluator]: [0mInference done 23/125. 0.1298 s / img. ETA=0:01:42
+[32m[05/06 11:49:34 d2.evaluation.evaluator]: [0mInference done 28/125. 0.1306 s / img. ETA=0:01:40
+[32m[05/06 11:49:39 d2.evaluation.evaluator]: [0mInference done 32/125. 0.1318 s / img. ETA=0:01:39
+[32m[05/06 11:49:45 d2.evaluation.evaluator]: [0mInference done 37/125. 0.1320 s / img. ETA=0:01:36
+[32m[05/06 11:49:51 d2.evaluation.evaluator]: [0mInference done 42/125. 0.1321 s / img. ETA=0:01:32
+[32m[05/06 11:49:57 d2.evaluation.evaluator]: [0mInference done 48/125. 0.1311 s / img. ETA=0:01:24
+[32m[05/06 11:50:02 d2.evaluation.evaluator]: [0mInference done 52/125. 0.1320 s / img. ETA=0:01:20
+[32m[05/06 11:50:07 d2.evaluation.evaluator]: [0mInference done 57/125. 0.1315 s / img. ETA=0:01:14
+[32m[05/06 11:50:14 d2.evaluation.evaluator]: [0mInference done 62/125. 0.1315 s / img. ETA=0:01:10
+[32m[05/06 11:50:19 d2.evaluation.evaluator]: [0mInference done 66/125. 0.1323 s / img. ETA=0:01:06
+[32m[05/06 11:50:25 d2.evaluation.evaluator]: [0mInference done 72/125. 0.1318 s / img. ETA=0:00:59
+[32m[05/06 11:50:31 d2.evaluation.evaluator]: [0mInference done 77/125. 0.1316 s / img. ETA=0:00:53
+[32m[05/06 11:50:37 d2.evaluation.evaluator]: [0mInference done 82/125. 0.1318 s / img. ETA=0:00:48
+[32m[05/06 11:50:42 d2.evaluation.evaluator]: [0mInference done 86/125. 0.1321 s / img. ETA=0:00:44
+[32m[05/06 11:50:47 d2.evaluation.evaluator]: [0mInference done 90/125. 0.1324 s / img. ETA=0:00:39
+[32m[05/06 11:50:53 d2.evaluation.evaluator]: [0mInference done 95/125. 0.1325 s / img. ETA=0:00:34
+[32m[05/06 11:50:59 d2.evaluation.evaluator]: [0mInference done 100/125. 0.1324 s / img. ETA=0:00:28
+[32m[05/06 11:51:05 d2.evaluation.evaluator]: [0mInference done 105/125. 0.1324 s / img. ETA=0:00:22
+[32m[05/06 11:51:10 d2.evaluation.evaluator]: [0mInference done 109/125. 0.1326 s / img. ETA=0:00:18
+[32m[05/06 11:51:15 d2.evaluation.evaluator]: [0mInference done 114/125. 0.1325 s / img. ETA=0:00:12
+[32m[05/06 11:51:21 d2.evaluation.evaluator]: [0mInference done 118/125. 0.1327 s / img. ETA=0:00:08
+[32m[05/06 11:51:26 d2.evaluation.evaluator]: [0mInference done 124/125. 0.1323 s / img. ETA=0:00:01
+[32m[05/06 11:51:27 d2.evaluation.evaluator]: [0mTotal inference time: 0:02:16.815477 (1.140129 s / img per device, on 4 devices)
+[32m[05/06 11:51:27 d2.evaluation.evaluator]: [0mTotal inference pure compute time: 0:00:15 (0.132186 s / img per device, on 4 devices)
+[32m[05/06 11:51:45 d2.evaluation.cityscapes_evaluation]: [0mEvaluating results under /tmp/cityscapes_eval_8uykt_8i ...
+Creating ground truth instances from png files.
+Processing 500 images...
+All images processed
+
+Matching 500 pairs of images...
+All images processed
+
+
+##################################################
+what           :             AP         AP_50%
+##################################################
+person         :          0.385          0.723
+rider          :          0.296          0.689
+car            :          0.545          0.802
+truck          :          0.395          0.567
+bus            :          0.612          0.808
+train          :          0.430          0.683
+motorcycle     :          0.228          0.457
+bicycle        :          0.233          0.595
+--------------------------------------------------
+average        :          0.391          0.665
+
+[32m[05/06 11:59:26 detectron2]: [0mEvaluation results for cityscapes_fine_inst_seg_val in csv format:
+[32m[05/06 11:59:26 d2.evaluation.testing]: [0mcopypaste: Task: segm
+[32m[05/06 11:59:26 d2.evaluation.testing]: [0mcopypaste: AP,AP50
+[32m[05/06 11:59:26 d2.evaluation.testing]: [0mcopypaste: 39.0668,66.5412
+[32m[05/06 11:59:26 d2.utils.events]: [0m eta: 17:41:28  iter: 12350  total_loss: 2.769  loss_box_reg_stage0: 0.315  loss_box_reg_stage1: 0.635  loss_box_reg_stage2: 0.823  loss_cls_stage0: 0.198  loss_cls_stage1: 0.168  loss_cls_stage2: 0.159  loss_mask: 0.246  loss_rpn_cls: 0.020  loss_rpn_loc: 0.152  lr: 0.001000  max_mem: 7650M
+[32m[05/06 12:02:35 d2.utils.events]: [0m eta: 3:37:47  iter: 12597  total_loss: 2.727  loss_box_reg_stage0: 0.312  loss_box_reg_stage1: 0.656  loss_box_reg_stage2: 0.824  loss_cls_stage0: 0.194  loss_cls_stage1: 0.161  loss_cls_stage2: 0.150  loss_mask: 0.250  loss_rpn_cls: 0.019  loss_rpn_loc: 0.126  lr: 0.001000  max_mem: 7650M
+[32m[05/06 12:05:50 d2.utils.events]: [0m eta: 3:40:13  iter: 12844  total_loss: 2.669  loss_box_reg_stage0: 0.300  loss_box_reg_stage1: 0.653  loss_box_reg_stage2: 0.828  loss_cls_stage0: 0.191  loss_cls_stage1: 0.158  loss_cls_stage2: 0.147  loss_mask: 0.241  loss_rpn_cls: 0.018  loss_rpn_loc: 0.140  lr: 0.001000  max_mem: 7650M
+[32m[05/06 12:09:05 d2.utils.events]: [0m eta: 3:37:42  iter: 13091  total_loss: 2.610  loss_box_reg_stage0: 0.312  loss_box_reg_stage1: 0.628  loss_box_reg_stage2: 0.807  loss_cls_stage0: 0.178  loss_cls_stage1: 0.154  loss_cls_stage2: 0.150  loss_mask: 0.240  loss_rpn_cls: 0.019  loss_rpn_loc: 0.137  lr: 0.001000  max_mem: 7650M
+[32m[05/06 12:12:20 d2.utils.events]: [0m eta: 3:35:05  iter: 13338  total_loss: 2.503  loss_box_reg_stage0: 0.300  loss_box_reg_stage1: 0.609  loss_box_reg_stage2: 0.794  loss_cls_stage0: 0.181  loss_cls_stage1: 0.150  loss_cls_stage2: 0.132  loss_mask: 0.232  loss_rpn_cls: 0.017  loss_rpn_loc: 0.120  lr: 0.001000  max_mem: 7650M
+[32m[05/06 12:15:35 d2.utils.events]: [0m eta: 3:30:41  iter: 13585  total_loss: 2.498  loss_box_reg_stage0: 0.298  loss_box_reg_stage1: 0.593  loss_box_reg_stage2: 0.753  loss_cls_stage0: 0.178  loss_cls_stage1: 0.145  loss_cls_stage2: 0.135  loss_mask: 0.233  loss_rpn_cls: 0.018  loss_rpn_loc: 0.124  lr: 0.001000  max_mem: 7650M
+[32m[05/06 12:18:48 d2.utils.events]: [0m eta: 3:26:15  iter: 13832  total_loss: 2.612  loss_box_reg_stage0: 0.307  loss_box_reg_stage1: 0.630  loss_box_reg_stage2: 0.802  loss_cls_stage0: 0.179  loss_cls_stage1: 0.154  loss_cls_stage2: 0.150  loss_mask: 0.229  loss_rpn_cls: 0.017  loss_rpn_loc: 0.154  lr: 0.001000  max_mem: 7650M
+[32m[05/06 12:22:01 d2.utils.events]: [0m eta: 3:22:50  iter: 14079  total_loss: 2.691  loss_box_reg_stage0: 0.308  loss_box_reg_stage1: 0.628  loss_box_reg_stage2: 0.824  loss_cls_stage0: 0.189  loss_cls_stage1: 0.164  loss_cls_stage2: 0.154  loss_mask: 0.236  loss_rpn_cls: 0.019  loss_rpn_loc: 0.146  lr: 0.001000  max_mem: 7650M
+[32m[05/06 12:25:15 d2.utils.events]: [0m eta: 3:20:29  iter: 14326  total_loss: 2.683  loss_box_reg_stage0: 0.317  loss_box_reg_stage1: 0.641  loss_box_reg_stage2: 0.797  loss_cls_stage0: 0.196  loss_cls_stage1: 0.160  loss_cls_stage2: 0.137  loss_mask: 0.245  loss_rpn_cls: 0.018  loss_rpn_loc: 0.152  lr: 0.001000  max_mem: 7650M
+[32m[05/06 12:28:29 d2.utils.events]: [0m eta: 3:17:07  iter: 14573  total_loss: 2.477  loss_box_reg_stage0: 0.294  loss_box_reg_stage1: 0.589  loss_box_reg_stage2: 0.741  loss_cls_stage0: 0.177  loss_cls_stage1: 0.146  loss_cls_stage2: 0.139  loss_mask: 0.232  loss_rpn_cls: 0.016  loss_rpn_loc: 0.124  lr: 0.001000  max_mem: 7650M
+[32m[05/06 12:31:42 fvcore.common.checkpoint]: [0mSaving checkpoint to /ssd_scratch/cvit/myfolder/cityscapes/models/model_0014819.pth
+[32m[05/06 12:31:43 d2.data.datasets.cityscapes]: [0m3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[32m[05/06 12:31:43 d2.data.datasets.cityscapes]: [0mPreprocessing cityscapes annotations ...
+[32m[05/06 12:33:15 d2.data.datasets.cityscapes]: [0mLoaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[32m[05/06 12:33:15 d2.data.common]: [0mSerializing 500 elements to byte tensors and concatenating them all ...
+[32m[05/06 12:33:15 d2.data.common]: [0mSerialized dataset takes 12.85 MiB
+[32m[05/06 12:33:15 d2.evaluation.evaluator]: [0mStart inference on 125 images
+[32m[05/06 12:33:15 d2.evaluation.cityscapes_evaluation]: [0mWriting cityscapes results to temporary directory /tmp/cityscapes_eval_l3n0ocuu ...
+[32m[05/06 12:33:29 d2.evaluation.evaluator]: [0mInference done 11/125. 0.1252 s / img. ETA=0:01:37
+[32m[05/06 12:33:36 d2.evaluation.evaluator]: [0mInference done 17/125. 0.1264 s / img. ETA=0:01:48
+[32m[05/06 12:33:43 d2.evaluation.evaluator]: [0mInference done 23/125. 0.1277 s / img. ETA=0:01:47
+[32m[05/06 12:33:49 d2.evaluation.evaluator]: [0mInference done 28/125. 0.1283 s / img. ETA=0:01:44
+[32m[05/06 12:33:54 d2.evaluation.evaluator]: [0mInference done 32/125. 0.1294 s / img. ETA=0:01:43
+[32m[05/06 12:34:01 d2.evaluation.evaluator]: [0mInference done 37/125. 0.1299 s / img. ETA=0:01:40
+[32m[05/06 12:34:07 d2.evaluation.evaluator]: [0mInference done 42/125. 0.1307 s / img. ETA=0:01:36
+[32m[05/06 12:34:13 d2.evaluation.evaluator]: [0mInference done 48/125. 0.1305 s / img. ETA=0:01:27
+[32m[05/06 12:34:18 d2.evaluation.evaluator]: [0mInference done 52/125. 0.1312 s / img. ETA=0:01:24
+[32m[05/06 12:34:24 d2.evaluation.evaluator]: [0mInference done 57/125. 0.1307 s / img. ETA=0:01:17
+[32m[05/06 12:34:30 d2.evaluation.evaluator]: [0mInference done 62/125. 0.1310 s / img. ETA=0:01:13
+[32m[05/06 12:34:36 d2.evaluation.evaluator]: [0mInference done 66/125. 0.1317 s / img. ETA=0:01:09
+[32m[05/06 12:34:42 d2.evaluation.evaluator]: [0mInference done 72/125. 0.1315 s / img. ETA=0:01:01
+[32m[05/06 12:34:48 d2.evaluation.evaluator]: [0mInference done 77/125. 0.1313 s / img. ETA=0:00:55
+[32m[05/06 12:34:54 d2.evaluation.evaluator]: [0mInference done 82/125. 0.1314 s / img. ETA=0:00:50
+[32m[05/06 12:34:59 d2.evaluation.evaluator]: [0mInference done 86/125. 0.1314 s / img. ETA=0:00:45
+[32m[05/06 12:35:05 d2.evaluation.evaluator]: [0mInference done 90/125. 0.1316 s / img. ETA=0:00:41
+[32m[05/06 12:35:10 d2.evaluation.evaluator]: [0mInference done 94/125. 0.1315 s / img. ETA=0:00:36
+[32m[05/06 12:35:15 d2.evaluation.evaluator]: [0mInference done 98/125. 0.1317 s / img. ETA=0:00:32
+[32m[05/06 12:35:20 d2.evaluation.evaluator]: [0mInference done 103/125. 0.1317 s / img. ETA=0:00:26
+[32m[05/06 12:35:25 d2.evaluation.evaluator]: [0mInference done 106/125. 0.1322 s / img. ETA=0:00:22
+[32m[05/06 12:35:30 d2.evaluation.evaluator]: [0mInference done 110/125. 0.1323 s / img. ETA=0:00:18
+[32m[05/06 12:35:36 d2.evaluation.evaluator]: [0mInference done 116/125. 0.1322 s / img. ETA=0:00:10
+[32m[05/06 12:35:42 d2.evaluation.evaluator]: [0mInference done 122/125. 0.1319 s / img. ETA=0:00:03
+[32m[05/06 12:35:45 d2.evaluation.evaluator]: [0mTotal inference time: 0:02:20.735917 (1.172799 s / img per device, on 4 devices)
+[32m[05/06 12:35:45 d2.evaluation.evaluator]: [0mTotal inference pure compute time: 0:00:15 (0.131868 s / img per device, on 4 devices)
+[32m[05/06 12:36:08 d2.evaluation.cityscapes_evaluation]: [0mEvaluating results under /tmp/cityscapes_eval_l3n0ocuu ...
+Creating ground truth instances from png files.
+Processing 500 images...
+All images processed
+
+Matching 500 pairs of images...
+All images processed
+
+
+##################################################
+what           :             AP         AP_50%
+##################################################
+person         :          0.388          0.729
+rider          :          0.301          0.697
+car            :          0.548          0.806
+truck          :          0.383          0.542
+bus            :          0.605          0.819
+train          :          0.443          0.682
+motorcycle     :          0.229          0.484
+bicycle        :          0.235          0.599
+--------------------------------------------------
+average        :          0.391          0.670
+
+[32m[05/06 12:43:56 detectron2]: [0mEvaluation results for cityscapes_fine_inst_seg_val in csv format:
+[32m[05/06 12:43:56 d2.evaluation.testing]: [0mcopypaste: Task: segm
+[32m[05/06 12:43:56 d2.evaluation.testing]: [0mcopypaste: AP,AP50
+[32m[05/06 12:43:56 d2.evaluation.testing]: [0mcopypaste: 39.1447,66.9505
+[32m[05/06 12:43:56 d2.utils.events]: [0m eta: 15:27:28  iter: 14820  total_loss: 2.668  loss_box_reg_stage0: 0.313  loss_box_reg_stage1: 0.631  loss_box_reg_stage2: 0.802  loss_cls_stage0: 0.193  loss_cls_stage1: 0.162  loss_cls_stage2: 0.148  loss_mask: 0.237  loss_rpn_cls: 0.017  loss_rpn_loc: 0.118  lr: 0.001000  max_mem: 7650M
+[32m[05/06 12:47:07 d2.utils.events]: [0m eta: 3:07:14  iter: 15067  total_loss: 2.542  loss_box_reg_stage0: 0.300  loss_box_reg_stage1: 0.583  loss_box_reg_stage2: 0.777  loss_cls_stage0: 0.173  loss_cls_stage1: 0.152  loss_cls_stage2: 0.142  loss_mask: 0.235  loss_rpn_cls: 0.017  loss_rpn_loc: 0.133  lr: 0.001000  max_mem: 7650M
+[32m[05/06 12:50:22 d2.utils.events]: [0m eta: 3:09:02  iter: 15314  total_loss: 2.565  loss_box_reg_stage0: 0.307  loss_box_reg_stage1: 0.636  loss_box_reg_stage2: 0.811  loss_cls_stage0: 0.184  loss_cls_stage1: 0.150  loss_cls_stage2: 0.141  loss_mask: 0.236  loss_rpn_cls: 0.018  loss_rpn_loc: 0.144  lr: 0.001000  max_mem: 7650M
+[32m[05/06 12:53:36 d2.utils.events]: [0m eta: 3:04:19  iter: 15561  total_loss: 2.428  loss_box_reg_stage0: 0.283  loss_box_reg_stage1: 0.591  loss_box_reg_stage2: 0.769  loss_cls_stage0: 0.170  loss_cls_stage1: 0.142  loss_cls_stage2: 0.121  loss_mask: 0.234  loss_rpn_cls: 0.017  loss_rpn_loc: 0.131  lr: 0.001000  max_mem: 7650M
+[32m[05/06 12:56:51 d2.utils.events]: [0m eta: 3:01:18  iter: 15808  total_loss: 2.588  loss_box_reg_stage0: 0.307  loss_box_reg_stage1: 0.623  loss_box_reg_stage2: 0.772  loss_cls_stage0: 0.181  loss_cls_stage1: 0.154  loss_cls_stage2: 0.148  loss_mask: 0.242  loss_rpn_cls: 0.017  loss_rpn_loc: 0.137  lr: 0.001000  max_mem: 7650M
+[32m[05/06 13:00:04 d2.utils.events]: [0m eta: 2:57:28  iter: 16055  total_loss: 2.500  loss_box_reg_stage0: 0.294  loss_box_reg_stage1: 0.605  loss_box_reg_stage2: 0.763  loss_cls_stage0: 0.178  loss_cls_stage1: 0.158  loss_cls_stage2: 0.141  loss_mask: 0.242  loss_rpn_cls: 0.018  loss_rpn_loc: 0.136  lr: 0.001000  max_mem: 7650M
+[32m[05/06 13:03:18 d2.utils.events]: [0m eta: 2:54:36  iter: 16302  total_loss: 2.618  loss_box_reg_stage0: 0.307  loss_box_reg_stage1: 0.638  loss_box_reg_stage2: 0.785  loss_cls_stage0: 0.184  loss_cls_stage1: 0.151  loss_cls_stage2: 0.143  loss_mask: 0.240  loss_rpn_cls: 0.019  loss_rpn_loc: 0.132  lr: 0.001000  max_mem: 7650M
+[32m[05/06 13:06:34 d2.utils.events]: [0m eta: 2:52:30  iter: 16549  total_loss: 2.504  loss_box_reg_stage0: 0.286  loss_box_reg_stage1: 0.629  loss_box_reg_stage2: 0.794  loss_cls_stage0: 0.167  loss_cls_stage1: 0.144  loss_cls_stage2: 0.127  loss_mask: 0.232  loss_rpn_cls: 0.016  loss_rpn_loc: 0.128  lr: 0.001000  max_mem: 7650M
+[32m[05/06 13:09:48 d2.utils.events]: [0m eta: 2:48:45  iter: 16796  total_loss: 2.466  loss_box_reg_stage0: 0.298  loss_box_reg_stage1: 0.594  loss_box_reg_stage2: 0.746  loss_cls_stage0: 0.177  loss_cls_stage1: 0.142  loss_cls_stage2: 0.134  loss_mask: 0.232  loss_rpn_cls: 0.015  loss_rpn_loc: 0.129  lr: 0.001000  max_mem: 7650M
+[32m[05/06 13:13:02 d2.utils.events]: [0m eta: 2:44:23  iter: 17043  total_loss: 2.540  loss_box_reg_stage0: 0.292  loss_box_reg_stage1: 0.614  loss_box_reg_stage2: 0.763  loss_cls_stage0: 0.172  loss_cls_stage1: 0.149  loss_cls_stage2: 0.128  loss_mask: 0.232  loss_rpn_cls: 0.016  loss_rpn_loc: 0.130  lr: 0.001000  max_mem: 7650M
+[32m[05/06 13:16:15 fvcore.common.checkpoint]: [0mSaving checkpoint to /ssd_scratch/cvit/myfolder/cityscapes/models/model_0017289.pth
+[32m[05/06 13:16:16 d2.data.datasets.cityscapes]: [0m3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[32m[05/06 13:16:16 d2.data.datasets.cityscapes]: [0mPreprocessing cityscapes annotations ...
+[32m[05/06 13:17:47 d2.data.datasets.cityscapes]: [0mLoaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[32m[05/06 13:17:47 d2.data.common]: [0mSerializing 500 elements to byte tensors and concatenating them all ...
+[32m[05/06 13:17:47 d2.data.common]: [0mSerialized dataset takes 12.85 MiB
+[32m[05/06 13:17:47 d2.evaluation.evaluator]: [0mStart inference on 125 images
+[32m[05/06 13:17:49 d2.evaluation.cityscapes_evaluation]: [0mWriting cityscapes results to temporary directory /tmp/cityscapes_eval_pbnmujic ...
+[32m[05/06 13:18:02 d2.evaluation.evaluator]: [0mInference done 11/125. 0.1217 s / img. ETA=0:01:35
+[32m[05/06 13:18:09 d2.evaluation.evaluator]: [0mInference done 17/125. 0.1246 s / img. ETA=0:01:46
+[32m[05/06 13:18:16 d2.evaluation.evaluator]: [0mInference done 23/125. 0.1262 s / img. ETA=0:01:43
+[32m[05/06 13:18:21 d2.evaluation.evaluator]: [0mInference done 28/125. 0.1276 s / img. ETA=0:01:40
+[32m[05/06 13:18:26 d2.evaluation.evaluator]: [0mInference done 32/125. 0.1292 s / img. ETA=0:01:39
+[32m[05/06 13:18:32 d2.evaluation.evaluator]: [0mInference done 37/125. 0.1303 s / img. ETA=0:01:36
+[32m[05/06 13:18:39 d2.evaluation.evaluator]: [0mInference done 42/125. 0.1312 s / img. ETA=0:01:32
+[32m[05/06 13:18:44 d2.evaluation.evaluator]: [0mInference done 48/125. 0.1302 s / img. ETA=0:01:23
+[32m[05/06 13:18:51 d2.evaluation.evaluator]: [0mInference done 53/125. 0.1309 s / img. ETA=0:01:19
+[32m[05/06 13:18:56 d2.evaluation.evaluator]: [0mInference done 58/125. 0.1307 s / img. ETA=0:01:13
+[32m[05/06 13:19:01 d2.evaluation.evaluator]: [0mInference done 62/125. 0.1309 s / img. ETA=0:01:10
+[32m[05/06 13:19:06 d2.evaluation.evaluator]: [0mInference done 66/125. 0.1315 s / img. ETA=0:01:06
+[32m[05/06 13:19:12 d2.evaluation.evaluator]: [0mInference done 72/125. 0.1310 s / img. ETA=0:00:59
+[32m[05/06 13:19:18 d2.evaluation.evaluator]: [0mInference done 77/125. 0.1310 s / img. ETA=0:00:53
+[32m[05/06 13:19:24 d2.evaluation.evaluator]: [0mInference done 82/125. 0.1310 s / img. ETA=0:00:48
+[32m[05/06 13:19:30 d2.evaluation.evaluator]: [0mInference done 87/125. 0.1311 s / img. ETA=0:00:43
+[32m[05/06 13:19:37 d2.evaluation.evaluator]: [0mInference done 92/125. 0.1312 s / img. ETA=0:00:37
+[32m[05/06 13:19:42 d2.evaluation.evaluator]: [0mInference done 96/125. 0.1313 s / img. ETA=0:00:33
+[32m[05/06 13:19:47 d2.evaluation.evaluator]: [0mInference done 101/125. 0.1312 s / img. ETA=0:00:27
+[32m[05/06 13:19:52 d2.evaluation.evaluator]: [0mInference done 105/125. 0.1312 s / img. ETA=0:00:22
+[32m[05/06 13:19:59 d2.evaluation.evaluator]: [0mInference done 110/125. 0.1315 s / img. ETA=0:00:17
+[32m[05/06 13:20:05 d2.evaluation.evaluator]: [0mInference done 116/125. 0.1313 s / img. ETA=0:00:10
+[32m[05/06 13:20:10 d2.evaluation.evaluator]: [0mInference done 122/125. 0.1310 s / img. ETA=0:00:03
+[32m[05/06 13:20:13 d2.evaluation.evaluator]: [0mTotal inference time: 0:02:15.417696 (1.128481 s / img per device, on 4 devices)
+[32m[05/06 13:20:13 d2.evaluation.evaluator]: [0mTotal inference pure compute time: 0:00:15 (0.130793 s / img per device, on 4 devices)
+[32m[05/06 13:20:34 d2.evaluation.cityscapes_evaluation]: [0mEvaluating results under /tmp/cityscapes_eval_pbnmujic ...
+Creating ground truth instances from png files.
+Processing 500 images...
+All images processed
+
+Matching 500 pairs of images...
+All images processed
+
+
+##################################################
+what           :             AP         AP_50%
+##################################################
+person         :          0.384          0.720
+rider          :          0.298          0.694
+car            :          0.551          0.809
+truck          :          0.378          0.537
+bus            :          0.615          0.829
+train          :          0.471          0.688
+motorcycle     :          0.228          0.498
+bicycle        :          0.235          0.599
+--------------------------------------------------
+average        :          0.395          0.672
+
+[32m[05/06 13:28:10 detectron2]: [0mEvaluation results for cityscapes_fine_inst_seg_val in csv format:
+[32m[05/06 13:28:10 d2.evaluation.testing]: [0mcopypaste: Task: segm
+[32m[05/06 13:28:10 d2.evaluation.testing]: [0mcopypaste: AP,AP50
+[32m[05/06 13:28:10 d2.evaluation.testing]: [0mcopypaste: 39.5051,67.1709
+[32m[05/06 13:28:10 d2.utils.events]: [0m eta: 12:37:11  iter: 17290  total_loss: 2.539  loss_box_reg_stage0: 0.301  loss_box_reg_stage1: 0.624  loss_box_reg_stage2: 0.784  loss_cls_stage0: 0.163  loss_cls_stage1: 0.141  loss_cls_stage2: 0.137  loss_mask: 0.232  loss_rpn_cls: 0.014  loss_rpn_loc: 0.135  lr: 0.001000  max_mem: 7650M
+[32m[05/06 13:31:20 d2.utils.events]: [0m eta: 2:34:38  iter: 17537  total_loss: 2.646  loss_box_reg_stage0: 0.312  loss_box_reg_stage1: 0.628  loss_box_reg_stage2: 0.786  loss_cls_stage0: 0.194  loss_cls_stage1: 0.160  loss_cls_stage2: 0.147  loss_mask: 0.246  loss_rpn_cls: 0.015  loss_rpn_loc: 0.135  lr: 0.001000  max_mem: 7650M
+[32m[05/06 13:34:35 d2.utils.events]: [0m eta: 2:36:33  iter: 17784  total_loss: 2.483  loss_box_reg_stage0: 0.277  loss_box_reg_stage1: 0.592  loss_box_reg_stage2: 0.751  loss_cls_stage0: 0.168  loss_cls_stage1: 0.146  loss_cls_stage2: 0.130  loss_mask: 0.233  loss_rpn_cls: 0.016  loss_rpn_loc: 0.130  lr: 0.001000  max_mem: 7650M
+[32m[05/06 13:37:51 d2.utils.events]: [0m eta: 2:33:03  iter: 18031  total_loss: 2.452  loss_box_reg_stage0: 0.284  loss_box_reg_stage1: 0.582  loss_box_reg_stage2: 0.728  loss_cls_stage0: 0.166  loss_cls_stage1: 0.144  loss_cls_stage2: 0.132  loss_mask: 0.226  loss_rpn_cls: 0.016  loss_rpn_loc: 0.129  lr: 0.001000  max_mem: 7650M
+[32m[05/06 13:41:05 d2.utils.events]: [0m eta: 2:29:10  iter: 18278  total_loss: 2.514  loss_box_reg_stage0: 0.286  loss_box_reg_stage1: 0.610  loss_box_reg_stage2: 0.768  loss_cls_stage0: 0.191  loss_cls_stage1: 0.147  loss_cls_stage2: 0.132  loss_mask: 0.240  loss_rpn_cls: 0.014  loss_rpn_loc: 0.124  lr: 0.001000  max_mem: 7650M
+[32m[05/06 13:44:20 d2.utils.events]: [0m eta: 2:26:01  iter: 18525  total_loss: 2.506  loss_box_reg_stage0: 0.293  loss_box_reg_stage1: 0.600  loss_box_reg_stage2: 0.784  loss_cls_stage0: 0.171  loss_cls_stage1: 0.136  loss_cls_stage2: 0.126  loss_mask: 0.232  loss_rpn_cls: 0.014  loss_rpn_loc: 0.128  lr: 0.001000  max_mem: 7650M
+[32m[05/06 13:47:34 d2.utils.events]: [0m eta: 2:22:13  iter: 18772  total_loss: 2.445  loss_box_reg_stage0: 0.283  loss_box_reg_stage1: 0.614  loss_box_reg_stage2: 0.753  loss_cls_stage0: 0.168  loss_cls_stage1: 0.139  loss_cls_stage2: 0.133  loss_mask: 0.228  loss_rpn_cls: 0.014  loss_rpn_loc: 0.146  lr: 0.001000  max_mem: 7650M
+[32m[05/06 13:50:48 d2.utils.events]: [0m eta: 2:18:42  iter: 19019  total_loss: 2.371  loss_box_reg_stage0: 0.286  loss_box_reg_stage1: 0.567  loss_box_reg_stage2: 0.736  loss_cls_stage0: 0.173  loss_cls_stage1: 0.147  loss_cls_stage2: 0.129  loss_mask: 0.227  loss_rpn_cls: 0.014  loss_rpn_loc: 0.115  lr: 0.001000  max_mem: 7650M
+[32m[05/06 13:54:03 d2.utils.events]: [0m eta: 2:16:45  iter: 19266  total_loss: 2.440  loss_box_reg_stage0: 0.293  loss_box_reg_stage1: 0.614  loss_box_reg_stage2: 0.766  loss_cls_stage0: 0.172  loss_cls_stage1: 0.138  loss_cls_stage2: 0.126  loss_mask: 0.236  loss_rpn_cls: 0.015  loss_rpn_loc: 0.134  lr: 0.001000  max_mem: 7650M
+[32m[05/06 13:57:17 d2.utils.events]: [0m eta: 2:12:33  iter: 19513  total_loss: 2.487  loss_box_reg_stage0: 0.288  loss_box_reg_stage1: 0.607  loss_box_reg_stage2: 0.764  loss_cls_stage0: 0.162  loss_cls_stage1: 0.137  loss_cls_stage2: 0.126  loss_mask: 0.228  loss_rpn_cls: 0.016  loss_rpn_loc: 0.121  lr: 0.001000  max_mem: 7650M
+[32m[05/06 14:00:31 fvcore.common.checkpoint]: [0mSaving checkpoint to /ssd_scratch/cvit/myfolder/cityscapes/models/model_0019759.pth
+[32m[05/06 14:00:32 d2.data.datasets.cityscapes]: [0m3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[32m[05/06 14:00:32 d2.data.datasets.cityscapes]: [0mPreprocessing cityscapes annotations ...
+[32m[05/06 14:02:04 d2.data.datasets.cityscapes]: [0mLoaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[32m[05/06 14:02:04 d2.data.common]: [0mSerializing 500 elements to byte tensors and concatenating them all ...
+[32m[05/06 14:02:04 d2.data.common]: [0mSerialized dataset takes 12.85 MiB
+[32m[05/06 14:02:04 d2.evaluation.evaluator]: [0mStart inference on 125 images
+[32m[05/06 14:02:04 d2.evaluation.cityscapes_evaluation]: [0mWriting cityscapes results to temporary directory /tmp/cityscapes_eval_y3wl77g0 ...
+[32m[05/06 14:02:18 d2.evaluation.evaluator]: [0mInference done 11/125. 0.1265 s / img. ETA=0:01:34
+[32m[05/06 14:02:24 d2.evaluation.evaluator]: [0mInference done 17/125. 0.1264 s / img. ETA=0:01:44
+[32m[05/06 14:02:31 d2.evaluation.evaluator]: [0mInference done 23/125. 0.1285 s / img. ETA=0:01:41
+[32m[05/06 14:02:36 d2.evaluation.evaluator]: [0mInference done 28/125. 0.1291 s / img. ETA=0:01:38
+[32m[05/06 14:02:42 d2.evaluation.evaluator]: [0mInference done 33/125. 0.1294 s / img. ETA=0:01:36
+[32m[05/06 14:02:48 d2.evaluation.evaluator]: [0mInference done 37/125. 0.1296 s / img. ETA=0:01:35
+[32m[05/06 14:02:54 d2.evaluation.evaluator]: [0mInference done 42/125. 0.1299 s / img. ETA=0:01:31
+[32m[05/06 14:02:59 d2.evaluation.evaluator]: [0mInference done 48/125. 0.1298 s / img. ETA=0:01:23
+[32m[05/06 14:03:05 d2.evaluation.evaluator]: [0mInference done 53/125. 0.1301 s / img. ETA=0:01:18
+[32m[05/06 14:03:11 d2.evaluation.evaluator]: [0mInference done 59/125. 0.1299 s / img. ETA=0:01:11
+[32m[05/06 14:03:17 d2.evaluation.evaluator]: [0mInference done 64/125. 0.1298 s / img. ETA=0:01:06
+[32m[05/06 14:03:22 d2.evaluation.evaluator]: [0mInference done 68/125. 0.1305 s / img. ETA=0:01:02
+[32m[05/06 14:03:27 d2.evaluation.evaluator]: [0mInference done 74/125. 0.1300 s / img. ETA=0:00:54
+[32m[05/06 14:03:33 d2.evaluation.evaluator]: [0mInference done 80/125. 0.1298 s / img. ETA=0:00:48
+[32m[05/06 14:03:39 d2.evaluation.evaluator]: [0mInference done 84/125. 0.1302 s / img. ETA=0:00:44
+[32m[05/06 14:03:44 d2.evaluation.evaluator]: [0mInference done 88/125. 0.1310 s / img. ETA=0:00:40
+[32m[05/06 14:03:51 d2.evaluation.evaluator]: [0mInference done 94/125. 0.1309 s / img. ETA=0:00:34
+[32m[05/06 14:03:56 d2.evaluation.evaluator]: [0mInference done 99/125. 0.1308 s / img. ETA=0:00:28
+[32m[05/06 14:04:02 d2.evaluation.evaluator]: [0mInference done 104/125. 0.1309 s / img. ETA=0:00:23
+[32m[05/06 14:04:07 d2.evaluation.evaluator]: [0mInference done 108/125. 0.1310 s / img. ETA=0:00:18
+[32m[05/06 14:04:13 d2.evaluation.evaluator]: [0mInference done 114/125. 0.1308 s / img. ETA=0:00:12
+[32m[05/06 14:04:18 d2.evaluation.evaluator]: [0mInference done 119/125. 0.1306 s / img. ETA=0:00:06
+[32m[05/06 14:04:23 d2.evaluation.evaluator]: [0mTotal inference time: 0:02:10.057008 (1.083808 s / img per device, on 4 devices)
+[32m[05/06 14:04:23 d2.evaluation.evaluator]: [0mTotal inference pure compute time: 0:00:15 (0.130224 s / img per device, on 4 devices)
+[32m[05/06 14:04:41 d2.evaluation.cityscapes_evaluation]: [0mEvaluating results under /tmp/cityscapes_eval_y3wl77g0 ...
+Creating ground truth instances from png files.
+Processing 500 images...
+All images processed
+
+Matching 500 pairs of images...
+All images processed
+
+
+##################################################
+what           :             AP         AP_50%
+##################################################
+person         :          0.382          0.716
+rider          :          0.296          0.676
+car            :          0.545          0.805
+truck          :          0.367          0.537
+bus            :          0.595          0.810
+train          :          0.454          0.685
+motorcycle     :          0.213          0.460
+bicycle        :          0.230          0.581
+--------------------------------------------------
+average        :          0.385          0.659
+
+[32m[05/06 14:12:15 detectron2]: [0mEvaluation results for cityscapes_fine_inst_seg_val in csv format:
+[32m[05/06 14:12:15 d2.evaluation.testing]: [0mcopypaste: Task: segm
+[32m[05/06 14:12:15 d2.evaluation.testing]: [0mcopypaste: AP,AP50
+[32m[05/06 14:12:15 d2.evaluation.testing]: [0mcopypaste: 38.5190,65.8855
+[32m[05/06 14:12:16 d2.utils.events]: [0m eta: 9:59:01  iter: 19760  total_loss: 2.428  loss_box_reg_stage0: 0.287  loss_box_reg_stage1: 0.587  loss_box_reg_stage2: 0.742  loss_cls_stage0: 0.157  loss_cls_stage1: 0.132  loss_cls_stage2: 0.116  loss_mask: 0.228  loss_rpn_cls: 0.014  loss_rpn_loc: 0.115  lr: 0.001000  max_mem: 7650M
+[32m[05/06 14:15:26 d2.utils.events]: [0m eta: 2:03:45  iter: 20007  total_loss: 2.421  loss_box_reg_stage0: 0.284  loss_box_reg_stage1: 0.585  loss_box_reg_stage2: 0.754  loss_cls_stage0: 0.170  loss_cls_stage1: 0.138  loss_cls_stage2: 0.126  loss_mask: 0.229  loss_rpn_cls: 0.014  loss_rpn_loc: 0.128  lr: 0.001000  max_mem: 7650M
+[32m[05/06 14:18:41 d2.utils.events]: [0m eta: 2:03:48  iter: 20254  total_loss: 2.475  loss_box_reg_stage0: 0.288  loss_box_reg_stage1: 0.602  loss_box_reg_stage2: 0.770  loss_cls_stage0: 0.174  loss_cls_stage1: 0.144  loss_cls_stage2: 0.122  loss_mask: 0.229  loss_rpn_cls: 0.015  loss_rpn_loc: 0.131  lr: 0.001000  max_mem: 7650M
+[32m[05/06 14:21:56 d2.utils.events]: [0m eta: 1:59:53  iter: 20501  total_loss: 2.537  loss_box_reg_stage0: 0.280  loss_box_reg_stage1: 0.620  loss_box_reg_stage2: 0.767  loss_cls_stage0: 0.166  loss_cls_stage1: 0.142  loss_cls_stage2: 0.132  loss_mask: 0.229  loss_rpn_cls: 0.015  loss_rpn_loc: 0.128  lr: 0.001000  max_mem: 7650M
+[32m[05/06 14:25:10 d2.utils.events]: [0m eta: 1:56:40  iter: 20748  total_loss: 2.547  loss_box_reg_stage0: 0.291  loss_box_reg_stage1: 0.606  loss_box_reg_stage2: 0.766  loss_cls_stage0: 0.172  loss_cls_stage1: 0.141  loss_cls_stage2: 0.123  loss_mask: 0.233  loss_rpn_cls: 0.014  loss_rpn_loc: 0.128  lr: 0.001000  max_mem: 7650M
+[32m[05/06 14:28:25 d2.utils.events]: [0m eta: 1:53:31  iter: 20995  total_loss: 2.528  loss_box_reg_stage0: 0.298  loss_box_reg_stage1: 0.601  loss_box_reg_stage2: 0.772  loss_cls_stage0: 0.177  loss_cls_stage1: 0.146  loss_cls_stage2: 0.132  loss_mask: 0.239  loss_rpn_cls: 0.015  loss_rpn_loc: 0.149  lr: 0.001000  max_mem: 7650M
+[32m[05/06 14:31:39 d2.utils.events]: [0m eta: 1:49:52  iter: 21242  total_loss: 2.642  loss_box_reg_stage0: 0.308  loss_box_reg_stage1: 0.629  loss_box_reg_stage2: 0.787  loss_cls_stage0: 0.182  loss_cls_stage1: 0.154  loss_cls_stage2: 0.136  loss_mask: 0.242  loss_rpn_cls: 0.014  loss_rpn_loc: 0.143  lr: 0.001000  max_mem: 7650M
+[32m[05/06 14:34:53 d2.utils.events]: [0m eta: 1:46:46  iter: 21489  total_loss: 2.460  loss_box_reg_stage0: 0.287  loss_box_reg_stage1: 0.600  loss_box_reg_stage2: 0.762  loss_cls_stage0: 0.162  loss_cls_stage1: 0.135  loss_cls_stage2: 0.117  loss_mask: 0.239  loss_rpn_cls: 0.013  loss_rpn_loc: 0.130  lr: 0.001000  max_mem: 7650M
+[32m[05/06 14:38:08 d2.utils.events]: [0m eta: 1:44:02  iter: 21736  total_loss: 2.497  loss_box_reg_stage0: 0.294  loss_box_reg_stage1: 0.584  loss_box_reg_stage2: 0.740  loss_cls_stage0: 0.181  loss_cls_stage1: 0.145  loss_cls_stage2: 0.133  loss_mask: 0.231  loss_rpn_cls: 0.013  loss_rpn_loc: 0.138  lr: 0.001000  max_mem: 7650M
+[32m[05/06 14:41:24 d2.utils.events]: [0m eta: 1:41:07  iter: 21983  total_loss: 2.491  loss_box_reg_stage0: 0.289  loss_box_reg_stage1: 0.614  loss_box_reg_stage2: 0.752  loss_cls_stage0: 0.175  loss_cls_stage1: 0.147  loss_cls_stage2: 0.126  loss_mask: 0.230  loss_rpn_cls: 0.013  loss_rpn_loc: 0.133  lr: 0.001000  max_mem: 7650M
+[32m[05/06 14:44:38 fvcore.common.checkpoint]: [0mSaving checkpoint to /ssd_scratch/cvit/myfolder/cityscapes/models/model_0022229.pth
+[32m[05/06 14:44:40 d2.data.datasets.cityscapes]: [0m3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[32m[05/06 14:44:40 d2.data.datasets.cityscapes]: [0mPreprocessing cityscapes annotations ...
+[32m[05/06 14:46:11 d2.data.datasets.cityscapes]: [0mLoaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[32m[05/06 14:46:11 d2.data.common]: [0mSerializing 500 elements to byte tensors and concatenating them all ...
+[32m[05/06 14:46:11 d2.data.common]: [0mSerialized dataset takes 12.85 MiB
+[32m[05/06 14:46:11 d2.evaluation.evaluator]: [0mStart inference on 125 images
+[32m[05/06 14:46:12 d2.evaluation.cityscapes_evaluation]: [0mWriting cityscapes results to temporary directory /tmp/cityscapes_eval_cnppl21i ...
+[32m[05/06 14:46:25 d2.evaluation.evaluator]: [0mInference done 11/125. 0.1211 s / img. ETA=0:01:31
+[32m[05/06 14:46:32 d2.evaluation.evaluator]: [0mInference done 17/125. 0.1238 s / img. ETA=0:01:42
+[32m[05/06 14:46:38 d2.evaluation.evaluator]: [0mInference done 23/125. 0.1271 s / img. ETA=0:01:40
+[32m[05/06 14:46:44 d2.evaluation.evaluator]: [0mInference done 28/125. 0.1279 s / img. ETA=0:01:38
+[32m[05/06 14:46:50 d2.evaluation.evaluator]: [0mInference done 33/125. 0.1284 s / img. ETA=0:01:35
+[32m[05/06 14:46:55 d2.evaluation.evaluator]: [0mInference done 37/125. 0.1295 s / img. ETA=0:01:34
+[32m[05/06 14:47:00 d2.evaluation.evaluator]: [0mInference done 41/125. 0.1303 s / img. ETA=0:01:32
+[32m[05/06 14:47:06 d2.evaluation.evaluator]: [0mInference done 47/125. 0.1297 s / img. ETA=0:01:25
+[32m[05/06 14:47:12 d2.evaluation.evaluator]: [0mInference done 52/125. 0.1298 s / img. ETA=0:01:19
+[32m[05/06 14:47:17 d2.evaluation.evaluator]: [0mInference done 57/125. 0.1296 s / img. ETA=0:01:14
+[32m[05/06 14:47:24 d2.evaluation.evaluator]: [0mInference done 62/125. 0.1301 s / img. ETA=0:01:09
+[32m[05/06 14:47:30 d2.evaluation.evaluator]: [0mInference done 67/125. 0.1306 s / img. ETA=0:01:04
+[32m[05/06 14:47:36 d2.evaluation.evaluator]: [0mInference done 73/125. 0.1304 s / img. ETA=0:00:57
+[32m[05/06 14:47:41 d2.evaluation.evaluator]: [0mInference done 78/125. 0.1305 s / img. ETA=0:00:52
+[32m[05/06 14:47:48 d2.evaluation.evaluator]: [0mInference done 83/125. 0.1305 s / img. ETA=0:00:47
+[32m[05/06 14:47:53 d2.evaluation.evaluator]: [0mInference done 87/125. 0.1307 s / img. ETA=0:00:43
+[32m[05/06 14:47:59 d2.evaluation.evaluator]: [0mInference done 92/125. 0.1307 s / img. ETA=0:00:37
+[32m[05/06 14:48:05 d2.evaluation.evaluator]: [0mInference done 96/125. 0.1309 s / img. ETA=0:00:33
+[32m[05/06 14:48:10 d2.evaluation.evaluator]: [0mInference done 101/125. 0.1307 s / img. ETA=0:00:27
+[32m[05/06 14:48:17 d2.evaluation.evaluator]: [0mInference done 106/125. 0.1308 s / img. ETA=0:00:21
+[32m[05/06 14:48:22 d2.evaluation.evaluator]: [0mInference done 111/125. 0.1310 s / img. ETA=0:00:16
+[32m[05/06 14:48:28 d2.evaluation.evaluator]: [0mInference done 116/125. 0.1308 s / img. ETA=0:00:10
+[32m[05/06 14:48:33 d2.evaluation.evaluator]: [0mInference done 122/125. 0.1306 s / img. ETA=0:00:03
+[32m[05/06 14:48:36 d2.evaluation.evaluator]: [0mTotal inference time: 0:02:15.375720 (1.128131 s / img per device, on 4 devices)
+[32m[05/06 14:48:36 d2.evaluation.evaluator]: [0mTotal inference pure compute time: 0:00:15 (0.130651 s / img per device, on 4 devices)
+[32m[05/06 14:49:05 d2.evaluation.cityscapes_evaluation]: [0mEvaluating results under /tmp/cityscapes_eval_cnppl21i ...
+Creating ground truth instances from png files.
+Processing 500 images...
+All images processed
+
+Matching 500 pairs of images...
+All images processed
+
+
+##################################################
+what           :             AP         AP_50%
+##################################################
+person         :          0.385          0.719
+rider          :          0.298          0.681
+car            :          0.544          0.810
+truck          :          0.382          0.531
+bus            :          0.605          0.801
+train          :          0.420          0.648
+motorcycle     :          0.226          0.480
+bicycle        :          0.226          0.578
+--------------------------------------------------
+average        :          0.386          0.656
+
+[32m[05/06 14:57:00 detectron2]: [0mEvaluation results for cityscapes_fine_inst_seg_val in csv format:
+[32m[05/06 14:57:00 d2.evaluation.testing]: [0mcopypaste: Task: segm
+[32m[05/06 14:57:00 d2.evaluation.testing]: [0mcopypaste: AP,AP50
+[32m[05/06 14:57:00 d2.evaluation.testing]: [0mcopypaste: 38.5781,65.6109
+[32m[05/06 14:57:00 d2.utils.events]: [0m eta: 7:48:07  iter: 22230  total_loss: 2.515  loss_box_reg_stage0: 0.303  loss_box_reg_stage1: 0.625  loss_box_reg_stage2: 0.757  loss_cls_stage0: 0.168  loss_cls_stage1: 0.131  loss_cls_stage2: 0.122  loss_mask: 0.227  loss_rpn_cls: 0.015  loss_rpn_loc: 0.128  lr: 0.001000  max_mem: 7650M
+[32m[05/06 15:00:11 d2.utils.events]: [0m eta: 1:32:21  iter: 22477  total_loss: 2.356  loss_box_reg_stage0: 0.277  loss_box_reg_stage1: 0.556  loss_box_reg_stage2: 0.730  loss_cls_stage0: 0.151  loss_cls_stage1: 0.140  loss_cls_stage2: 0.119  loss_mask: 0.233  loss_rpn_cls: 0.014  loss_rpn_loc: 0.124  lr: 0.001000  max_mem: 7650M
+[32m[05/06 15:03:27 d2.utils.events]: [0m eta: 1:31:39  iter: 22724  total_loss: 2.402  loss_box_reg_stage0: 0.289  loss_box_reg_stage1: 0.591  loss_box_reg_stage2: 0.771  loss_cls_stage0: 0.171  loss_cls_stage1: 0.134  loss_cls_stage2: 0.130  loss_mask: 0.235  loss_rpn_cls: 0.015  loss_rpn_loc: 0.124  lr: 0.001000  max_mem: 7650M
+[32m[05/06 15:06:43 d2.utils.events]: [0m eta: 1:28:07  iter: 22971  total_loss: 2.456  loss_box_reg_stage0: 0.298  loss_box_reg_stage1: 0.595  loss_box_reg_stage2: 0.774  loss_cls_stage0: 0.173  loss_cls_stage1: 0.148  loss_cls_stage2: 0.126  loss_mask: 0.241  loss_rpn_cls: 0.013  loss_rpn_loc: 0.143  lr: 0.001000  max_mem: 7650M
+[32m[05/06 15:09:59 d2.utils.events]: [0m eta: 1:24:39  iter: 23218  total_loss: 2.420  loss_box_reg_stage0: 0.282  loss_box_reg_stage1: 0.583  loss_box_reg_stage2: 0.726  loss_cls_stage0: 0.153  loss_cls_stage1: 0.127  loss_cls_stage2: 0.116  loss_mask: 0.229  loss_rpn_cls: 0.013  loss_rpn_loc: 0.115  lr: 0.001000  max_mem: 7650M
+[32m[05/06 15:13:14 d2.utils.events]: [0m eta: 1:21:17  iter: 23465  total_loss: 2.259  loss_box_reg_stage0: 0.260  loss_box_reg_stage1: 0.561  loss_box_reg_stage2: 0.713  loss_cls_stage0: 0.158  loss_cls_stage1: 0.125  loss_cls_stage2: 0.108  loss_mask: 0.217  loss_rpn_cls: 0.012  loss_rpn_loc: 0.112  lr: 0.001000  max_mem: 7650M
+[32m[05/06 15:16:28 d2.utils.events]: [0m eta: 1:17:32  iter: 23712  total_loss: 2.475  loss_box_reg_stage0: 0.293  loss_box_reg_stage1: 0.609  loss_box_reg_stage2: 0.758  loss_cls_stage0: 0.172  loss_cls_stage1: 0.138  loss_cls_stage2: 0.125  loss_mask: 0.227  loss_rpn_cls: 0.015  loss_rpn_loc: 0.121  lr: 0.001000  max_mem: 7650M
+[32m[05/06 15:19:42 d2.utils.events]: [0m eta: 1:14:32  iter: 23959  total_loss: 2.344  loss_box_reg_stage0: 0.281  loss_box_reg_stage1: 0.571  loss_box_reg_stage2: 0.730  loss_cls_stage0: 0.159  loss_cls_stage1: 0.136  loss_cls_stage2: 0.117  loss_mask: 0.223  loss_rpn_cls: 0.013  loss_rpn_loc: 0.125  lr: 0.001000  max_mem: 7650M
+[32m[05/06 15:22:58 d2.utils.events]: [0m eta: 1:11:42  iter: 24206  total_loss: 2.463  loss_box_reg_stage0: 0.285  loss_box_reg_stage1: 0.606  loss_box_reg_stage2: 0.782  loss_cls_stage0: 0.159  loss_cls_stage1: 0.133  loss_cls_stage2: 0.120  loss_mask: 0.232  loss_rpn_cls: 0.014  loss_rpn_loc: 0.127  lr: 0.001000  max_mem: 7650M
+[32m[05/06 15:26:12 d2.utils.events]: [0m eta: 1:07:56  iter: 24453  total_loss: 2.294  loss_box_reg_stage0: 0.264  loss_box_reg_stage1: 0.576  loss_box_reg_stage2: 0.726  loss_cls_stage0: 0.161  loss_cls_stage1: 0.125  loss_cls_stage2: 0.116  loss_mask: 0.224  loss_rpn_cls: 0.013  loss_rpn_loc: 0.118  lr: 0.001000  max_mem: 7650M
+[32m[05/06 15:29:25 fvcore.common.checkpoint]: [0mSaving checkpoint to /ssd_scratch/cvit/myfolder/cityscapes/models/model_0024699.pth
+[32m[05/06 15:29:26 d2.data.datasets.cityscapes]: [0m3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[32m[05/06 15:29:26 d2.data.datasets.cityscapes]: [0mPreprocessing cityscapes annotations ...
+[32m[05/06 15:30:58 d2.data.datasets.cityscapes]: [0mLoaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[32m[05/06 15:30:58 d2.data.common]: [0mSerializing 500 elements to byte tensors and concatenating them all ...
+[32m[05/06 15:30:58 d2.data.common]: [0mSerialized dataset takes 12.85 MiB
+[32m[05/06 15:30:58 d2.evaluation.evaluator]: [0mStart inference on 125 images
+[32m[05/06 15:30:59 d2.evaluation.cityscapes_evaluation]: [0mWriting cityscapes results to temporary directory /tmp/cityscapes_eval_bue0h_sb ...
+[32m[05/06 15:31:13 d2.evaluation.evaluator]: [0mInference done 11/125. 0.1221 s / img. ETA=0:01:38
+[32m[05/06 15:31:20 d2.evaluation.evaluator]: [0mInference done 17/125. 0.1263 s / img. ETA=0:01:49
+[32m[05/06 15:31:26 d2.evaluation.evaluator]: [0mInference done 23/125. 0.1284 s / img. ETA=0:01:44
+[32m[05/06 15:31:32 d2.evaluation.evaluator]: [0mInference done 27/125. 0.1295 s / img. ETA=0:01:45
+[32m[05/06 15:31:37 d2.evaluation.evaluator]: [0mInference done 31/125. 0.1304 s / img. ETA=0:01:45
+[32m[05/06 15:31:43 d2.evaluation.evaluator]: [0mInference done 36/125. 0.1309 s / img. ETA=0:01:40
+[32m[05/06 15:31:48 d2.evaluation.evaluator]: [0mInference done 40/125. 0.1313 s / img. ETA=0:01:37
+[32m[05/06 15:31:53 d2.evaluation.evaluator]: [0mInference done 45/125. 0.1307 s / img. ETA=0:01:31
+[32m[05/06 15:31:59 d2.evaluation.evaluator]: [0mInference done 49/125. 0.1308 s / img. ETA=0:01:27
+[32m[05/06 15:32:04 d2.evaluation.evaluator]: [0mInference done 54/125. 0.1306 s / img. ETA=0:01:21
+[32m[05/06 15:32:10 d2.evaluation.evaluator]: [0mInference done 59/125. 0.1307 s / img. ETA=0:01:15
+[32m[05/06 15:32:16 d2.evaluation.evaluator]: [0mInference done 64/125. 0.1309 s / img. ETA=0:01:10
+[32m[05/06 15:32:21 d2.evaluation.evaluator]: [0mInference done 68/125. 0.1314 s / img. ETA=0:01:06
+[32m[05/06 15:32:26 d2.evaluation.evaluator]: [0mInference done 73/125. 0.1314 s / img. ETA=0:00:59
+[32m[05/06 15:32:32 d2.evaluation.evaluator]: [0mInference done 78/125. 0.1313 s / img. ETA=0:00:54
+[32m[05/06 15:32:37 d2.evaluation.evaluator]: [0mInference done 82/125. 0.1318 s / img. ETA=0:00:49
+[32m[05/06 15:32:43 d2.evaluation.evaluator]: [0mInference done 86/125. 0.1320 s / img. ETA=0:00:45
+[32m[05/06 15:32:48 d2.evaluation.evaluator]: [0mInference done 90/125. 0.1322 s / img. ETA=0:00:41
+[32m[05/06 15:32:54 d2.evaluation.evaluator]: [0mInference done 94/125. 0.1324 s / img. ETA=0:00:36
+[32m[05/06 15:32:59 d2.evaluation.evaluator]: [0mInference done 98/125. 0.1327 s / img. ETA=0:00:32
+[32m[05/06 15:33:04 d2.evaluation.evaluator]: [0mInference done 103/125. 0.1325 s / img. ETA=0:00:26
+[32m[05/06 15:33:10 d2.evaluation.evaluator]: [0mInference done 107/125. 0.1328 s / img. ETA=0:00:21
+[32m[05/06 15:33:16 d2.evaluation.evaluator]: [0mInference done 112/125. 0.1328 s / img. ETA=0:00:15
+[32m[05/06 15:33:22 d2.evaluation.evaluator]: [0mInference done 117/125. 0.1327 s / img. ETA=0:00:09
+[32m[05/06 15:33:27 d2.evaluation.evaluator]: [0mInference done 123/125. 0.1325 s / img. ETA=0:00:02
+[32m[05/06 15:33:29 d2.evaluation.evaluator]: [0mTotal inference time: 0:02:20.953621 (1.174614 s / img per device, on 4 devices)
+[32m[05/06 15:33:29 d2.evaluation.evaluator]: [0mTotal inference pure compute time: 0:00:15 (0.132259 s / img per device, on 4 devices)
+[32m[05/06 15:33:50 d2.evaluation.cityscapes_evaluation]: [0mEvaluating results under /tmp/cityscapes_eval_bue0h_sb ...
+Creating ground truth instances from png files.
+Processing 500 images...
+All images processed
+
+Matching 500 pairs of images...
+All images processed
+
+
+##################################################
+what           :             AP         AP_50%
+##################################################
+person         :          0.381          0.717
+rider          :          0.301          0.696
+car            :          0.540          0.801
+truck          :          0.364          0.512
+bus            :          0.606          0.813
+train          :          0.407          0.672
+motorcycle     :          0.227          0.493
+bicycle        :          0.230          0.586
+--------------------------------------------------
+average        :          0.382          0.661
+
+[32m[05/06 15:41:57 detectron2]: [0mEvaluation results for cityscapes_fine_inst_seg_val in csv format:
+[32m[05/06 15:41:57 d2.evaluation.testing]: [0mcopypaste: Task: segm
+[32m[05/06 15:41:57 d2.evaluation.testing]: [0mcopypaste: AP,AP50
+[32m[05/06 15:41:57 d2.evaluation.testing]: [0mcopypaste: 38.1996,66.1190
+[32m[05/06 15:41:57 d2.utils.events]: [0m eta: 5:15:03  iter: 24700  total_loss: 2.287  loss_box_reg_stage0: 0.272  loss_box_reg_stage1: 0.571  loss_box_reg_stage2: 0.715  loss_cls_stage0: 0.156  loss_cls_stage1: 0.122  loss_cls_stage2: 0.107  loss_mask: 0.227  loss_rpn_cls: 0.013  loss_rpn_loc: 0.133  lr: 0.001000  max_mem: 7650M
+[32m[05/06 15:45:08 d2.utils.events]: [0m eta: 1:00:26  iter: 24947  total_loss: 2.344  loss_box_reg_stage0: 0.285  loss_box_reg_stage1: 0.578  loss_box_reg_stage2: 0.739  loss_cls_stage0: 0.161  loss_cls_stage1: 0.134  loss_cls_stage2: 0.114  loss_mask: 0.226  loss_rpn_cls: 0.013  loss_rpn_loc: 0.112  lr: 0.000750  max_mem: 7650M
+[32m[05/06 15:48:24 d2.utils.events]: [0m eta: 0:58:51  iter: 25194  total_loss: 2.403  loss_box_reg_stage0: 0.284  loss_box_reg_stage1: 0.585  loss_box_reg_stage2: 0.753  loss_cls_stage0: 0.154  loss_cls_stage1: 0.125  loss_cls_stage2: 0.112  loss_mask: 0.233  loss_rpn_cls: 0.013  loss_rpn_loc: 0.123  lr: 0.000750  max_mem: 7650M
+[32m[05/06 15:51:41 d2.utils.events]: [0m eta: 0:55:50  iter: 25441  total_loss: 2.340  loss_box_reg_stage0: 0.273  loss_box_reg_stage1: 0.575  loss_box_reg_stage2: 0.719  loss_cls_stage0: 0.157  loss_cls_stage1: 0.132  loss_cls_stage2: 0.106  loss_mask: 0.221  loss_rpn_cls: 0.012  loss_rpn_loc: 0.115  lr: 0.000750  max_mem: 7650M
+[32m[05/06 15:54:56 d2.utils.events]: [0m eta: 0:52:01  iter: 25688  total_loss: 2.275  loss_box_reg_stage0: 0.264  loss_box_reg_stage1: 0.555  loss_box_reg_stage2: 0.704  loss_cls_stage0: 0.149  loss_cls_stage1: 0.117  loss_cls_stage2: 0.107  loss_mask: 0.226  loss_rpn_cls: 0.014  loss_rpn_loc: 0.118  lr: 0.000750  max_mem: 7650M
+[32m[05/06 15:58:12 d2.utils.events]: [0m eta: 0:48:50  iter: 25935  total_loss: 2.292  loss_box_reg_stage0: 0.269  loss_box_reg_stage1: 0.560  loss_box_reg_stage2: 0.726  loss_cls_stage0: 0.158  loss_cls_stage1: 0.126  loss_cls_stage2: 0.111  loss_mask: 0.221  loss_rpn_cls: 0.012  loss_rpn_loc: 0.117  lr: 0.000750  max_mem: 7650M
+[32m[05/06 16:01:26 d2.utils.events]: [0m eta: 0:45:24  iter: 26182  total_loss: 2.338  loss_box_reg_stage0: 0.282  loss_box_reg_stage1: 0.602  loss_box_reg_stage2: 0.758  loss_cls_stage0: 0.149  loss_cls_stage1: 0.127  loss_cls_stage2: 0.113  loss_mask: 0.229  loss_rpn_cls: 0.013  loss_rpn_loc: 0.118  lr: 0.000750  max_mem: 7650M
+[32m[05/06 16:04:41 d2.utils.events]: [0m eta: 0:42:15  iter: 26429  total_loss: 2.262  loss_box_reg_stage0: 0.268  loss_box_reg_stage1: 0.559  loss_box_reg_stage2: 0.691  loss_cls_stage0: 0.158  loss_cls_stage1: 0.137  loss_cls_stage2: 0.119  loss_mask: 0.220  loss_rpn_cls: 0.013  loss_rpn_loc: 0.115  lr: 0.000750  max_mem: 7650M
+[32m[05/06 16:07:56 d2.utils.events]: [0m eta: 0:39:01  iter: 26676  total_loss: 2.254  loss_box_reg_stage0: 0.256  loss_box_reg_stage1: 0.551  loss_box_reg_stage2: 0.682  loss_cls_stage0: 0.156  loss_cls_stage1: 0.123  loss_cls_stage2: 0.104  loss_mask: 0.218  loss_rpn_cls: 0.011  loss_rpn_loc: 0.126  lr: 0.000750  max_mem: 7650M
+[32m[05/06 16:11:12 d2.utils.events]: [0m eta: 0:35:54  iter: 26923  total_loss: 2.239  loss_box_reg_stage0: 0.264  loss_box_reg_stage1: 0.546  loss_box_reg_stage2: 0.684  loss_cls_stage0: 0.147  loss_cls_stage1: 0.118  loss_cls_stage2: 0.108  loss_mask: 0.222  loss_rpn_cls: 0.012  loss_rpn_loc: 0.107  lr: 0.000750  max_mem: 7650M
+[32m[05/06 16:14:27 fvcore.common.checkpoint]: [0mSaving checkpoint to /ssd_scratch/cvit/myfolder/cityscapes/models/model_0027169.pth
+[32m[05/06 16:14:28 d2.data.datasets.cityscapes]: [0m3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[32m[05/06 16:14:28 d2.data.datasets.cityscapes]: [0mPreprocessing cityscapes annotations ...
+[32m[05/06 16:16:00 d2.data.datasets.cityscapes]: [0mLoaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[32m[05/06 16:16:00 d2.data.common]: [0mSerializing 500 elements to byte tensors and concatenating them all ...
+[32m[05/06 16:16:00 d2.data.common]: [0mSerialized dataset takes 12.85 MiB
+[32m[05/06 16:16:00 d2.evaluation.evaluator]: [0mStart inference on 125 images
+[32m[05/06 16:16:00 d2.evaluation.cityscapes_evaluation]: [0mWriting cityscapes results to temporary directory /tmp/cityscapes_eval_8t0ec9w6 ...
+[32m[05/06 16:16:14 d2.evaluation.evaluator]: [0mInference done 11/125. 0.1226 s / img. ETA=0:01:34
+[32m[05/06 16:16:20 d2.evaluation.evaluator]: [0mInference done 17/125. 0.1244 s / img. ETA=0:01:42
+[32m[05/06 16:16:26 d2.evaluation.evaluator]: [0mInference done 23/125. 0.1248 s / img. ETA=0:01:37
+[32m[05/06 16:16:32 d2.evaluation.evaluator]: [0mInference done 28/125. 0.1261 s / img. ETA=0:01:36
+[32m[05/06 16:16:37 d2.evaluation.evaluator]: [0mInference done 33/125. 0.1270 s / img. ETA=0:01:33
+[32m[05/06 16:16:43 d2.evaluation.evaluator]: [0mInference done 38/125. 0.1277 s / img. ETA=0:01:29
+[32m[05/06 16:16:48 d2.evaluation.evaluator]: [0mInference done 42/125. 0.1280 s / img. ETA=0:01:27
+[32m[05/06 16:16:53 d2.evaluation.evaluator]: [0mInference done 48/125. 0.1277 s / img. ETA=0:01:18
+[32m[05/06 16:16:59 d2.evaluation.evaluator]: [0mInference done 53/125. 0.1277 s / img. ETA=0:01:14
+[32m[05/06 16:17:05 d2.evaluation.evaluator]: [0mInference done 59/125. 0.1278 s / img. ETA=0:01:08
+[32m[05/06 16:17:11 d2.evaluation.evaluator]: [0mInference done 64/125. 0.1282 s / img. ETA=0:01:04
+[32m[05/06 16:17:16 d2.evaluation.evaluator]: [0mInference done 68/125. 0.1285 s / img. ETA=0:01:00
+[32m[05/06 16:17:22 d2.evaluation.evaluator]: [0mInference done 74/125. 0.1289 s / img. ETA=0:00:53
+[32m[05/06 16:17:27 d2.evaluation.evaluator]: [0mInference done 79/125. 0.1288 s / img. ETA=0:00:48
+[32m[05/06 16:17:33 d2.evaluation.evaluator]: [0mInference done 83/125. 0.1291 s / img. ETA=0:00:45
+[32m[05/06 16:17:38 d2.evaluation.evaluator]: [0mInference done 87/125. 0.1296 s / img. ETA=0:00:41
+[32m[05/06 16:17:43 d2.evaluation.evaluator]: [0mInference done 92/125. 0.1296 s / img. ETA=0:00:35
+[32m[05/06 16:17:49 d2.evaluation.evaluator]: [0mInference done 97/125. 0.1297 s / img. ETA=0:00:30
+[32m[05/06 16:17:55 d2.evaluation.evaluator]: [0mInference done 102/125. 0.1297 s / img. ETA=0:00:25
+[32m[05/06 16:18:00 d2.evaluation.evaluator]: [0mInference done 106/125. 0.1299 s / img. ETA=0:00:20
+[32m[05/06 16:18:06 d2.evaluation.evaluator]: [0mInference done 111/125. 0.1300 s / img. ETA=0:00:15
+[32m[05/06 16:18:11 d2.evaluation.evaluator]: [0mInference done 116/125. 0.1300 s / img. ETA=0:00:09
+[32m[05/06 16:18:16 d2.evaluation.evaluator]: [0mInference done 122/125. 0.1298 s / img. ETA=0:00:03
+[32m[05/06 16:18:19 d2.evaluation.evaluator]: [0mTotal inference time: 0:02:09.982017 (1.083183 s / img per device, on 4 devices)
+[32m[05/06 16:18:19 d2.evaluation.evaluator]: [0mTotal inference pure compute time: 0:00:15 (0.129692 s / img per device, on 4 devices)
+[32m[05/06 16:18:43 d2.evaluation.cityscapes_evaluation]: [0mEvaluating results under /tmp/cityscapes_eval_8t0ec9w6 ...
+Creating ground truth instances from png files.
+Processing 500 images...
+All images processed
+
+Matching 500 pairs of images...
+All images processed
+
+
+##################################################
+what           :             AP         AP_50%
+##################################################
+person         :          0.380          0.716
+rider          :          0.303          0.685
+car            :          0.539          0.799
+truck          :          0.380          0.515
+bus            :          0.587          0.809
+train          :          0.416          0.649
+motorcycle     :          0.222          0.487
+bicycle        :          0.232          0.584
+--------------------------------------------------
+average        :          0.382          0.655
+
+[32m[05/06 16:26:23 detectron2]: [0mEvaluation results for cityscapes_fine_inst_seg_val in csv format:
+[32m[05/06 16:26:23 d2.evaluation.testing]: [0mcopypaste: Task: segm
+[32m[05/06 16:26:23 d2.evaluation.testing]: [0mcopypaste: AP,AP50
+[32m[05/06 16:26:23 d2.evaluation.testing]: [0mcopypaste: 38.2446,65.5486
+[32m[05/06 16:26:23 d2.utils.events]: [0m eta: 2:31:44  iter: 27170  total_loss: 2.234  loss_box_reg_stage0: 0.264  loss_box_reg_stage1: 0.542  loss_box_reg_stage2: 0.697  loss_cls_stage0: 0.148  loss_cls_stage1: 0.117  loss_cls_stage2: 0.104  loss_mask: 0.224  loss_rpn_cls: 0.014  loss_rpn_loc: 0.139  lr: 0.000750  max_mem: 7650M
+[32m[05/06 16:29:33 d2.utils.events]: [0m eta: 0:28:33  iter: 27417  total_loss: 2.264  loss_box_reg_stage0: 0.268  loss_box_reg_stage1: 0.549  loss_box_reg_stage2: 0.730  loss_cls_stage0: 0.151  loss_cls_stage1: 0.119  loss_cls_stage2: 0.105  loss_mask: 0.222  loss_rpn_cls: 0.015  loss_rpn_loc: 0.133  lr: 0.000750  max_mem: 7650M
+[32m[05/06 16:32:49 d2.utils.events]: [0m eta: 0:26:09  iter: 27664  total_loss: 2.209  loss_box_reg_stage0: 0.275  loss_box_reg_stage1: 0.547  loss_box_reg_stage2: 0.689  loss_cls_stage0: 0.149  loss_cls_stage1: 0.118  loss_cls_stage2: 0.108  loss_mask: 0.222  loss_rpn_cls: 0.011  loss_rpn_loc: 0.116  lr: 0.000750  max_mem: 7650M
+[32m[05/06 16:36:05 d2.utils.events]: [0m eta: 0:22:49  iter: 27911  total_loss: 2.201  loss_box_reg_stage0: 0.268  loss_box_reg_stage1: 0.521  loss_box_reg_stage2: 0.671  loss_cls_stage0: 0.145  loss_cls_stage1: 0.119  loss_cls_stage2: 0.106  loss_mask: 0.227  loss_rpn_cls: 0.012  loss_rpn_loc: 0.109  lr: 0.000750  max_mem: 7650M
+[32m[05/06 16:39:21 d2.utils.events]: [0m eta: 0:19:33  iter: 28158  total_loss: 2.203  loss_box_reg_stage0: 0.261  loss_box_reg_stage1: 0.539  loss_box_reg_stage2: 0.673  loss_cls_stage0: 0.149  loss_cls_stage1: 0.122  loss_cls_stage2: 0.104  loss_mask: 0.225  loss_rpn_cls: 0.011  loss_rpn_loc: 0.117  lr: 0.000750  max_mem: 7650M
+[32m[05/06 16:42:36 d2.utils.events]: [0m eta: 0:16:17  iter: 28405  total_loss: 2.185  loss_box_reg_stage0: 0.264  loss_box_reg_stage1: 0.536  loss_box_reg_stage2: 0.672  loss_cls_stage0: 0.146  loss_cls_stage1: 0.119  loss_cls_stage2: 0.109  loss_mask: 0.214  loss_rpn_cls: 0.010  loss_rpn_loc: 0.118  lr: 0.000750  max_mem: 7650M
+[32m[05/06 16:45:50 d2.utils.events]: [0m eta: 0:12:57  iter: 28652  total_loss: 2.294  loss_box_reg_stage0: 0.274  loss_box_reg_stage1: 0.553  loss_box_reg_stage2: 0.718  loss_cls_stage0: 0.153  loss_cls_stage1: 0.124  loss_cls_stage2: 0.115  loss_mask: 0.225  loss_rpn_cls: 0.010  loss_rpn_loc: 0.129  lr: 0.000750  max_mem: 7650M
+[32m[05/06 16:49:04 d2.utils.events]: [0m eta: 0:09:40  iter: 28899  total_loss: 2.373  loss_box_reg_stage0: 0.284  loss_box_reg_stage1: 0.567  loss_box_reg_stage2: 0.714  loss_cls_stage0: 0.165  loss_cls_stage1: 0.128  loss_cls_stage2: 0.123  loss_mask: 0.238  loss_rpn_cls: 0.013  loss_rpn_loc: 0.137  lr: 0.000750  max_mem: 7650M
+[32m[05/06 16:52:19 d2.utils.events]: [0m eta: 0:06:29  iter: 29146  total_loss: 2.172  loss_box_reg_stage0: 0.266  loss_box_reg_stage1: 0.534  loss_box_reg_stage2: 0.676  loss_cls_stage0: 0.150  loss_cls_stage1: 0.120  loss_cls_stage2: 0.106  loss_mask: 0.219  loss_rpn_cls: 0.011  loss_rpn_loc: 0.116  lr: 0.000750  max_mem: 7650M
+[32m[05/06 16:55:34 d2.utils.events]: [0m eta: 0:03:15  iter: 29393  total_loss: 2.352  loss_box_reg_stage0: 0.271  loss_box_reg_stage1: 0.570  loss_box_reg_stage2: 0.707  loss_cls_stage0: 0.161  loss_cls_stage1: 0.126  loss_cls_stage2: 0.109  loss_mask: 0.235  loss_rpn_cls: 0.011  loss_rpn_loc: 0.122  lr: 0.000750  max_mem: 7650M
+[32m[05/06 16:58:47 fvcore.common.checkpoint]: [0mSaving checkpoint to /ssd_scratch/cvit/myfolder/cityscapes/models/model_0029639.pth
+[32m[05/06 16:58:47 fvcore.common.checkpoint]: [0mSaving checkpoint to /ssd_scratch/cvit/myfolder/cityscapes/models/model_final.pth
+[32m[05/06 16:58:49 d2.data.datasets.cityscapes]: [0m3 cities found in '/ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val'.
+[32m[05/06 16:58:49 d2.data.datasets.cityscapes]: [0mPreprocessing cityscapes annotations ...
+[32m[05/06 17:00:20 d2.data.datasets.cityscapes]: [0mLoaded 500 images from /ssd_scratch/cvit/myfolder/cityscapes/leftImg8bit/val
+[32m[05/06 17:00:20 d2.data.common]: [0mSerializing 500 elements to byte tensors and concatenating them all ...
+[32m[05/06 17:00:20 d2.data.common]: [0mSerialized dataset takes 12.85 MiB
+[32m[05/06 17:00:20 d2.evaluation.evaluator]: [0mStart inference on 125 images
+[32m[05/06 17:00:20 d2.evaluation.cityscapes_evaluation]: [0mWriting cityscapes results to temporary directory /tmp/cityscapes_eval_qxis5cup ...
+[32m[05/06 17:00:32 d2.evaluation.evaluator]: [0mInference done 11/125. 0.1206 s / img. ETA=0:01:25
+[32m[05/06 17:00:37 d2.evaluation.evaluator]: [0mInference done 17/125. 0.1219 s / img. ETA=0:01:27
+[32m[05/06 17:00:43 d2.evaluation.evaluator]: [0mInference done 23/125. 0.1236 s / img. ETA=0:01:26
+[32m[05/06 17:00:48 d2.evaluation.evaluator]: [0mInference done 28/125. 0.1260 s / img. ETA=0:01:26
+[32m[05/06 17:00:53 d2.evaluation.evaluator]: [0mInference done 33/125. 0.1265 s / img. ETA=0:01:24
+[32m[05/06 17:00:58 d2.evaluation.evaluator]: [0mInference done 38/125. 0.1267 s / img. ETA=0:01:20
+[32m[05/06 17:01:04 d2.evaluation.evaluator]: [0mInference done 43/125. 0.1273 s / img. ETA=0:01:18
+[32m[05/06 17:01:09 d2.evaluation.evaluator]: [0mInference done 50/125. 0.1273 s / img. ETA=0:01:09
+[32m[05/06 17:01:15 d2.evaluation.evaluator]: [0mInference done 56/125. 0.1270 s / img. ETA=0:01:03
+[32m[05/06 17:01:20 d2.evaluation.evaluator]: [0mInference done 61/125. 0.1270 s / img. ETA=0:00:59
+[32m[05/06 17:01:26 d2.evaluation.evaluator]: [0mInference done 65/125. 0.1273 s / img. ETA=0:00:57
+[32m[05/06 17:01:32 d2.evaluation.evaluator]: [0mInference done 72/125. 0.1269 s / img. ETA=0:00:50
+[32m[05/06 17:01:37 d2.evaluation.evaluator]: [0mInference done 77/125. 0.1269 s / img. ETA=0:00:46
+[32m[05/06 17:01:42 d2.evaluation.evaluator]: [0mInference done 82/125. 0.1273 s / img. ETA=0:00:41
+[32m[05/06 17:01:48 d2.evaluation.evaluator]: [0mInference done 87/125. 0.1278 s / img. ETA=0:00:37
+[32m[05/06 17:01:54 d2.evaluation.evaluator]: [0mInference done 92/125. 0.1280 s / img. ETA=0:00:32
+[32m[05/06 17:01:59 d2.evaluation.evaluator]: [0mInference done 97/125. 0.1279 s / img. ETA=0:00:27
+[32m[05/06 17:02:04 d2.evaluation.evaluator]: [0mInference done 102/125. 0.1279 s / img. ETA=0:00:22
+[32m[05/06 17:02:09 d2.evaluation.evaluator]: [0mInference done 106/125. 0.1280 s / img. ETA=0:00:19
+[32m[05/06 17:02:14 d2.evaluation.evaluator]: [0mInference done 112/125. 0.1278 s / img. ETA=0:00:12
+[32m[05/06 17:02:20 d2.evaluation.evaluator]: [0mInference done 117/125. 0.1279 s / img. ETA=0:00:08
+[32m[05/06 17:02:25 d2.evaluation.evaluator]: [0mInference done 124/125. 0.1275 s / img. ETA=0:00:00
+[32m[05/06 17:02:26 d2.evaluation.evaluator]: [0mTotal inference time: 0:01:58.233058 (0.985275 s / img per device, on 4 devices)
+[32m[05/06 17:02:26 d2.evaluation.evaluator]: [0mTotal inference pure compute time: 0:00:15 (0.127437 s / img per device, on 4 devices)
+[32m[05/06 17:02:54 d2.evaluation.cityscapes_evaluation]: [0mEvaluating results under /tmp/cityscapes_eval_qxis5cup ...
+Creating ground truth instances from png files.
+Processing 500 images...
+All images processed
+
+Matching 500 pairs of images...
+All images processed
+
+
+##################################################
+what           :             AP         AP_50%
+##################################################
+person         :          0.377          0.713
+rider          :          0.294          0.682
+car            :          0.542          0.796
+truck          :          0.364          0.501
+bus            :          0.590          0.797
+train          :          0.451          0.706
+motorcycle     :          0.229          0.488
+bicycle        :          0.228          0.580
+--------------------------------------------------
+average        :          0.384          0.658
+
+[32m[05/06 17:10:15 detectron2]: [0mEvaluation results for cityscapes_fine_inst_seg_val in csv format:
+[32m[05/06 17:10:15 d2.evaluation.testing]: [0mcopypaste: Task: segm
+[32m[05/06 17:10:15 d2.evaluation.testing]: [0mcopypaste: AP,AP50
+[32m[05/06 17:10:15 d2.evaluation.testing]: [0mcopypaste: 38.4236,65.7873
+[32m[05/06 17:10:15 d2.utils.events]: [0m eta: 0:00:00  iter: 29640  total_loss: 2.262  loss_box_reg_stage0: 0.268  loss_box_reg_stage1: 0.562  loss_box_reg_stage2: 0.698  loss_cls_stage0: 0.150  loss_cls_stage1: 0.121  loss_cls_stage2: 0.108  loss_mask: 0.220  loss_rpn_cls: 0.012  loss_rpn_loc: 0.124  lr: 0.000750  max_mem: 7650M
+[32m[05/06 17:10:15 fvcore.common.checkpoint]: [0mSaving checkpoint to /ssd_scratch/cvit/myfolder/cityscapes/models/model_final.pth
+['model']
+Done removing solver states
+Training Done
